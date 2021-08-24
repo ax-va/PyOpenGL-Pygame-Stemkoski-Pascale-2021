@@ -7,7 +7,7 @@ from opengl_tutorial.core.utils import Utils
 
 class Base(object):
     def __init__(self, screen_size=(512, 512)):
-        # initialize all opengl_tutorial modules
+        # initialize all pygame modules
         pygame.init()
         # indicate rendering details
         display_flags = pygame.DOUBLEBUF | pygame.OPENGL
