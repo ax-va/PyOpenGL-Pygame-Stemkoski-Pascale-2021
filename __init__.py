@@ -4,6 +4,7 @@ __dependencies__ = {
             'pygame': '2.0.1',
             'PyOpenGL': '3.1.5',
             'PyOpenGL-accelerate': '3.1.5',
+            'numpy': '1.21.1',
         },
 }
 __doc__ = \
