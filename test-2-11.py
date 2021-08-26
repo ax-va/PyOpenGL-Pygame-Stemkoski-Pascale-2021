@@ -7,7 +7,7 @@ from opengl_tutorial.core.uniform import Uniform
 
 
 class Test(Base):
-    """  Enables the user to move a triangle using the arrow keys """
+    """ Enables the user to move a triangle using the arrow keys """
     def initialize(self):
         print("Initializing program...")
         # initialize program #
