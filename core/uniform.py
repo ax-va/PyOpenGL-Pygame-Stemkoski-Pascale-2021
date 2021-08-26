@@ -6,7 +6,6 @@ class Uniform:
         # type of data:
         # int | bool | float | vec2 | vec3 | vec4
         self._data_type = data_type
-
         # data to be sent to uniform variable
         self._data = data
         # reference for variable location in program
