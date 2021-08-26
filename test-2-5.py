@@ -5,8 +5,8 @@ from opengl_tutorial.core.utils import Utils
 from opengl_tutorial.core.attribute import Attribute
 
 
-# render shapes with vertex colors
 class Test(Base):
+    """ Render shapes with vertex colors """
     def initialize(self):
         print("Initializing program...")
 

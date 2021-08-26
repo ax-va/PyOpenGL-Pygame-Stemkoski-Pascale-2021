@@ -5,8 +5,8 @@ from opengl_tutorial.core.utils import Utils
 from opengl_tutorial.core.attribute import Attribute
 
 
-# render two shapes
 class Test(Base):
+    """ Render two shapes """
     def initialize(self):
         print("Initializing program...")
         # initialize program #

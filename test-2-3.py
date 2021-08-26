@@ -5,8 +5,8 @@ from opengl_tutorial.core.utils import Utils
 from opengl_tutorial.core.attribute import Attribute
 
 
-# render six points in a hexagon arrangement
 class Test(Base):
+    """ Render six points in a hexagon arrangement """
     def initialize(self):
         print("Initializing program...")
         # initialize program #

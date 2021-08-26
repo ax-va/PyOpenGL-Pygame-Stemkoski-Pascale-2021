@@ -5,7 +5,7 @@ from opengl_tutorial.core.utils import Utils
 
 
 class Test(Base):
-    """Render a single point"""
+    """ Render a single point """
     def initialize(self):
         print("Initializing program...")
         # initialize program #

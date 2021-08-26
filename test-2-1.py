@@ -2,6 +2,7 @@ from opengl_tutorial.core.base import Base
 
 
 class Test(Base):
+    """ Render a window """
     def initialize(self):
         print("Initializing program...")
 

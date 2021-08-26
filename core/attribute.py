@@ -2,7 +2,7 @@ import OpenGL.GL as GL
 import numpy as np
 
 
-class Attribute(object):
+class Attribute:
     def __init__(self, data_type, data):
         # type of elements in data array: int | float | vec2 | vec3 | vec4
         self._data_type = data_type
@@ -13,8 +13,8 @@ class Attribute(object):
         # upload data immediately
         self.upload_data()
 
-    # upload this data to a GPU buffer
     def upload_data(self):
+        """ Upload this data to a GPU buffer """
         # convert data to numpy array format; convert numbers to 32 bit floats
         data = np.array(self._data).astype(np.float32)
         # select buffer used by the following functions
@@ -22,8 +22,8 @@ class Attribute(object):
         # store data in currently bound buffer
         GL.glBufferData(GL.GL_ARRAY_BUFFER, data.ravel(), GL.GL_STATIC_DRAW)
 
-    # associate variable in program with this buffer
     def associate_variable(self, program_ref, variable_name):
+        """ Associate variable in program with this buffer """
         # get reference for program variable with given name
         variable_ref = GL.glGetAttribLocation(program_ref, variable_name)
         # if the program does not reference the variable, then exit

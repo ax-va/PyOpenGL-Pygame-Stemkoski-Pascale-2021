@@ -5,7 +5,7 @@ from collections import namedtuple
 
 class Utils:
     """
-    Provides static methods to load and compile OpenGL shaders and link to create programs
+    Static methods to load and compile OpenGL shaders and link to create programs
     """
     @staticmethod
     def get_system_info():
