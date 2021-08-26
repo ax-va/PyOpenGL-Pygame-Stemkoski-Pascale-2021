@@ -23,7 +23,7 @@ class Attribute:
         GL.glBufferData(GL.GL_ARRAY_BUFFER, data.ravel(), GL.GL_STATIC_DRAW)
 
     def associate_variable(self, program_ref, variable_name):
-        """ Associate variable in program with this buffer """
+        """ Associate variable in program with the buffer """
         # get reference for program variable with given name
         variable_ref = GL.glGetAttribLocation(program_ref, variable_name)
         # if the program does not reference the variable, then exit
