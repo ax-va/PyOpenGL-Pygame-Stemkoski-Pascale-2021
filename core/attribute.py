@@ -14,7 +14,7 @@ class Attribute:
         self.upload_data()
 
     def upload_data(self):
-        """ Upload this data to a GPU buffer """
+        """ Upload the data to a GPU buffer """
         # convert data to numpy array format; convert numbers to 32 bit floats
         data = np.array(self._data).astype(np.float32)
         # select buffer used by the following functions
