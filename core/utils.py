@@ -13,7 +13,7 @@ class Utils:
         renderer = GL.glGetString(GL.GL_RENDERER).decode('utf-8')
         opengl = GL.glGetString(GL.GL_VERSION).decode('utf-8')
         glsl = GL.glGetString(GL.GL_SHADING_LANGUAGE_VERSION).decode('utf-8')
-        Result = namedtuple('SystemInfo', ['vendor', 'renderer', 'opengl_mats', 'glsl'])
+        Result = namedtuple('SystemInfo', ['vendor', 'renderer', 'opengl', 'glsl'])
         return Result(vendor, renderer, opengl, glsl)
 
     @staticmethod
