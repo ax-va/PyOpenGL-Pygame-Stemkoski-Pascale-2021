@@ -1,7 +1,7 @@
 import OpenGL.GL as GL
 
-from opengl_tutorial.core.base import Base
-from opengl_tutorial.core.utils import Utils
+from tutorial.core.base import Base
+from tutorial.core.utils import Utils
 
 
 class Test(Base):

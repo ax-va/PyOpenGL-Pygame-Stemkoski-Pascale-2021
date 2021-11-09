@@ -1,4 +1,4 @@
-from opengl_tutorial.core.base import Base
+from tutorial.core.base import Base
 
 
 # check input

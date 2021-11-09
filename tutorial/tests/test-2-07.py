@@ -1,14 +1,13 @@
 import OpenGL.GL as GL
-import math
 
-from opengl_tutorial.core.base import Base
-from opengl_tutorial.core.utils import Utils
-from opengl_tutorial.core.attribute import Attribute
-from opengl_tutorial.core.uniform import Uniform
+from tutorial.core.base import Base
+from tutorial.core.utils import Utils
+from tutorial.core.attribute import Attribute
+from tutorial.core.uniform import Uniform
 
 
 class Test(Base):
-    """ Animate triangle moving in a circular path around the origin """
+    """ Animate triangle moving across screen """
     def initialize(self):
         print("Initializing program...")
         # initialize program #
@@ -51,8 +50,13 @@ class Test(Base):
 
     def update(self):
         """ Update data """
-        self._translation.data[0] = 0.75 * math.cos(self._time)
-        self._translation.data[1] = 0.75 * math.sin(self._time)
+        # increase x coordinate of translation
+        self._translation.data[0] += 0.01
+        # if triangle passes off-screen on the right,
+        # change translation so it reappears on the left
+        if self._translation.data[0] > 1.2:
+            self._translation.data[0] = -1.2
+        # render scene #
         # reset color buffer with specified color
         GL.glClear(GL.GL_COLOR_BUFFER_BIT)
         GL.glUseProgram(self._program_ref)

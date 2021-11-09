@@ -1,8 +1,8 @@
 import OpenGL.GL as GL
 
-from opengl_tutorial.core.base import Base
-from opengl_tutorial.core.utils import Utils
-from opengl_tutorial.core.attribute import Attribute
+from tutorial.core.base import Base
+from tutorial.core.utils import Utils
+from tutorial.core.attribute import Attribute
 
 
 class Test(Base):
