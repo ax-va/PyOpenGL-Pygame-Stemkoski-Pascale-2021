@@ -55,7 +55,7 @@ class Test(Base):
         self._turn_speed = 90 * (pi / 180)
 
     def update(self):
-        # update data
+        """ Update data """
         move_amount = self._move_speed * self._delta_time
         turn_amount = self._turn_speed * self._delta_time
         # global translation
