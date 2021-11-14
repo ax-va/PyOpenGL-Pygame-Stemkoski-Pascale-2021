@@ -9,7 +9,7 @@ from tutorial.core.matrix import Matrix
 
 
 class Test(Base):
-    """ Move a triangle around the screen """
+    """ Move a triangle around the screen: global and local transformations """
     def initialize(self):
         print('Initializing program...')
         ### initialize program ###
@@ -37,7 +37,7 @@ class Test(Base):
         ### set up vertex array object ###
         vao_ref = GL.glGenVertexArrays(1)
         GL.glBindVertexArray(vao_ref)
-        ### set up vertex attribute ###
+        ### set up vertex attribute: three points of triangle ###
         position_data = [[0.0,   0.2,  0.0], [0.1,  -0.2,  0.0], [-0.1, -0.2,  0.0]]
         self._vertex_count = len(position_data)
         position_attribute = Attribute('vec3', position_data)
