@@ -16,8 +16,8 @@ class Uniform:
         return self._data
 
     @data.setter
-    def data(self, new_data):
-        self._data = new_data
+    def data(self, data):
+        self._data = data
 
     def locate_variable(self, program_ref, variable_name):
         """ Get and store reference for program variable with given name """
