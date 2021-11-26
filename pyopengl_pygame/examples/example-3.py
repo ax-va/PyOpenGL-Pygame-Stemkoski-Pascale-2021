@@ -1,15 +1,18 @@
 import OpenGL.GL as GL
 from math import pi
 
-from tutorial.core.base import Base
-from tutorial.core.utils import Utils
-from tutorial.core.attribute import Attribute
-from tutorial.core.uniform import Uniform
-from tutorial.core.matrix import Matrix
+from pyopengl_pygame.core.base import Base
+from pyopengl_pygame.core.utils import Utils
+from pyopengl_pygame.core.attribute import Attribute
+from pyopengl_pygame.core.uniform import Uniform
+from pyopengl_pygame.core.matrix import Matrix
 
 
-class Test(Base):
-    """ Move a triangle around the screen: global and local transformations """
+class Example(Base):
+    """
+    Move a triangle around the screen: global and local transformations.
+    Use keys w, a, s ,d, q, e and i, j, k ,l, u, p, respectively.
+    """
     def initialize(self):
         print('Initializing program...')
         ### initialize program ###
@@ -112,4 +115,4 @@ class Test(Base):
 
 
 # instantiate this class and run the program
-Test().run()
+Example().run()

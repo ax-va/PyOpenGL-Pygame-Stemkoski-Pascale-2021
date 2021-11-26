@@ -1,8 +1,8 @@
 import pygame
 import sys
 
-from tutorial.core.input import Input
-from tutorial.core.utils import Utils
+from pyopengl_pygame.core.input import Input
+from pyopengl_pygame.core.utils import Utils
 
 
 class Base:

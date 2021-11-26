@@ -1,5 +1,4 @@
 import OpenGL.GL as GL
-import math
 import pathlib
 import sys
 
@@ -9,14 +8,14 @@ package_dir = str(pathlib.Path(__file__).resolve().parents[2])
 if package_dir not in sys.path:
     sys.path.insert(0, package_dir)
 
-from tutorial.core.base import Base
-from tutorial.core.utils import Utils
-from tutorial.core.attribute import Attribute
-from tutorial.core.uniform import Uniform
+from pyopengl_pygame.core.base import Base
+from pyopengl_pygame.core.utils import Utils
+from pyopengl_pygame.core.attribute import Attribute
+from pyopengl_pygame.core.uniform import Uniform
 
 
-class Test(Base):
-    """ Animate triangle changing its color """
+class Example(Base):
+    """ Enables the user to move a triangle using the arrow keys """
     def initialize(self):
         print("Initializing program...")
         # initialize program #
@@ -56,13 +55,20 @@ class Test(Base):
         self._translation.locate_variable(self._program_ref, 'translation')
         self._base_color = Uniform('vec3', [1.0, 0.0, 0.0])
         self._base_color.locate_variable(self._program_ref, 'baseColor')
+        # triangle speed, units per second
+        self._speed = 0.5
 
     def update(self):
         """ Update data """
-        # self._base_color.data[0] = (math.sin(3 * self._time) + 1) / 2
-        self._base_color.data[0] = (math.sin(self._time) + 1) / 2
-        self._base_color.data[1] = (math.sin(self._time + 2.1) + 1) / 2
-        self._base_color.data[2] = (math.sin(self._time + 4.2) + 1) / 2
+        distance = self._speed * self._delta_time
+        if self._input.is_key_pressed('left'):
+            self._translation.data[0] -= distance
+        if self._input.is_key_pressed('right'):
+            self._translation.data[0] += distance
+        if self._input.is_key_pressed('down'):
+            self._translation.data[1] -= distance
+        if self._input.is_key_pressed('up'):
+            self._translation.data[1] += distance
         # reset color buffer with specified color
         GL.glClear(GL.GL_COLOR_BUFFER_BIT)
         GL.glUseProgram(self._program_ref)
@@ -72,4 +78,4 @@ class Test(Base):
 
 
 # instantiate this class and run the program
-Test().run()
+Example().run()

@@ -8,14 +8,15 @@ package_dir = str(pathlib.Path(__file__).resolve().parents[2])
 if package_dir not in sys.path:
     sys.path.insert(0, package_dir)
 
-from tutorial.core.base import Base
-from tutorial.core.utils import Utils
-from tutorial.core.attribute import Attribute
-from tutorial.core.uniform import Uniform
+from pyopengl_pygame.core.base import Base
+from pyopengl_pygame.core.utils import Utils
+from pyopengl_pygame.core.attribute import Attribute
+from pyopengl_pygame.core.uniform import Uniform
 
 
 class Test(Base):
-    """ Animate triangle moving across screen """
+    """ Render two triangles with different positions and colors """
+
     def initialize(self):
         print("Initializing program...")
         # initialize program #
@@ -37,9 +38,6 @@ class Test(Base):
             }
         """
         self._program_ref = Utils.initialize_program(vs_code, fs_code)
-        # render settings (optional) #
-        # specify color used when clearly
-        GL.glClearColor(0.0, 0.0, 0.0, 1.0)
         # set up vertex array object #
         vao_ref = GL.glGenVertexArrays(1)
         GL.glBindVertexArray(vao_ref)
@@ -51,25 +49,24 @@ class Test(Base):
         position_attribute = Attribute('vec3', position_data)
         position_attribute.associate_variable(self._program_ref, 'position')
         # set up uniforms #
-        self._translation = Uniform('vec3', [-0.5, 0.0, 0.0])
-        self._translation.locate_variable(self._program_ref, 'translation')
-        self._base_color = Uniform('vec3', [1.0, 0.0, 0.0])
-        self._base_color.locate_variable(self._program_ref, 'baseColor')
+        self._translation1 = Uniform('vec3', [-0.5, 0.0, 0.0])
+        self._translation1.locate_variable(self._program_ref, 'translation')
+        self._translation2 = Uniform('vec3', [0.5, 0.0, 0.0])
+        self._translation2.locate_variable(self._program_ref, 'translation')
+        self._base_color1 = Uniform('vec3', [1.0, 0.0, 0.0])
+        self._base_color1.locate_variable(self._program_ref, 'baseColor')
+        self._base_color2 = Uniform('vec3', [0.0, 0.0, 1.0])
+        self._base_color2.locate_variable(self._program_ref, 'baseColor')
 
     def update(self):
-        """ Update data """
-        # increase x coordinate of translation
-        self._translation.data[0] += 0.01
-        # if triangle passes off-screen on the right,
-        # change translation so it reappears on the left
-        if self._translation.data[0] > 1.2:
-            self._translation.data[0] = -1.2
-        # render scene #
-        # reset color buffer with specified color
-        GL.glClear(GL.GL_COLOR_BUFFER_BIT)
         GL.glUseProgram(self._program_ref)
-        self._translation.upload_data()
-        self._base_color.upload_data()
+        # draw the first triangle
+        self._translation1.upload_data()
+        self._base_color1.upload_data()
+        GL.glDrawArrays(GL.GL_TRIANGLES, 0, self._vertex_count)
+        # draw the second triangle
+        self._translation2.upload_data()
+        self._base_color2.upload_data()
         GL.glDrawArrays(GL.GL_TRIANGLES, 0, self._vertex_count)
 
 

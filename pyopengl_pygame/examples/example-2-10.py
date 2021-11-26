@@ -7,11 +7,11 @@ package_dir = str(pathlib.Path(__file__).resolve().parents[2])
 if package_dir not in sys.path:
     sys.path.insert(0, package_dir)
 
-from tutorial.core.base import Base
+from pyopengl_pygame.core.base import Base
 
 
 # check input
-class Test(Base):
+class Example(Base):
     """ Create a text-based application to verify that these modifications work as expected """
     def initialize(self):
         print("Initializing program...")
@@ -32,4 +32,4 @@ class Test(Base):
 
 
 # instantiate this class and run the program
-Test().run()
+Example().run()
