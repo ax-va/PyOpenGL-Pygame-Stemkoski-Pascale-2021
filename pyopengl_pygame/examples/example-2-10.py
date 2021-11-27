@@ -12,7 +12,7 @@ from pyopengl_pygame.core.base import Base
 
 # check input
 class Example(Base):
-    """ Create a text-based application to verify that these modifications work as expected """
+    """ Create a text-based application to verify that the key-press modifications work as expected """
     def initialize(self):
         print("Initializing program...")
 
