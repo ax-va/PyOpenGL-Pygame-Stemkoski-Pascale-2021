@@ -3,6 +3,12 @@ import pathlib
 import sys
 from math import pi
 
+# Get the package directory
+package_dir = str(pathlib.Path(__file__).resolve().parents[2])
+# Add the package directory into sys.path if necessary
+if package_dir not in sys.path:
+    sys.path.insert(0, package_dir)
+
 from pyopengl_pygame.core.base import Base
 from pyopengl_pygame.core.utils import Utils
 from pyopengl_pygame.core.attribute import Attribute
