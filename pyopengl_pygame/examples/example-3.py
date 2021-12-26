@@ -1,4 +1,6 @@
 import OpenGL.GL as GL
+import pathlib
+import sys
 from math import pi
 
 from pyopengl_pygame.core.base import Base
