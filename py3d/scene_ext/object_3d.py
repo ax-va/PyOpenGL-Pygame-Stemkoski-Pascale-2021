@@ -88,9 +88,3 @@ class Object3D:
         self._transform.itemset((0, 3), position[0])
         self._transform.itemset((1, 3), position[1])
         self._transform.itemset((2, 3), position[2])
-
-
-if __name__ == "__main__":
-    l1 = [1, 2, 3]
-    l2 = [4, 5, 6]
-    print(l1 + l2)
