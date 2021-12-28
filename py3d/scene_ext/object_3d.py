@@ -9,23 +9,8 @@ class Object3D:
         self._parent = None
         self._children = []
 
-    def add(self, child):
-        self._children.append(child)
-        child.parent = self
-
-    def remove(self, child):
-        self._children.remove(child)
-        child.parent = None
-
-    def get_world_matrix(self):
-        """  Calculate a transformation of this Object3D relative
-             to the root Object3D of the scene graph  """
-        if self._parent is None:
-            return self._transform
-        else:
-            return self._parent.get_world_matrix() @ self._transform
-
-    def get_descendant_list(self):
+    @property
+    def descendant_list(self):
         """  Return a single list containing all descendants  """
         # master list of all descendant nodes
         descendants = []
@@ -42,6 +27,28 @@ class Object3D:
             nodes_to_process = node.children + nodes_to_process
         return descendants
 
+    @property
+    def global_matrix(self):
+        """  Calculate a transformation of this Object3D relative
+             to the root Object3D of the scene graph  """
+        if self._parent is None:
+            return self._transform
+        else:
+            return self._parent.global_matrix @ self._transform
+
+    @property
+    def local_matrix(self):
+        return self._transform
+
+    def add(self, child):
+        self._children.append(child)
+        child.parent = self
+
+    def remove(self, child):
+        self._children.remove(child)
+        child.parent = None
+
+    # apply geometric transformations
     def apply_matrix(self, matrix, local=True):
         if local:
             self._transform = self._transform @ matrix
