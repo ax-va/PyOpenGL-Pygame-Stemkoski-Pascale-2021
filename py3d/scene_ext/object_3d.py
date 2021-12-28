@@ -2,7 +2,7 @@ from py3d.core.matrix import Matrix
 
 
 class Object3D:
-    """  The Object3D class represents a node in the scene graph tree structure """
+    """  Represents a node in the scene graph tree structure  """
     def __init__(self):
         # Local transform matrix with respect to the parent of the object
         self._transform = Matrix.make_identity()
