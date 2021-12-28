@@ -4,7 +4,7 @@ from py3d.core.matrix import Matrix
 class Object3D:
     """ Represent a node in the scene graph tree structure """
     def __init__(self):
-        # Local transform matrix with respect to the parent of the object
+        # local transform matrix with respect to the parent of the object
         self._matrix = Matrix.make_identity()
         self._parent = None
         self._children = []
@@ -29,7 +29,7 @@ class Object3D:
 
     @property
     def global_matrix(self):
-        """ Calculate a transformation of this Object3D relative to the root Object3D of the scene graph """
+        """ Calculate the transformation of this Object3D relative to the root Object3D of the scene graph """
         if self._parent is None:
             return self._matrix
         else:
