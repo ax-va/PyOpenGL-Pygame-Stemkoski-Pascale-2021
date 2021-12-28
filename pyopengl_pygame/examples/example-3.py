@@ -19,7 +19,7 @@ from pyopengl_pygame.core.matrix import Matrix
 class Example(Base):
     """
     Move a triangle around the screen: global and local transformations.
-    Use keys w, a, s ,d, q, e and i, j, k ,l, u, p, respectively.
+    Use keys w, a, s ,d, z, x, q, e and i, j, k ,l, u, p, respectively.
     """
     def initialize(self):
         print('Initializing program...')
