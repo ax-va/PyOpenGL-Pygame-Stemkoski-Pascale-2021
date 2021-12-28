@@ -9,11 +9,11 @@ package_dir = str(pathlib.Path(__file__).resolve().parents[2])
 if package_dir not in sys.path:
     sys.path.insert(0, package_dir)
 
-from pyopengl_pygame.core.base import Base
-from pyopengl_pygame.core.utils import Utils
-from pyopengl_pygame.core.attribute import Attribute
-from pyopengl_pygame.core.uniform import Uniform
-from pyopengl_pygame.core.matrix import Matrix
+from py3d.core.base import Base
+from py3d.core.utils import Utils
+from py3d.core.attribute import Attribute
+from py3d.core.uniform import Uniform
+from py3d.core.matrix import Matrix
 
 
 class Example(Base):

@@ -1,4 +1,4 @@
-from pyopengl_pygame.core.matrix import Matrix
+from py3d.core.matrix import Matrix
 
 
 class Object3D:

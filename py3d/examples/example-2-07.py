@@ -1,5 +1,4 @@
 import OpenGL.GL as GL
-import math
 import pathlib
 import sys
 
@@ -9,14 +8,14 @@ package_dir = str(pathlib.Path(__file__).resolve().parents[2])
 if package_dir not in sys.path:
     sys.path.insert(0, package_dir)
 
-from pyopengl_pygame.core.base import Base
-from pyopengl_pygame.core.utils import Utils
-from pyopengl_pygame.core.attribute import Attribute
-from pyopengl_pygame.core.uniform import Uniform
+from py3d.core.base import Base
+from py3d.core.utils import Utils
+from py3d.core.attribute import Attribute
+from py3d.core.uniform import Uniform
 
 
 class Example(Base):
-    """ Animate triangle changing its color """
+    """ Animate triangle moving across screen """
     def initialize(self):
         print("Initializing program...")
         # initialize program #
@@ -59,10 +58,13 @@ class Example(Base):
 
     def update(self):
         """ Update data """
-        # self._base_color.data[0] = (math.sin(3 * self._time) + 1) / 2
-        self._base_color.data[0] = (math.sin(self._time) + 1) / 2
-        self._base_color.data[1] = (math.sin(self._time + 2.1) + 1) / 2
-        self._base_color.data[2] = (math.sin(self._time + 4.2) + 1) / 2
+        # increase x coordinate of translation
+        self._translation.data[0] += 0.01
+        # if triangle passes off-screen on the right,
+        # change translation so it reappears on the left
+        if self._translation.data[0] > 1.2:
+            self._translation.data[0] = -1.2
+        # render scene #
         # reset color buffer with specified color
         GL.glClear(GL.GL_COLOR_BUFFER_BIT)
         GL.glUseProgram(self._program_ref)
