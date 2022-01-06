@@ -6,6 +6,7 @@ class ParametricGeometry(Geometry):
                  u_start, u_end, u_resolution,
                  v_start, v_end, v_resolution,
                  surface_function):
+        super().__init__()
         # Generate set of points on function
         delta_u = (u_end - u_start) / u_resolution
         delta_v = (v_end - v_start) / v_resolution

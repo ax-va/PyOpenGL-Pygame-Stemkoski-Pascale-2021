@@ -1,6 +1,6 @@
 from math import sin, cos, pi
 
-from py3d.geometry.geometry import ParametricGeometry
+from py3d.geometry.parametric import ParametricGeometry
 
 
 class EllipsoidGeometry(ParametricGeometry):

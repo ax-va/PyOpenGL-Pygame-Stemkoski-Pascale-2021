@@ -1,6 +1,6 @@
 import OpenGL.GL as GL
 
-from py3d.scene_ext.object_3d import Object3D
+from py3d.core_ext.object3d import Object3D
 
 
 class Mesh(Object3D):
@@ -18,7 +18,23 @@ class Mesh(Object3D):
         # and shader program stored in material
         self._vao_ref = GL.glGenVertexArrays(1)
         GL.glBindVertexArray(self._vao_ref)
-        for variable_name, attribute_object in geometry.attributes.items():
+        for variable_name, attribute_object in geometry.attribute_dict.items():
             attribute_object.associate_variable(material.program_ref, variable_name)
         # Unbind this vertex array object
         GL.glBindVertexArray(0)
+
+    @property
+    def geometry(self):
+        return self._geometry
+
+    @property
+    def material(self):
+        return self._material
+
+    @property
+    def vao_ref(self):
+        return self._vao_ref
+
+    @property
+    def visible(self):
+        return self._visible

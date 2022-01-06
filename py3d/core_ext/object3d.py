@@ -7,13 +7,21 @@ class Object3D:
         # local transform matrix with respect to the parent of the object
         self._matrix = Matrix.make_identity()
         self._parent = None
-        self._children = []
+        self._children_list = []
+
+    @property
+    def children_list(self):
+        return self._children_list
+
+    @children_list.setter
+    def children_list(self, children_list):
+        self._children_list = children_list
 
     @property
     def descendant_list(self):
         """ Return a single list containing all descendants """
         # master list of all descendant nodes
-        descendants = []
+        descendant_list = []
         # nodes to be added to descendant list,
         # and whose children will be added to this list
         nodes_to_process = [self]
@@ -22,10 +30,10 @@ class Object3D:
             # remove first node from list
             node = nodes_to_process.pop(0)
             # add this node to descendant list
-            descendants.append(node)
+            descendant_list.append(node)
             # children of this node must also be processed
-            nodes_to_process = node.children + nodes_to_process
-        return descendants
+            nodes_to_process = node._children_list + nodes_to_process
+        return descendant_list
 
     @property
     def global_matrix(self):
@@ -56,12 +64,20 @@ class Object3D:
                 self._matrix.item((1, 3)),
                 self._matrix.item((2, 3))]
 
+    @property
+    def parent(self):
+        return self._parent
+
+    @parent.setter
+    def parent(self, parent):
+        self._parent = parent
+
     def add(self, child):
-        self._children.append(child)
+        self._children_list.append(child)
         child.parent = self
 
     def remove(self, child):
-        self._children.remove(child)
+        self._children_list.remove(child)
         child.parent = None
 
     # apply geometric transformations

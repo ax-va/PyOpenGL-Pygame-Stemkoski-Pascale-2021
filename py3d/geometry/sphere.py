@@ -1,4 +1,4 @@
-from py3d.geometry.geometry import EllipsoidGeometry
+from py3d.geometry.ellipsoid import EllipsoidGeometry
 
 
 class SphereGeometry(EllipsoidGeometry):

@@ -18,6 +18,7 @@ class BoxGeometry(Geometry):
         c1, c2 = [1, 0.5, 0.5], [0.5, 0, 0]
         c3, c4 = [0.5, 1, 0.5], [0, 0.5, 0]
         c5, c6 = [0.5, 0.5, 1], [0, 0, 0.5]
+        # Each side consists of two triangles
         position_data = [p5, p1, p3, p5, p3, p7,
                          p0, p4, p6, p0, p6, p2,
                          p6, p7, p3, p6, p3, p2,
