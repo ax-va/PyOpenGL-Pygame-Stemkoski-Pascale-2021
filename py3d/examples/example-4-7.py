@@ -14,24 +14,30 @@ from py3d.core_ext.camera import Camera
 from py3d.core_ext.mesh import Mesh
 from py3d.core_ext.renderer import Renderer
 from py3d.core_ext.scene import Scene
+from py3d.geometry.box import BoxGeometry
 from py3d.extras.axes import AxesHelper
 from py3d.extras.grid import GridHelper
 from py3d.extras.movement_rig import MovementRig
+from py3d.material.surface import SurfaceMaterial
 
 
 class Example(Base):
     """
     Render the axes and xy-grid.
-    Add camera movement: WASDRF(move), QE(turn), TG(look).
+    Add box movement: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")
         self._renderer = Renderer()
         self._scene = Scene()
         self._camera = Camera(aspect_ratio=800/600)
+        self._camera.set_position([0.5, 1, 5])
+        geometry = BoxGeometry()
+        material = SurfaceMaterial(property_dict={"useVertexColors": True})
+        self._mesh = Mesh(geometry, material)
         self._rig = MovementRig()
-        self._rig.add(self._camera)
-        self._rig.set_position([0.5, 1, 5])
+        self._rig.add(self._mesh)
+        self._rig.set_position([0, 0.5, -0.5])
         self._scene.add(self._rig)
         axes = AxesHelper(axis_length=2)
         self._scene.add(axes)
