@@ -5,7 +5,7 @@ from py3d.core_ext.object3d import Object3D
 
 class MovementRig(Object3D):
     """
-    Adds moving forwards and backwards, lef and right, up and down (all local translations),
+    Add moving forwards and backwards, left and right, up and down (all local translations),
     as well as turning left and right, and looking up and down
     """
     def __init__(self, units_per_second=1, degrees_per_second=60):
