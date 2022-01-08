@@ -23,7 +23,7 @@ from py3d.material.surface import SurfaceMaterial
 
 class Example(Base):
     """
-    Render the axes and xy-grid.
+    Render the axes and the rotated xy-grid.
     Add box movement: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
