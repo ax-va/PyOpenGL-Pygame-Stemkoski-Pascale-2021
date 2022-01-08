@@ -26,9 +26,9 @@ class Example(Base):
         self._camera = Camera(aspect_ratio=800/600)
         self._camera.set_position([0, 0, 4])
         geometry = BoxGeometry()
-        # material = SurfaceMaterial({"useVertexColors": True})
+        # material = SurfaceMaterial(property_dict={"useVertexColors": True})
         material = SurfaceMaterial(
-            {
+            property_dict={
                 "useVertexColors": True,
                 "wireframe": True,
                 "lineWidth": 8
@@ -38,8 +38,8 @@ class Example(Base):
         self._scene.add(self._mesh)
 
     def update(self):
-        # self._mesh.rotate_y(0.0514)
-        # self._mesh.rotate_x(0.0337)
+        self._mesh.rotate_y(0.0514)
+        self._mesh.rotate_x(0.0337)
         self._renderer.render(self._scene, self._camera)
 
 
