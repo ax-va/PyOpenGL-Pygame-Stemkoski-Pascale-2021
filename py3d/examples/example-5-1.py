@@ -32,8 +32,6 @@ class Example(Base):
         self._scene.add(self._mesh)
 
     def update(self):
-        # self._mesh.rotate_y(0.0514)
-        # self._mesh.rotate_x(0.0337)
         self._renderer.render(self._scene, self._camera)
 
 
