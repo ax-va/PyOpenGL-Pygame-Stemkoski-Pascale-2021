@@ -34,8 +34,7 @@ class Texture:
         for name, value in property_dict.items():
             if name in self._property_dict.keys():
                 self._property_dict[name] = value
-            else:
-                # unknown property type
+            else:  # unknown property type
                 raise Exception("Texture has no property with name: " + name)
 
     def upload_data(self):

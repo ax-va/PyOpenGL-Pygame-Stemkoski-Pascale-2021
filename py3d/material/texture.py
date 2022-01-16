@@ -31,9 +31,9 @@ class TextureMaterial(Material):
             vec4 color = vec4(baseColor, 1.0) * texture2D(texture, UV);
             if (color.a < 0.1)
                 discard;
+                
+            fragColor = color;
         }
-        
-        fragColor = color;
         """
         super().__init__(vertex_shader_code, fragment_shader_code)
         self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])
