@@ -46,4 +46,4 @@ class Example(Base):
 
 
 # Instantiate this class and run the program
-Example(screen_size=[800,600]).run()
+Example(screen_size=[800, 600]).run()
