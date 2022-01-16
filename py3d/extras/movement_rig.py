@@ -21,7 +21,7 @@ class MovementRig(Object3D):
         self._degrees_per_second = degrees_per_second
 
         # Customizable key mappings.
-        # Defaults: WASDRF(move), QE(turn), TG(look)
+        # Defaults: W, A, S, D, R, F (move), Q, E (turn), T, G (look)
         self.KEY_MOVE_FORWARDS = "w"
         self.KEY_MOVE_BACKWARDS = "s"
         self.KEY_MOVE_LEFT = "a"

@@ -3,7 +3,7 @@ import pygame
 
 class Input:
     def __init__(self):
-        # has the user quit the application?
+        # Has the user quit the application?
         self._quit = False
         # lists to store key states
         # down, up: discrete event; lasts for one iteration
@@ -39,16 +39,16 @@ class Input:
         return key_code in self._key_up_list
 
     def update(self):
-        # reset discrete key states
+        # Reset discrete key states
         self._key_down_list = []
         self._key_up_list = []
-        # iterate over all user input events (such as keyboard or mouse)
+        # Iterate over all user input events (such as keyboard or mouse)
         # that occurred since the last time events were checked
         for event in pygame.event.get():
-            # quit event occurs by clicking button to close window
+            # Quit event occurs by clicking button to close window
             if event.type == pygame.QUIT:
                 self._quit = True
-            # check for keydown and keyup events;
+            # Check for key-down and key-up events;
             # get name of key from event and append to or remove from corresponding lists
             if event.type == pygame.KEYDOWN:
                 key_name = pygame.key.name(event.key)

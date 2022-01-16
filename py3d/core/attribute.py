@@ -10,7 +10,7 @@ class Attribute:
         self._data = data
         # reference of available buffer from GPU
         self._buffer_ref = GL.glGenBuffers(1)
-        # upload data immediately
+        # Upload data immediately
         self.upload_data()
 
     @property
@@ -19,22 +19,22 @@ class Attribute:
 
     def upload_data(self):
         """ Upload the data to a GPU buffer """
-        # convert data to numpy array format; convert numbers to 32 bit floats
+        # Convert data to numpy array format; convert numbers to 32-bit floats
         data = np.array(self._data).astype(np.float32)
-        # select buffer used by the following functions
+        # Select buffer used by the following functions
         GL.glBindBuffer(GL.GL_ARRAY_BUFFER, self._buffer_ref)
-        # store data in currently bound buffer
+        # Store data in currently bound buffer
         GL.glBufferData(GL.GL_ARRAY_BUFFER, data.ravel(), GL.GL_STATIC_DRAW)
 
     def associate_variable(self, program_ref, variable_name):
         """ Associate variable in program with the buffer """
-        # get reference for program variable with given name
+        # Get reference for program variable with given name
         variable_ref = GL.glGetAttribLocation(program_ref, variable_name)
-        # if the program does not reference the variable, then exit
+        # If the program does not reference the variable, then exit
         if variable_ref != -1:
-            # select buffer used by the following functions
+            # Select buffer used by the following functions
             GL.glBindBuffer(GL.GL_ARRAY_BUFFER, self._buffer_ref)
-            # specify how data will be read from the currently bound buffer into the specified variable
+            # Specify how data will be read from the currently bound buffer into the specified variable
             if self._data_type == "int":
                 GL.glVertexAttribPointer(variable_ref, 1, GL.GL_INT, False, 0, None)
             elif self._data_type == "float":
@@ -47,5 +47,5 @@ class Attribute:
                 GL.glVertexAttribPointer(variable_ref, 4, GL.GL_FLOAT, False, 0, None)
             else:
                 raise Exception(f'Attribute {variable_name} has unknown type {self._data_type}')
-            # indicate that data will be streamed to this variable
+            # Indicate that data will be streamed to this variable
             GL.glEnableVertexAttribArray(variable_ref)

@@ -1,4 +1,4 @@
-from py3d.geometry.cylindricalGeometry import CylindricalGeometry
+from py3d.geometry.cylindrical import CylindricalGeometry
 
 
 class PyramidGeometry(CylindricalGeometry):

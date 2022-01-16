@@ -5,8 +5,8 @@ from py3d.core_ext.object3d import Object3D
 
 class Mesh(Object3D):
     """
-    Contains geometric data that specifes vertex-related properties and material data
-    that specifes the general appearance of the object
+    Contains geometric data that specifies vertex-related properties and material data
+    that specifies the general appearance of the object
     """
     def __init__(self, geometry, material):
         super().__init__()

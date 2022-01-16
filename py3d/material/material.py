@@ -3,20 +3,21 @@ import OpenGL.GL as GL
 from py3d.core.uniform import Uniform
 from py3d.core.utils import Utils
 
+
 class Material:
     def __init__(self, vertex_shader_code, fragment_shader_code):
         self._program_ref = Utils.initialize_program(vertex_shader_code, fragment_shader_code)
-        # Store Uniform objects, indexed by name of associated variable in shader
-        self._uniform_dict = {}
+        # Store Uniform objects, indexed by name of associated variable in shader.
         # Each shader typically contains these uniforms; values will be set during render process from Mesh / Camera.
-        # Additional uniforms added by extending classes.
-        self._uniform_dict["modelMatrix"] = Uniform("mat4", None)
-        self._uniform_dict["viewMatrix"] = Uniform("mat4", None)
-        self._uniform_dict["projectionMatrix"] = Uniform("mat4", None)
-        # Store OpenGL render settings, indexed by variable name.
-        # Additional settings added by extending classes.
-        self._setting_dict = {}
-        self._setting_dict["drawStyle"] = GL.GL_TRIANGLES
+        self._uniform_dict = {
+            "modelMatrix": Uniform("mat4", None),
+            "viewMatrix": Uniform("mat4", None),
+            "projectionMatrix": Uniform("mat4", None),
+        }
+        # Store OpenGL render settings, indexed by variable name
+        self._setting_dict = {
+            "drawStyle": GL.GL_TRIANGLES
+        }
 
     @property
     def program_ref(self):
