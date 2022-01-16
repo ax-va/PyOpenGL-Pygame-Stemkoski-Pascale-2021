@@ -25,7 +25,7 @@ class Uniform:
 
     def upload_data(self):
         """ Store data in uniform variable previously located """
-        # if the program does not reference the variable, then exit
+        # If the program does not reference the variable, then exit
         if self._variable_ref != -1:
             if self._data_type == 'int':
                 GL.glUniform1i(self._variable_ref, self._data)

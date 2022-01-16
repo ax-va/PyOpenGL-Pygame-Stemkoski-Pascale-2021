@@ -18,51 +18,51 @@ class Utils:
 
     @staticmethod
     def initialize_shader(shader_code, shader_type):
-        # specify required OpenGL/GLSL version
+        # Specify required OpenGL/GLSL version
         shader_code = '#version 330\n' + shader_code
-        # create empty shader object and return reference value
+        # Create empty shader object and return reference value
         shader_ref = GL.glCreateShader(shader_type)
-        # stores the source code in the shader
+        # Stores the source code in the shader
         GL.glShaderSource(shader_ref, shader_code)
-        # compiles source code previously stored in the shader object
+        # Compiles source code previously stored in the shader object
         GL.glCompileShader(shader_ref)
-        # queries whether shader compile was successful
+        # Queries whether shader compile was successful
         compile_success = GL.glGetShaderiv(shader_ref, GL.GL_COMPILE_STATUS)
         if not compile_success:
-            # retrieve error message
+            # Retrieve error message
             error_message = GL.glGetShaderInfoLog(shader_ref)
             # free memory used to store shader program
             GL.glDeleteShader(shader_ref)
-            # convert byte string to character string
+            # Convert byte string to character string
             error_message = '\n' + error_message.decode('utf-8')
-            # raise exception: halt program and print error message
+            # Raise exception: halt program and print error message
             raise Exception(error_message)
-        # compilation was successful; return shader reference value
+        # Compilation was successful; return shader reference value
         return shader_ref
 
     @staticmethod
     def initialize_program(vertex_shader_code, fragment_shader_code):
         vertex_shader_ref = Utils.initialize_shader(vertex_shader_code, GL.GL_VERTEX_SHADER)
         fragment_shader_ref = Utils.initialize_shader(fragment_shader_code, GL.GL_FRAGMENT_SHADER)
-        # create empty program object and store reference to it
+        # Create empty program object and store reference to it
         program_ref = GL.glCreateProgram()
-        # attach previously compiled shader programs
+        # Attach previously compiled shader programs
         GL.glAttachShader(program_ref, vertex_shader_ref)
         GL.glAttachShader(program_ref, fragment_shader_ref)
-        # link vertex shader to fragment shader
+        # Link vertex shader to fragment shader
         GL.glLinkProgram(program_ref)
         # queries whether program link was successful
         link_success = GL.glGetProgramiv(program_ref, GL.GL_LINK_STATUS)
         if not link_success:
-            # retrieve error message
+            # Retrieve error message
             error_message = GL.glGetProgramInfoLog(program_ref)
             # free memory used to store program
             GL.glDeleteProgram(program_ref)
-            # convert byte string to character string
+            # Convert byte string to character string
             error_message = '\n' + error_message.decode('utf-8')
-            # raise exception: halt application and print error message
+            # Raise exception: halt application and print error message
             raise Exception(error_message)
-        # linking was successful; return program reference value
+        # Linking was successful; return program reference value
         return program_ref
 
     @staticmethod

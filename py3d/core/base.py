@@ -7,36 +7,36 @@ from py3d.core.utils import Utils
 
 class Base:
     def __init__(self, screen_size=(512, 512)):
-        # initialize all pygame modules
+        # Initialize all pygame modules
         pygame.init()
-        # indicate rendering details
+        # Indicate rendering details
         display_flags = pygame.DOUBLEBUF | pygame.OPENGL
-        # initialize buffers to perform antialiasing
+        # Initialize buffers to perform antialiasing
         pygame.display.gl_set_attribute(pygame.GL_MULTISAMPLEBUFFERS, 1)
         pygame.display.gl_set_attribute(pygame.GL_MULTISAMPLESAMPLES, 4)
-        # use a core OpenGL profile for cross-platform compatibility
+        # Use a core OpenGL profile for cross-platform compatibility
         pygame.display.gl_set_attribute(pygame.GL_CONTEXT_PROFILE_MASK, pygame.GL_CONTEXT_PROFILE_CORE)
-        # create and display the window
+        # Create and display the window
         self._screen = pygame.display.set_mode(screen_size, display_flags)
-        # set the text that appears in the title bar of the window
+        # Set the text that appears in the title bar of the window
         pygame.display.set_caption("Graphics Window")
-        # determine if main loop is active
+        # Determine if main loop is active
         self._running = True
-        # manage time-related data and operations
+        # Manage time-related data and operations
         self._clock = pygame.time.Clock()
-        # manage user input
+        # Manage user input
         self._input = Input()
         # number of seconds application has been running
         self._time = 0
-        # print the system information
+        # Print the system information
         Utils.print_system_info()
 
-    # implement by extending class
     def initialize(self):
+        """ Implement by extending class """
         pass
 
-    # implement by extending class
     def update(self):
+        """ Implement by extending class """
         pass
 
     def run(self):
@@ -50,14 +50,14 @@ class Base:
                 self._running = False
             # seconds since iteration of run loop
             self._delta_time = self._clock.get_time() / 1000
-            # increment time application has been running
+            # Increment time application has been running
             self._time += self._delta_time
             # update #
             self.update()
             # render #
-            # display image on screen
+            # Display image on screen
             pygame.display.flip()
-            # pause if necessary to achieve 60 FPS
+            # Pause if necessary to achieve 60 FPS
             self._clock.tick(60)
         # shutdown #
         pygame.quit()

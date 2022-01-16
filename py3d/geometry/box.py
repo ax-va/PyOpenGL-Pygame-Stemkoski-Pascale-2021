@@ -6,13 +6,13 @@ class BoxGeometry(Geometry):
         super().__init__()
         # vertices
         p0 = [-width / 2, -height / 2, -depth / 2]
-        p1 = [ width / 2, -height / 2, -depth / 2]
-        p2 = [-width / 2,  height / 2, -depth / 2]
-        p3 = [ width / 2,  height / 2, -depth / 2]
-        p4 = [-width / 2, -height / 2,  depth / 2]
-        p5 = [ width / 2, -height / 2,  depth / 2]
-        p6 = [-width / 2,  height / 2,  depth / 2]
-        p7 = [ width / 2,  height / 2,  depth / 2]
+        p1 = [width / 2, -height / 2, -depth / 2]
+        p2 = [-width / 2, height / 2, -depth / 2]
+        p3 = [width / 2, height / 2, -depth / 2]
+        p4 = [-width / 2, -height / 2, depth / 2]
+        p5 = [width / 2, -height / 2, depth / 2]
+        p6 = [-width / 2, height / 2, depth / 2]
+        p7 = [width / 2, height / 2, depth / 2]
         # colors for faces in order:
         # x+, x-, y+, y-, z+, z-
         c1, c2 = [1, 0.5, 0.5], [0.5, 0, 0]

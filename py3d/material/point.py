@@ -20,5 +20,3 @@ class PointMaterial(BasicMaterial):
             GL.glEnable(GL.GL_POINT_SMOOTH)
         else:
             GL.glDisable(GL.GL_POINT_SMOOTH)
-
-
