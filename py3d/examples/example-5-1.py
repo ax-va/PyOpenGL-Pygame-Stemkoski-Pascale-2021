@@ -13,9 +13,7 @@ from py3d.core_ext.mesh import Mesh
 from py3d.core_ext.renderer import Renderer
 from py3d.core_ext.scene import Scene
 from py3d.core_ext.texture import Texture
-from py3d.geometry.box import BoxGeometry
-# from py3d.geometry.geometry import Geometry
-from py3d.material.surface import SurfaceMaterial
+from py3d.geometry.rectangle import RectangleGeometry
 from py3d.material.texture import TextureMaterial
 
 
@@ -26,22 +24,16 @@ class Example(Base):
         self._renderer = Renderer()
         self._scene = Scene()
         self._camera = Camera(aspect_ratio=800/600)
-        self._camera.set_position([0, 0, 4])
-        geometry = BoxGeometry()
-        # material = SurfaceMaterial(property_dict={"useVertexColors": True})
-        material = SurfaceMaterial(
-            property_dict={
-                "useVertexColors": True,
-                "wireframe": True,
-                "lineWidth": 8
-            }
-        )
+        self._camera.set_position([0, 0, 2])
+        geometry = RectangleGeometry()
+        grid = Texture("../images/grid.jpg")
+        material = TextureMaterial(grid)
         self._mesh = Mesh(geometry, material)
         self._scene.add(self._mesh)
 
     def update(self):
-        self._mesh.rotate_y(0.0514)
-        self._mesh.rotate_x(0.0337)
+        # self._mesh.rotate_y(0.0514)
+        # self._mesh.rotate_x(0.0337)
         self._renderer.render(self._scene, self._camera)
 
 

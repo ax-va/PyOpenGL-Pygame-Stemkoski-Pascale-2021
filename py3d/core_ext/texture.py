@@ -21,6 +21,10 @@ class Texture:
             self.load_image(file_name)
             self.upload_data()
 
+    @property
+    def texture_ref(self):
+        return self._texture_ref
+
     def load_image(self, file_name):
         """ Load image from file """
         self._surface = pygame.image.load(file_name)

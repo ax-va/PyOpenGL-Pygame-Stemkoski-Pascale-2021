@@ -13,6 +13,9 @@ class Renderer:
     def render(self, scene, camera):
         # Clear color and depth buffers
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+        # blending
+        GL.glEnable(GL.GL_BLEND)
+        GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
         # Update camera view (calculate inverse)
         camera.update_view_matrix()
         # Extract list of all Mesh objects in scene
