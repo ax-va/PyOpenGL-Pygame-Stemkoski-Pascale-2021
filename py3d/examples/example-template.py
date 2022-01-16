@@ -20,7 +20,7 @@ from py3d.material.texture import TextureMaterial
 
 
 class Example(Base):
-    """ Render a basic scene that consists of a spinning cube """
+    """ Example template """
     def initialize(self):
         print("Initializing program...")
         self._renderer = Renderer()
