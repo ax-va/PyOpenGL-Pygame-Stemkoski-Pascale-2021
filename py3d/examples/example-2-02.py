@@ -16,7 +16,7 @@ class Example(Base):
     """ Render a single point """
     def initialize(self):
         print("Initializing program...")
-        # initialize program #
+        # Initialize program #
         # vertex shader code
         vs_code = """
             void main()
@@ -32,22 +32,22 @@ class Example(Base):
                 fragColor = vec4(1.0, 1.0, 0.0, 1.0);
             }
         """
-        # send code to GPU and compile; store program reference
-        self._program_ref = Utils.initialize_program(vs_code, fs_code)
-        # set up vertex array object #
+        # Send code to GPU and compile; store program reference
+        self.program_ref = Utils.initialize_program(vs_code, fs_code)
+        # Set up vertex array object #
         vao_ref = GL.glGenVertexArrays(1)
         GL.glBindVertexArray(vao_ref)
         # render settings (optional) #
-        # set point width and height
+        # Set point width and height
         GL.glPointSize(10)
 
     def update(self):
-        # select program to use when rendering
-        GL.glUseProgram(self._program_ref)
-        # renders geometric objects using selected program
+        # Select program to use when rendering
+        GL.glUseProgram(self.program_ref)
+        # Renders geometric objects using selected program
         GL.glDrawArrays(GL.GL_POINTS, 0, 1)
 
 
-# instantiate this class and run the program
+# Instantiate this class and run the program
 Example().run()
 

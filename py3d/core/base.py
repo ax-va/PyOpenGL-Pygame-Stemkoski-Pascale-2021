@@ -31,6 +31,22 @@ class Base:
         # Print the system information
         Utils.print_system_info()
 
+    @property
+    def delta_time(self):
+        return self._delta_time
+
+    @property
+    def input(self):
+        return self._input
+
+    @property
+    def time(self):
+        return self._time
+
+    @time.setter
+    def time(self, value):
+        self._time = value
+
     def initialize(self):
         """ Implement by extending class """
         pass
@@ -40,7 +56,7 @@ class Base:
         pass
 
     def run(self):
-        # startup #
+        # Startup #
         self.initialize()
         # main loop #
         while self._running:
@@ -52,13 +68,13 @@ class Base:
             self._delta_time = self._clock.get_time() / 1000
             # Increment time application has been running
             self._time += self._delta_time
-            # update #
+            # Update #
             self.update()
-            # render #
+            # Render #
             # Display image on screen
             pygame.display.flip()
             # Pause if necessary to achieve 60 FPS
             self._clock.tick(60)
-        # shutdown #
+        # Shutdown #
         pygame.quit()
         sys.exit()

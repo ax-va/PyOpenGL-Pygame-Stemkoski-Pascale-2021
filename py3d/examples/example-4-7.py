@@ -28,30 +28,30 @@ class Example(Base):
     """
     def initialize(self):
         print("Initializing program...")
-        self._renderer = Renderer()
-        self._scene = Scene()
-        self._camera = Camera(aspect_ratio=800/600)
-        self._camera.set_position([0.5, 1, 5])
+        self.renderer = Renderer()
+        self.scene = Scene()
+        self.camera = Camera(aspect_ratio=800/600)
+        self.camera.set_position([0.5, 1, 5])
         geometry = BoxGeometry()
         material = SurfaceMaterial(property_dict={"useVertexColors": True})
-        self._mesh = Mesh(geometry, material)
-        self._rig = MovementRig()
-        self._rig.add(self._mesh)
-        self._rig.set_position([0, 0.5, -0.5])
-        self._scene.add(self._rig)
+        self.mesh = Mesh(geometry, material)
+        self.rig = MovementRig()
+        self.rig.add(self.mesh)
+        self.rig.set_position([0, 0.5, -0.5])
+        self.scene.add(self.rig)
         axes = AxesHelper(axis_length=2)
-        self._scene.add(axes)
+        self.scene.add(axes)
         grid = GridHelper(
             size=20,
             grid_color=[1, 1, 1],
             center_color=[1, 1, 0]
         )
         grid.rotate_x(-math.pi / 2)
-        self._scene.add(grid)
+        self.scene.add(grid)
 
     def update(self):
-        self._rig.update(self._input, self._delta_time)
-        self._renderer.render(self._scene, self._camera)
+        self.rig.update(self.input, self.delta_time)
+        self.renderer.render(self.scene, self.camera)
 
 
 # Instantiate this class and run the program

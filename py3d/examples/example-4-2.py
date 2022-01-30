@@ -20,10 +20,10 @@ class Example(Base):
     """ Render a basic scene that consists of a custom geometry """
     def initialize(self):
         print("Initializing program...")
-        self._renderer = Renderer()
-        self._scene = Scene()
-        self._camera = Camera(aspect_ratio=800/600)
-        self._camera.set_position([0, 0, 0.5])
+        self.renderer = Renderer()
+        self.scene = Scene()
+        self.camera = Camera(aspect_ratio=800/600)
+        self.camera.set_position([0, 0, 0.5])
         geometry = Geometry()
         p0 = [-0.1, 0.1, 0.0]
         p1 = [0.0, 0.0, 0.0]
@@ -39,11 +39,11 @@ class Example(Base):
         geometry.add_attribute("vec3", "vertexColor", color_data)
         geometry.count_vertices()
         material = SurfaceMaterial(property_dict={"useVertexColors": True})
-        self._mesh = Mesh(geometry, material)
-        self._scene.add(self._mesh)
+        self.mesh = Mesh(geometry, material)
+        self.scene.add(self.mesh)
 
     def update(self):
-        self._renderer.render(self._scene, self._camera)
+        self.renderer.render(self.scene, self.camera)
 
 
 # Instantiate this class and run the program

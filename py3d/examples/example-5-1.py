@@ -21,18 +21,18 @@ class Example(Base):
     """ Render a rectangle with a texture applied to it """
     def initialize(self):
         print("Initializing program...")
-        self._renderer = Renderer()
-        self._scene = Scene()
-        self._camera = Camera(aspect_ratio=800/600)
-        self._camera.set_position([0, 0, 2])
+        self.renderer = Renderer()
+        self.scene = Scene()
+        self.camera = Camera(aspect_ratio=800/600)
+        self.camera.set_position([0, 0, 2])
         geometry = RectangleGeometry()
         grid_texture = Texture("../images/grid.jpg")
         material = TextureMaterial(grid_texture)
-        self._mesh = Mesh(geometry, material)
-        self._scene.add(self._mesh)
+        self.mesh = Mesh(geometry, material)
+        self.scene.add(self.mesh)
 
     def update(self):
-        self._renderer.render(self._scene, self._camera)
+        self.renderer.render(self.scene, self.camera)
 
 
 # Instantiate this class and run the program

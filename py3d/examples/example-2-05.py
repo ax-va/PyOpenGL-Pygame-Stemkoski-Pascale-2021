@@ -18,7 +18,7 @@ class Example(Base):
     def initialize(self):
         print("Initializing program...")
 
-        # initialize program #
+        # Initialize program #
         vs_code = """
             in vec3 position;
             in vec3 vertexColor;
@@ -37,23 +37,23 @@ class Example(Base):
                 fragColor = vec4(color.r, color.g, color.b, 1.0);
             }
         """
-        self._program_ref = Utils.initialize_program(vs_code, fs_code)
+        self.program_ref = Utils.initialize_program(vs_code, fs_code)
         # render settings (optional) #
         GL.glPointSize(10)
         GL.glLineWidth(4)
-        # set up vertex array object #
+        # Set up vertex array object #
         vao_ref = GL.glGenVertexArrays(1)
         GL.glBindVertexArray(vao_ref)
-        # set up vertex attributes #
+        # Set up vertex attributes #
         position_data = [[ 0.8,  0.0,  0.0],
                          [ 0.4,  0.6,  0.0],
                          [-0.4,  0.6,  0.0],
                          [-0.8,  0.0,  0.0],
                          [-0.4, -0.6,  0.0],
                          [ 0.4, -0.6,  0.0]]
-        self._vertex_count = len(position_data)
+        self.vertex_count = len(position_data)
         position_attribute = Attribute("vec3", position_data)
-        position_attribute.associate_variable(self._program_ref, 'position')
+        position_attribute.associate_variable(self.program_ref, 'position')
         color_data = [[1.0, 0.0, 0.0],
                       [1.0, 0.5, 0.0],
                       [1.0, 1.0, 0.0],
@@ -61,14 +61,14 @@ class Example(Base):
                       [0.0, 0.0, 1.0],
                       [0.5, 0.0, 1.0]]
         color_attribute = Attribute("vec3", color_data)
-        color_attribute.associate_variable(self._program_ref, 'vertexColor')
+        color_attribute.associate_variable(self.program_ref, 'vertexColor')
 
     def update(self):
-        GL.glUseProgram(self._program_ref)
-        # GL.glDrawArrays(GL.GL_POINTS, 0, self._vertex_count)
-        # GL.glDrawArrays(GL.GL_LINE_LOOP, 0, self._vertex_count)
-        GL.glDrawArrays(GL.GL_TRIANGLE_FAN, 0, self._vertex_count)
+        GL.glUseProgram(self.program_ref)
+        # GL.glDrawArrays(GL.GL_POINTS, 0, self.vertex_count)
+        # GL.glDrawArrays(GL.GL_LINE_LOOP, 0, self.vertex_count)
+        GL.glDrawArrays(GL.GL_TRIANGLE_FAN, 0, self.vertex_count)
 
 
-# instantiate this class and run the program
+# Instantiate this class and run the program
 Example().run()

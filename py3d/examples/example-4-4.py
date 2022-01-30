@@ -21,10 +21,10 @@ class Example(Base):
     """ Render a spinning sphere with gradient colors """
     def initialize(self):
         print("Initializing program...")
-        self._renderer = Renderer()
-        self._scene = Scene()
-        self._camera = Camera(aspect_ratio=800/600)
-        self._camera.set_position([0, 0, 7])
+        self.renderer = Renderer()
+        self.scene = Scene()
+        self.camera = Camera(aspect_ratio=800/600)
+        self.camera.set_position([0, 0, 7])
         geometry = SphereGeometry(radius=3)
         vs_code = """
         uniform mat4 modelMatrix;
@@ -51,13 +51,13 @@ class Example(Base):
         """
         material = Material(vs_code, fs_code)
         material.locate_uniforms()
-        self._mesh = Mesh(geometry, material)
-        self._scene.add(self._mesh)
+        self.mesh = Mesh(geometry, material)
+        self.scene.add(self.mesh)
 
     def update(self):
-        self._mesh.rotate_y(0.00514)
-        self._mesh.rotate_x(0.00337)
-        self._renderer.render(self._scene, self._camera)
+        self.mesh.rotate_y(0.00514)
+        self.mesh.rotate_x(0.00337)
+        self.renderer.render(self.scene, self.camera)
 
 
 # Instantiate this class and run the program

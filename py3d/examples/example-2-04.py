@@ -13,11 +13,11 @@ from py3d.core.utils import Utils
 from py3d.core.attribute import Attribute
 
 
-class Test(Base):
+class Example(Base):
     """ Render two shapes """
     def initialize(self):
         print("Initializing program...")
-        # initialize program #
+        # Initialize program #
         vs_code = """
             in vec3 position;
             void main()
@@ -32,39 +32,39 @@ class Test(Base):
                 fragColor = vec4(1.0, 1.0, 0.0, 1.0);
             }
         """
-        self._program_ref = Utils.initialize_program(vs_code, fs_code)
+        self.program_ref = Utils.initialize_program(vs_code, fs_code)
         # render settings #
         GL.glLineWidth(4)
-        # set up vertex array object - triangle #
-        self._vao_tri = GL.glGenVertexArrays(1)
-        GL.glBindVertexArray(self._vao_tri)
-        position_data_tri = [[-0.5,  0.8,  0.0],
-                             [-0.2,  0.2,  0.0],
-                             [-0.8,  0.2,  0.0]]
-        self._vertex_count_tri = len(position_data_tri)
-        position_attribute_tri = Attribute('vec3', position_data_tri)
-        position_attribute_tri.associate_variable(self._program_ref, 'position')
-        # set up vertex array object - square #
-        self._vao_square = GL.glGenVertexArrays(1)
-        GL.glBindVertexArray(self._vao_square)
+        # Set up vertex array object - triangle #
+        self.vao_triangle = GL.glGenVertexArrays(1)
+        GL.glBindVertexArray(self.vao_triangle)
+        position_data_triangle = [[-0.5,  0.8,  0.0],
+                                  [-0.2,  0.2,  0.0],
+                                  [-0.8,  0.2,  0.0]]
+        self.vertex_count_triangle = len(position_data_triangle)
+        position_attribute_triangle = Attribute('vec3', position_data_triangle)
+        position_attribute_triangle.associate_variable(self.program_ref, 'position')
+        # Set up vertex array object - square #
+        self.vao_square = GL.glGenVertexArrays(1)
+        GL.glBindVertexArray(self.vao_square)
         position_data_square = [[0.8, 0.8, 0.0],
                                 [0.8, 0.2, 0.0],
                                 [0.2, 0.2, 0.0],
                                 [0.2, 0.8, 0.0]]
-        self._vertex_count_square = len(position_data_square)
+        self.vertex_count_square = len(position_data_square)
         position_attribute_square = Attribute('vec3', position_data_square)
-        position_attribute_square.associate_variable(self._program_ref, 'position')
+        position_attribute_square.associate_variable(self.program_ref, 'position')
 
     def update(self):
-        # using same program to render both shapes
-        GL.glUseProgram(self._program_ref)
-        # draw the triangle
-        GL.glBindVertexArray(self._vao_tri)
-        GL.glDrawArrays(GL.GL_LINE_LOOP, 0, self._vertex_count_tri)
-        # draw the square
-        GL.glBindVertexArray(self._vao_square)
-        GL.glDrawArrays(GL.GL_LINE_LOOP, 0, self._vertex_count_square)
+        # Using same program to render both shapes
+        GL.glUseProgram(self.program_ref)
+        # Draw the triangle
+        GL.glBindVertexArray(self.vao_triangle)
+        GL.glDrawArrays(GL.GL_LINE_LOOP, 0, self.vertex_count_triangle)
+        # Draw the square
+        GL.glBindVertexArray(self.vao_square)
+        GL.glDrawArrays(GL.GL_LINE_LOOP, 0, self.vertex_count_square)
 
 
-# instantiate this class and run the program
-Test().run()
+# Instantiate this class and run the program
+Example().run()

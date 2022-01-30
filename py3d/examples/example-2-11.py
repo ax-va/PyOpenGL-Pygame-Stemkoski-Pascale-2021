@@ -18,7 +18,7 @@ class Example(Base):
     """ Enables the user to move a triangle using the arrow keys """
     def initialize(self):
         print("Initializing program...")
-        # initialize program #
+        # Initialize program #
         vs_code = """
             in vec3 position;
             uniform vec3 translation;
@@ -36,46 +36,46 @@ class Example(Base):
                 fragColor = vec4(baseColor.r, baseColor.g, baseColor.b, 1.0);
             }
         """
-        self._program_ref = Utils.initialize_program(vs_code, fs_code)
+        self.program_ref = Utils.initialize_program(vs_code, fs_code)
         # render settings (optional) #
-        # specify color used when clearly
+        # Specify color used when clearly
         GL.glClearColor(0.0, 0.0, 0.0, 1.0)
-        # set up vertex array object #
+        # Set up vertex array object #
         vao_ref = GL.glGenVertexArrays(1)
         GL.glBindVertexArray(vao_ref)
-        # set up vertex attribute #
+        # Set up vertex attribute #
         position_data = [[ 0.0,  0.2,  0.0],
                          [ 0.2, -0.2,  0.0],
                          [-0.2, -0.2,  0.0]]
-        self._vertex_count = len(position_data)
+        self.vertex_count = len(position_data)
         position_attribute = Attribute('vec3', position_data)
-        position_attribute.associate_variable(self._program_ref, 'position')
-        # set up uniforms #
-        self._translation = Uniform('vec3', [-0.5, 0.0, 0.0])
-        self._translation.locate_variable(self._program_ref, 'translation')
-        self._base_color = Uniform('vec3', [1.0, 0.0, 0.0])
-        self._base_color.locate_variable(self._program_ref, 'baseColor')
+        position_attribute.associate_variable(self.program_ref, 'position')
+        # Set up uniforms #
+        self.translation = Uniform('vec3', [-0.5, 0.0, 0.0])
+        self.translation.locate_variable(self.program_ref, 'translation')
+        self.base_color = Uniform('vec3', [1.0, 0.0, 0.0])
+        self.base_color.locate_variable(self.program_ref, 'baseColor')
         # triangle speed, units per second
-        self._speed = 0.5
+        self.speed = 0.5
 
     def update(self):
         """ Update data """
-        distance = self._speed * self._delta_time
-        if self._input.is_key_pressed('left'):
-            self._translation.data[0] -= distance
-        if self._input.is_key_pressed('right'):
-            self._translation.data[0] += distance
-        if self._input.is_key_pressed('down'):
-            self._translation.data[1] -= distance
-        if self._input.is_key_pressed('up'):
-            self._translation.data[1] += distance
-        # reset color buffer with specified color
+        distance = self.speed * self.delta_time
+        if self.input.is_key_pressed('left'):
+            self.translation.data[0] -= distance
+        if self.input.is_key_pressed('right'):
+            self.translation.data[0] += distance
+        if self.input.is_key_pressed('down'):
+            self.translation.data[1] -= distance
+        if self.input.is_key_pressed('up'):
+            self.translation.data[1] += distance
+        # Reset color buffer with specified color
         GL.glClear(GL.GL_COLOR_BUFFER_BIT)
-        GL.glUseProgram(self._program_ref)
-        self._translation.upload_data()
-        self._base_color.upload_data()
-        GL.glDrawArrays(GL.GL_TRIANGLES, 0, self._vertex_count)
+        GL.glUseProgram(self.program_ref)
+        self.translation.upload_data()
+        self.base_color.upload_data()
+        GL.glDrawArrays(GL.GL_TRIANGLES, 0, self.vertex_count)
 
 
-# instantiate this class and run the program
+# Instantiate this class and run the program
 Example().run()

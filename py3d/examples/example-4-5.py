@@ -24,10 +24,10 @@ class Example(Base):
     """
     def initialize(self):
         print("Initializing program...")
-        self._renderer = Renderer()
-        self._scene = Scene()
-        self._camera = Camera(aspect_ratio=800/600)
-        self._camera.set_position([0, 0, 7])
+        self.renderer = Renderer()
+        self.scene = Scene()
+        self.camera = Camera(aspect_ratio=800/600)
+        self.camera.set_position([0, 0, 7])
         geometry = SphereGeometry(
             radius=3,
             radius_segments=128,
@@ -64,13 +64,13 @@ class Example(Base):
         material = Material(vs_code, fs_code)
         material.add_uniform("float", "time", self._time)
         material.locate_uniforms()
-        self._mesh = Mesh(geometry, material)
-        self._scene.add(self._mesh)
+        self.mesh = Mesh(geometry, material)
+        self.scene.add(self.mesh)
 
     def update(self):
-        self._time += 1 / 60
-        self._mesh.material.uniform_dict["time"].data = self._time
-        self._renderer.render(self._scene, self._camera)
+        self.time += 1 / 60
+        self.mesh.material.uniform_dict["time"].data = self.time
+        self.renderer.render(self.scene, self.camera)
 
 
 # Instantiate this class and run the program

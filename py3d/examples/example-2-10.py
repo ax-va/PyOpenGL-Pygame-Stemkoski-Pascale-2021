@@ -10,26 +10,26 @@ if package_dir not in sys.path:
 from py3d.core.base import Base
 
 
-# check input
+# Check input
 class Example(Base):
     """ Create a text-based application to verify that the key-press modifications work as expected """
     def initialize(self):
         print("Initializing program...")
 
     def update(self):
-        # # debug printing
-        # if len(self._input.key_down_list) > 0:
-        #     print('Keys down:', self._input.key_down_list)
-        # if len(self._input.key_pressed_list) > 0:
-        #     print('Keys pressed:', self._input.key_pressed_list)
-        # if len(self._input.key_up_list) > 0:
-        #     print('Keys up:', self._input.key_up_list)
+        # # Debug printing
+        # if len(self.input.key_down_list) > 0:
+        #     print('Keys down:', self.input.key_down_list)
+        # if len(self.input.key_pressed_list) > 0:
+        #     print('Keys pressed:', self.input.key_pressed_list)
+        # if len(self.input.key_up_list) > 0:
+        #     print('Keys up:', self.input.key_up_list)
         # typical usage
-        if self._input.is_key_down('space'):
+        if self.input.is_key_down('space'):
             print("The 'space' key was just pressed down")
-        if self._input.is_key_pressed('right'):
+        if self.input.is_key_pressed('right'):
             print("The 'right' key is currently being pressed")
 
 
-# instantiate this class and run the program
+# Instantiate this class and run the program
 Example().run()

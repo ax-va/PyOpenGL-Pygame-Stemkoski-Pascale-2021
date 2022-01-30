@@ -19,5 +19,5 @@ class Example(Base):
         pass
 
 
-# instantiate this class and run the program
+# Instantiate this class and run the program
 Example().run()

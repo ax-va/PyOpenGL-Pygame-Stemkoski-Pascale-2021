@@ -22,10 +22,10 @@ class Example(Base):
     """ Render the sine function """
     def initialize(self):
         print("Initializing program...")
-        self._renderer = Renderer()
-        self._scene = Scene()
-        self._camera = Camera(aspect_ratio=800/600)
-        self._camera.set_position([0, 0, 5])
+        self.renderer = Renderer()
+        self.scene = Scene()
+        self.camera = Camera(aspect_ratio=800/600)
+        self.camera.set_position([0, 0, 5])
         geometry = Geometry()
         vs_code = """
         uniform mat4 projectionMatrix;
@@ -58,11 +58,11 @@ class Example(Base):
         point_mesh = Mesh(geometry, point_material)
         line_material = LineMaterial(vs_code, fs_code, {"baseColor": [1, 0, 1], "lineWidth": 4}, use_vertex_colors)
         line_mesh = Mesh(geometry, line_material)
-        self._scene.add(point_mesh)
-        self._scene.add(line_mesh)
+        self.scene.add(point_mesh)
+        self.scene.add(line_mesh)
 
     def update(self):
-        self._renderer.render(self._scene, self._camera)
+        self.renderer.render(self.scene, self.camera)
 
 
 # Instantiate this class and run the program
