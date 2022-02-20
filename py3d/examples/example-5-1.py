@@ -26,9 +26,12 @@ class Example(Base):
         self.camera = Camera(aspect_ratio=800/600)
         self.camera.set_position([0, 0, 2])
         geometry = RectangleGeometry()
-        grid_texture = Texture("../images/grid.jpg")
-        material = TextureMaterial(grid_texture)
-        self.mesh = Mesh(geometry, material)
+        grid_texture = Texture(file_name="../images/grid.jpg")
+        material = TextureMaterial(texture=grid_texture)
+        self.mesh = Mesh(
+            geometry=geometry,
+            material=material
+        )
         self.scene.add(self.mesh)
 
     def update(self):
