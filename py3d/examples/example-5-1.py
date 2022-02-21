@@ -18,7 +18,7 @@ from py3d.material.texture import TextureMaterial
 
 
 class Example(Base):
-    """ Render a textured rectangle """
+    """ Render a textured square """
     def initialize(self):
         print("Initializing program...")
         self.renderer = Renderer()
