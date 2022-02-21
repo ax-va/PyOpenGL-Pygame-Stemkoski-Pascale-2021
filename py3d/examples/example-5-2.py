@@ -41,7 +41,7 @@ class Example(Base):
         grass_geometry = RectangleGeometry(width=100, height=100)
         grass_material = TextureMaterial(
             texture=Texture(file_name="../images/grass.jpg"),
-            property_list={"repeatUV": [50, 50]}
+            property_dict={"repeatUV": [50, 50]}
         )
         grass = Mesh(grass_geometry, grass_material)
         grass.rotate_x(-math.pi/2)
