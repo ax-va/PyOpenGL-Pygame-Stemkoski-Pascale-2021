@@ -3,6 +3,8 @@ The OpenGL examples are based on the book "Developing Graphics Frameworks with P
 
 The examples cover the book chapters from 2 through 4 with slight changes and demonstrate GLSL programming by PyOpenGL. Pygame is used for control, windowing, and image loading.
 
+You can find the examples themselves in the examples folder. Just read the class description and run the script. Since the object-oriented approach is used, the auxiliary classes necessary for the examples are logically separated in other folders.
+
 You need also to install the following used packages or later:
 - numpy 1.21.1
 - pygame 2.0.1
