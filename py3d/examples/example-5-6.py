@@ -19,7 +19,7 @@ from py3d.material.material import Material
 
 class Example(Base):
     """
-    Generate a procerural fragment color by using uv-coordinates
+    Generate a procedural fragment color by using uv-coordinates
     and also clouds, lava, marble, and wood grain textures
     """
     def initialize(self):
