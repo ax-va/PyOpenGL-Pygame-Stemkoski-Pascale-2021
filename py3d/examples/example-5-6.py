@@ -88,31 +88,39 @@ class Example(Base):
             out vec4 fragColor;
             void main()
             {
-                // // smoothed random
-                // // float r = random(UV);
-                // float r = boxRandom(UV, 10);
-                // float r = smoothRandom(UV, 10);
-                // float r = fractalRandom(UV, 10);
-                // fragColor = vec4(r, r, r, 1);
+                /*
+                // smoothed random color
+                float r = random(UV);
+                float r = boxRandom(UV, 10);
+                float r = smoothRandom(UV, 10);
+                float r = fractalRandom(UV, 10);
+                fragColor = vec4(r, r, r, 1);
+                */
                 
-                // // clouds
-                // float r = fractalRandom(UV, 5);
-                // vec4 color1 = vec4(0.5, 0.5, 1, 1);
-                // vec4 color2 = vec4(1, 1, 1, 1);
-                // fragColor = mix(color1, color2, r);
+                /*
+                // clouds
+                float r = fractalRandom(UV, 5);
+                vec4 color1 = vec4(0.5, 0.5, 1, 1);
+                vec4 color2 = vec4(1, 1, 1, 1);
+                fragColor = mix(color1, color2, r);
+                */
                 
-                // // lava
-                // float r = fractalRandom(UV, 40);
-                // vec4 color1 = vec4(1, 0.8, 0, 1);
-                // vec4 color2 = vec4(0.8, 0, 0, 1);
-                // fragColor = mix(color1, color2, r);
+                /*
+                // lava
+                float r = fractalRandom(UV, 40);
+                vec4 color1 = vec4(1, 0.8, 0, 1);
+                vec4 color2 = vec4(0.8, 0, 0, 1);
+                fragColor = mix(color1, color2, r);
+                */
                 
-                // // marble
-                // float t = fractalRandom(UV, 4);
-                // float r = abs(sin(20 * t));
-                // vec4 color1 = vec4(0.0, 0.2, 0.0, 1.0);
-                // vec4 color2 = vec4(1.0, 1.0, 1.0, 1.0);
-                // fragColor = mix(color1, color2, r);
+                /*
+                // marble
+                float t = fractalRandom(UV, 4);
+                float r = abs(sin(20 * t));
+                vec4 color1 = vec4(0.0, 0.2, 0.0, 1.0);
+                vec4 color2 = vec4(1.0, 1.0, 1.0, 1.0);
+                fragColor = mix(color1, color2, r);
+                */
                 
                 // wood grain
                 float t = 80 * UV.y + 20 * fractalRandom(UV, 2);
