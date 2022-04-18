@@ -50,14 +50,12 @@ class Example(Base):
                 return fract(235711.0 * sin(14.337 * UV.x + 42.418 * UV.y));
             }
             
-            // Return a value of scaled pixels
             float boxRandom(vec2 UV, float scale)
             {
                 vec2 iScaleUV = floor(scale * UV);
                 return random(iScaleUV);
             }
             
-            // Return a smoothed value of scaled pixels
             float smoothRandom(vec2 UV, float scale)
             {
                 vec2 iScaleUV = floor(scale * UV);
