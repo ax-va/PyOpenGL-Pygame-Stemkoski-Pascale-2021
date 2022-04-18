@@ -18,11 +18,7 @@ from py3d.material.material import Material
 
 
 class Example(Base):
-    """
-    Blend between two different textures cyclically.  The fragment shader
-    samples colors from two textures at each fragment, and then, linearly
-    interpolates between these colors to determine the output fragment color.
-    """
+    """ Distort a texture by using a RGB noise texture with pseudo-random uv-coordinates over time """
     def initialize(self):
         print("Initializing program...")
         self.renderer = Renderer()
@@ -44,34 +40,34 @@ class Example(Base):
             }
         """
         fragment_shader_code = """
-            uniform sampler2D texture1;
-            uniform sampler2D texture2;
+            uniform sampler2D rgbNoise;
+            uniform sampler2D image;
             in vec2 UV;
             uniform float time;
             out vec4 fragColor;
 
             void main()
             {
-                vec4 color1 = texture2D(texture1, UV);
-                vec4 color2 = texture2D(texture2, UV);
-                float s = abs(sin(time));
-                fragColor = s * color1 + (1.0 - s) * color2;
+                vec2 uvShift = UV + vec2(-0.033, 0.07) * time;
+                vec4 noiseValues = texture2D(rgbNoise, uvShift);
+                vec2 uvNoise = UV + 0.01 * noiseValues.rg;
+                fragColor = texture2D(image, uvNoise);
             }
         """
+        rgb_noise_texture = Texture("../images/rgb-noise.jpg")
         grid_texture = Texture("../images/grid.jpg")
-        crate_texture = Texture("../images/crate.jpg")
-        self.blend_material = Material(vertex_shader_code, fragment_shader_code)
-        self.blend_material.add_uniform("sampler2D", "texture1", [grid_texture.texture_ref, 1])
-        self.blend_material.add_uniform("sampler2D", "texture2", [crate_texture.texture_ref, 2])
-        self.blend_material.add_uniform("float", "time", 0.0)
-        self.blend_material.locate_uniforms()
+        self.distort_material = Material(vertex_shader_code, fragment_shader_code)
+        self.distort_material.add_uniform("sampler2D", "rgbNoise", [rgb_noise_texture.texture_ref, 1])
+        self.distort_material.add_uniform("sampler2D", "image", [grid_texture.texture_ref, 2])
+        self.distort_material.add_uniform("float", "time", 0.0)
+        self.distort_material.locate_uniforms()
 
         geometry = RectangleGeometry()
-        self.mesh = Mesh(geometry, self.blend_material)
+        self.mesh = Mesh(geometry, self.distort_material)
         self.scene.add(self.mesh)
 
     def update(self):
-        self.blend_material.uniform_dict["time"].data += self.delta_time
+        self.distort_material.uniform_dict["time"].data += self.delta_time
         self.renderer.render(self.scene, self.camera)
 
 
