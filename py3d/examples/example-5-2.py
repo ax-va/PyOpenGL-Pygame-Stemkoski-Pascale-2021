@@ -35,7 +35,7 @@ class Example(Base):
         self.scene.add(self.rig)
         self.rig.set_position([0, 1, 4])
         sky_geometry = SphereGeometry(radius=50)
-        sky_material = TextureMaterial(texture=Texture(file_name="../images/sky-earth.jpg"))
+        sky_material = TextureMaterial(texture=Texture(file_name="../images/sky.jpg"))
         sky = Mesh(sky_geometry, sky_material)
         self.scene.add(sky)
         grass_geometry = RectangleGeometry(width=100, height=100)

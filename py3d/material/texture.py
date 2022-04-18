@@ -47,7 +47,7 @@ class TextureMaterial(Material):
         self.setting_dict["wireframe"] = False
         # line thickness for wireframe rendering
         self.setting_dict["lineWidth"] = 1
-        self.set_properties(property_list)
+        self.set_properties(property_dict)
 
     def update_render_settings(self):
         if self.setting_dict["doubleSide"]:
