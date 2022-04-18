@@ -71,7 +71,7 @@ class Example(Base):
             
             // Add smooth random values at different scales
             // weighted (amplitudes) so that sum is approximately 1.0
-            float fractalRandom(vec2 UV, float scale)
+            float fractalLikeRandom(vec2 UV, float scale)
             {
                 float value = 0.0;
                 float amplitude = 0.5;
@@ -90,10 +90,10 @@ class Example(Base):
             {
                 /*
                 // smoothed random color
-                float r = random(UV);
-                float r = boxRandom(UV, 10);
-                float r = smoothRandom(UV, 10);
-                float r = fractalRandom(UV, 10);
+                // float r = random(UV);
+                // float r = boxRandom(UV, 10);
+                // float r = smoothRandom(UV, 10);
+                float r = fractalLikeRandom(UV, 10);
                 fragColor = vec4(r, r, r, 1);
                 */
                 
