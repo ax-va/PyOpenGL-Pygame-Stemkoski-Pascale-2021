@@ -18,7 +18,7 @@ from py3d.material.material import Material
 
 
 class Example(Base):
-    """ Distort a texture by using a RGB noise texture with pseudo-random uv-coordinates over time """
+    """ Distort a texture over time by using a RGB noise texture with pseudo-random uv-coordinates """
     def initialize(self):
         print("Initializing program...")
         self.renderer = Renderer()
