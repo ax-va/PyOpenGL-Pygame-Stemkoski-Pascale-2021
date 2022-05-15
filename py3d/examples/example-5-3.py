@@ -19,8 +19,8 @@ from py3d.material.material import Material
 
 class Example(Base):
     """
-    Create a rippling effect in a texture, by adding a sine-based displacement to the
-    V component of the UV coordinates in the fragment shader.
+    Create a rippling effect in a texture, by adding a sine-based displacement
+    to the V component of the UV coordinates in the fragment shader.
     """
     def initialize(self):
         print("Initializing program...")

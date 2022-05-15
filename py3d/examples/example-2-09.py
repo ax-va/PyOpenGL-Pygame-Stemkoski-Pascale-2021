@@ -16,7 +16,7 @@ from py3d.core.uniform import Uniform
 
 
 class Example(Base):
-    """ Animate triangle changing its color """
+    """ Animate a triangle changing its color """
     def initialize(self):
         print("Initializing program...")
         # Initialize program #

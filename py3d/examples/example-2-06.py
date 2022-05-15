@@ -16,7 +16,6 @@ from py3d.core.uniform import Uniform
 
 class Example(Base):
     """ Render two triangles with different positions and colors """
-
     def initialize(self):
         print("Initializing program...")
         # Initialize program #

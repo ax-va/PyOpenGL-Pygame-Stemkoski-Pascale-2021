@@ -15,7 +15,7 @@ from py3d.core.uniform import Uniform
 
 
 class Example(Base):
-    """ Animate triangle moving across screen """
+    """ Animate a triangle moving across screen """
     def initialize(self):
         print("Initializing program...")
         # Initialize program #

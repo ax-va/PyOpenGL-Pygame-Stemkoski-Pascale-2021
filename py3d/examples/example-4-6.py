@@ -21,8 +21,8 @@ from py3d.extras.movement_rig import MovementRig
 
 class Example(Base):
     """
-    Render the axes and the rotated xy-grid.
-    Add camera movement: WASDRF(move), QE(turn), TG(look).
+    Render axes and a rotated xy-grid.
+    Show camera movement: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")

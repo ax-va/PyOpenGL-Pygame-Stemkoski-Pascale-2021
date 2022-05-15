@@ -16,7 +16,7 @@ from py3d.core.uniform import Uniform
 
 
 class Example(Base):
-    """ Animate triangle moving in a circular path around the origin """
+    """ Animate a triangle moving in a circular path around the origin """
     def initialize(self):
         print("Initializing program...")
         # Initialize program #

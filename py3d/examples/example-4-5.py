@@ -19,7 +19,7 @@ from py3d.material.material import Material
 
 class Example(Base):
     """
-    Render an animated rippling effect on the sphere.
+    Render an animated rippling effect on a sphere.
     The color shifts back and forth from the red end of the spectrum.
     """
     def initialize(self):
