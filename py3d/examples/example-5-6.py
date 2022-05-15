@@ -97,7 +97,7 @@ class Example(Base):
                 
                 /*
                 // clouds
-                float r = fractalRandom(UV, 5);
+                float r = fractalLikeRandom(UV, 5);
                 vec4 color1 = vec4(0.5, 0.5, 1, 1);
                 vec4 color2 = vec4(1, 1, 1, 1);
                 fragColor = mix(color1, color2, r);
@@ -105,7 +105,7 @@ class Example(Base):
                 
                 /*
                 // lava
-                float r = fractalRandom(UV, 40);
+                float r = fractalLikeRandom(UV, 40);
                 vec4 color1 = vec4(1, 0.8, 0, 1);
                 vec4 color2 = vec4(0.8, 0, 0, 1);
                 fragColor = mix(color1, color2, r);
@@ -113,7 +113,7 @@ class Example(Base):
                 
                 /*
                 // marble
-                float t = fractalRandom(UV, 4);
+                float t = fractalLikeRandom(UV, 4);
                 float r = abs(sin(20 * t));
                 vec4 color1 = vec4(0.0, 0.2, 0.0, 1.0);
                 vec4 color2 = vec4(1.0, 1.0, 1.0, 1.0);
@@ -121,7 +121,7 @@ class Example(Base):
                 */
                 
                 // wood grain
-                float t = 80 * UV.y + 20 * fractalRandom(UV, 2);
+                float t = 80 * UV.y + 20 * fractalLikeRandom(UV, 2);
                 float r = clamp(2 * abs(sin(t)), 0, 1);
                 vec4 color1 = vec4(0.3, 0.2, 0.0, 1.0);
                 vec4 color2 = vec4(0.6, 0.4, 0.2, 1.0);
