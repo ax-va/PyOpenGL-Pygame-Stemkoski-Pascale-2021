@@ -28,16 +28,16 @@ class Geometry:
         for old_pos in old_position_data:
             # Avoid changing list references
             new_pos = old_pos.copy()
-            # Add homogeneous fourth coordinate
+            # Add the homogeneous fourth coordinate
             new_pos.append(1)
             # Multiply by matrix
             new_pos = matrix @ new_pos
-            # Remove homogeneous coordinate
+            # Remove the homogeneous coordinate
             new_pos = list(new_pos[0:3])
-            # Add to new data list
+            # Add to the new data list
             new_position_data.append(new_pos)
         self._attribute_dict[variable_name].data = new_position_data
-        # new data must be uploaded
+        # New data must be uploaded
         self._attribute_dict[variable_name].upload_data()
 
     def count_vertices(self):

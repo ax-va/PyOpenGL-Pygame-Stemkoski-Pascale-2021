@@ -17,6 +17,10 @@ class Attribute:
     def data(self):
         return self._data
 
+    @data.setter
+    def data(self, data):
+        self._data = data
+
     def upload_data(self):
         """ Upload the data to a GPU buffer """
         # Convert data to numpy array format; convert numbers to 32-bit floats
