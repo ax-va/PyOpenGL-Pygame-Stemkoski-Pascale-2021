@@ -10,9 +10,13 @@ class Renderer:
         GL.glEnable(GL.GL_MULTISAMPLE)
         GL.glClearColor(clear_color[0], clear_color[1], clear_color[2], 1)
 
-    def render(self, scene, camera):
+    def render(self, scene, camera, clear_color=True, clear_depth=True):
         # Clear color and depth buffers
-        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+        # GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+        if clear_color:
+            GL.glClear(GL.GL_COLOR_BUFFER_BIT)
+        if clear_depth:
+            GL.glClear(GL.GL_DEPTH_BUFFER_BIT)
         # blending
         GL.glEnable(GL.GL_BLEND)
         GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)

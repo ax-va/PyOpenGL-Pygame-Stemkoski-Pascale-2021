@@ -49,7 +49,11 @@ class Example(Base):
         self.tiles_per_second = 8
         self.sprite = Mesh(geometry, sprite_material)
         self.scene.add(self.sprite)
-        grid = GridHelper()
+        grid = GridHelper(
+            size=20,
+            grid_color=[1, 1, 1],
+            center_color=[1, 1, 0]
+        )
         grid.rotate_x(-math.pi / 2)
         self.scene.add(grid)
 
