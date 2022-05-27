@@ -35,7 +35,7 @@ class Example(Base):
         self.camera = Camera(aspect_ratio=800/600)
         self.rig = MovementRig()
         self.rig.add(self.camera)
-        self.rig.set_position([0, 0.5, 3])
+        self.rig.set_position([0, 1.5, 5])
         self.scene.add(self.rig)
 
         crate_geometry = BoxGeometry()
