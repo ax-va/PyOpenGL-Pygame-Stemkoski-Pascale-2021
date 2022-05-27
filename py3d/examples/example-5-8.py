@@ -26,7 +26,7 @@ class Example(Base):
     """
     Illustrate billboarding by using look-at.
     A billboard always looks at a moving camera.
-    Use ADRF to move the camera and see this effect.
+    Use keys ADRF to move the camera and see this effect.
     """
     def initialize(self):
         print("Initializing program...")
