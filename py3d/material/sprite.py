@@ -1,6 +1,6 @@
 import OpenGL.GL as GL
 
-from material.material import Material
+from py3d.material.material import Material
 
 
 class SpriteMaterial(Material):
