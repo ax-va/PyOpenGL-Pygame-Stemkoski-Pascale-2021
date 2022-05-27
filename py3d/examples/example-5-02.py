@@ -23,7 +23,7 @@ from py3d.extras.movement_rig import MovementRig
 class Example(Base):
     """
     Render a textured skysphere and a textured grass floor.
-    Show the camera movement: WASDRF(move), QE(turn), TG(look).
+    Move the camera: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")

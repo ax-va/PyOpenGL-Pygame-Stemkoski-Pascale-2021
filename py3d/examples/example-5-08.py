@@ -24,7 +24,7 @@ from py3d.material.texture import TextureMaterial
 
 class Example(Base):
     """
-    Illustrate billboarding by using look-at.
+    Demonstrate billboarding by using look-at.
     A billboard always looks at a moving camera.
     Use keys ADRF to move the camera and see this effect.
     """

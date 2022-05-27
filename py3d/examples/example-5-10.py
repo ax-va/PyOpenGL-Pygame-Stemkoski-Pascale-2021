@@ -24,9 +24,9 @@ from py3d.extras.text_texture import TextTexture
 
 class Example(Base):
     """
-    Demonstrates a heads-up display (HUD): a transparent layer containing some images
+    Demonstrate a heads-up display (HUD): a transparent layer containing some images
     (for example, with a text), rendered afer the main scene, and appearing on the top layer.
-    Show the camera movement: WASDRF(move), QE(turn), TG(look).
+    Move the camera: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")

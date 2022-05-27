@@ -24,7 +24,7 @@ from py3d.material.surface import SurfaceMaterial
 class Example(Base):
     """
     Render axes, a rotated xy-grid, and a box.
-    Show the box movement: WASDRF(move), QE(turn), TG(look).
+    Move the box: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")
