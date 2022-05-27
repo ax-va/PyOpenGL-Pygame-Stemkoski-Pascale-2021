@@ -55,7 +55,7 @@ class Example(Base):
             position=[0, 600],
             alignment=[0, 1]
         )
-        label_mat1 = TextureMaterial(Texture("../images/crate-sim.png"))
+        label_mat1 = TextureMaterial(Texture("../images/crate-simulator.png"))
         label1 = Mesh(label_geo1, label_mat1)
         self.hud_scene.add(label1)
 
