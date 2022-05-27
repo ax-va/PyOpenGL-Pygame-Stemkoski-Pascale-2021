@@ -19,6 +19,7 @@ from py3d.geometry.rectangle import RectangleGeometry
 from py3d.material.texture import TextureMaterial
 from py3d.extras.movement_rig import MovementRig
 from py3d.extras.grid import GridHelper
+from py3d.extras.text_texture import TextTexture
 
 
 class Example(Base):
@@ -61,11 +62,20 @@ class Example(Base):
         self.hud_scene.add(label1)
 
         label_geo2 = RectangleGeometry(
-            width=400, height=200,
+            width=200, height=200,
             position=[800, 0],
             alignment=[1, 0]
         )
-        label_mat2 = TextureMaterial(Texture("../images/crate-version.png"))
+        message = TextTexture(
+            text="Version 1.0",
+            system_font_name="Ink Free",
+            font_size=32,
+            font_color=[127, 255, 127],
+            image_width=200,
+            image_height=200,
+            transparent=True
+        )
+        label_mat2 = TextureMaterial(message)
         label2 = Mesh(label_geo2, label_mat2)
         self.hud_scene.add(label2)
 
