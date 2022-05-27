@@ -1,6 +1,6 @@
 import pygame
 
-from core_ext.texture import Texture
+from py3d.core_ext.texture import Texture
 
 class TextTexture(Texture):
     """
