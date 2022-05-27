@@ -53,7 +53,7 @@ class Example(Base):
         self.hud_camera.set_orthographic(0, 800, 0, 600, 1, -1)
 
         label_geo1 = RectangleGeometry(
-            width=600, height=200,
+            width=400, height=200,
             position=[0, 600],
             alignment=[0, 1]
         )
