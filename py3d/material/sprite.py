@@ -5,8 +5,7 @@ from material.material import Material
 
 class SpriteMaterial(Material):
     def __init__(self, texture, property_dict={}):
-        vertex_shader_code = \
-        """
+        vertex_shader_code = """
         uniform mat4 projectionMatrix;
         uniform mat4 viewMatrix;
         uniform mat4 modelMatrix;
