@@ -40,6 +40,7 @@ class Example(Base):
         crate_geometry = BoxGeometry()
         crate_material = TextureMaterial(Texture("../images/crate.jpg"))
         crate = Mesh(crate_geometry, crate_material)
+        crate.translate(0, 0.5, 0)
         self.scene.add(crate)
 
         grid = GridHelper(grid_color=[1, 1, 1], center_color=[1, 1, 0])
