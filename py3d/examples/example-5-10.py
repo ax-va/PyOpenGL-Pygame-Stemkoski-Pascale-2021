@@ -52,16 +52,16 @@ class Example(Base):
         self.hud_camera = Camera()
         self.hud_camera.set_orthographic(0, 800, 0, 600, 1, -1)
 
-        label_geo1 = RectangleGeometry(
+        label_geometry1 = RectangleGeometry(
             width=400, height=200,
             position=[0, 600],
             alignment=[0, 1]
         )
-        label_mat1 = TextureMaterial(Texture("../images/crate-simulator.png"))
-        label1 = Mesh(label_geo1, label_mat1)
+        label_material1 = TextureMaterial(Texture("../images/crate-simulator.png"))
+        label1 = Mesh(label_geometry1, label_material1)
         self.hud_scene.add(label1)
 
-        label_geo2 = RectangleGeometry(
+        label_geometry2 = RectangleGeometry(
             width=200, height=200,
             position=[800, 0],
             alignment=[1, 0]
@@ -75,8 +75,8 @@ class Example(Base):
             image_height=200,
             transparent=True
         )
-        label_mat2 = TextureMaterial(message)
-        label2 = Mesh(label_geo2, label_mat2)
+        label_material2 = TextureMaterial(message)
+        label2 = Mesh(label_geometry2, label_material2)
         self.hud_scene.add(label2)
 
     def update(self):
