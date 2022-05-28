@@ -6,8 +6,8 @@ The examples cover the book chapters from 2 through 4 with slight changes and de
 You find the examples in an examples folder (package). Just read a class description in a script and run it. Since the object-oriented approach is used, auxiliary classes necessary for running the examples are logically separated in other folders (packages).
 
 You need also to install the following packages or later:
-- numpy 1.21.1
-- pygame 2.0.1
-- PyOpenGL 3.1.5
-- PyOpenGL-accelerate 3.1.5
+- numpy 1.22.4
+- pygame 2.1.2
+- PyOpenGL 3.1.6
+- PyOpenGL-accelerate 3.1.6
 
