@@ -23,7 +23,7 @@ from py3d.extras.grid import GridHelper
 
 class Example(Base):
     """
-    Demonstrate billboarding by spritesheet by using the 4-by-3 sprites of Sonic.
+    Demonstrate billboarding by the 4-by-3 spritesheet of Sonic.
     A billboard always faces a camera.
     Move the camera: WASDRF(move), QE(turn), TG(look).
     """
