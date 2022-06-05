@@ -9,7 +9,7 @@ class Camera(Object3D):
     def __init__(self, angle_of_view=60, aspect_ratio=1, near=0.1, far=1000):
         super().__init__()
         self._projection_matrix = Matrix.make_perspective(angle_of_view, aspect_ratio, near, far)
-        self._view_matrix = Matrix.make_identity()
+        self._view_matrix = Matrix.make_identity()  # inverse of self._matrix
 
     @property
     def projection_matrix(self):

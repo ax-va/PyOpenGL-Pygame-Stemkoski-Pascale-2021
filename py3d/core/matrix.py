@@ -101,8 +101,9 @@ class Matrix:
         # the right vector is zero.
         # Fix this by perturbing the world_up vector a bit
         if norm(right) < 0.001:
-            offset = numpy.array([0.001, 0, 0])
+            offset = numpy.array([0, 0, -0.001])
             right = cross(forward, world_up + offset)
+            print("here")
         up = cross(right, forward)
         # All vectors should have length 1
         forward = divide(forward, norm(forward))

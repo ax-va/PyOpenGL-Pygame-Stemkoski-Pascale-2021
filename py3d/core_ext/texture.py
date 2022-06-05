@@ -22,6 +22,14 @@ class Texture:
             self.upload_data()
 
     @property
+    def surface(self):
+        return self._surface
+
+    @surface.setter
+    def surface(self, surface):
+        self._surface = surface
+
+    @property
     def texture_ref(self):
         return self._texture_ref
 
