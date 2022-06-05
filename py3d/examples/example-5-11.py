@@ -53,7 +53,7 @@ class Example(Base):
         self.scene.add(grass)
 
         sphere_geometry = SphereGeometry()
-        sphere_material = TextureMaterial(Texture("../images/grid.jpg") )
+        sphere_material = TextureMaterial(Texture("../images/grid.jpg"))
         self.sphere = Mesh(sphere_geometry, sphere_material)
         self.sphere.set_position([0, 1, 0])
         self.scene.add(self.sphere)
