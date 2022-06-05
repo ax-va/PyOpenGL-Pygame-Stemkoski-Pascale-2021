@@ -27,6 +27,7 @@ class Example(Base):
     """
     Render a scene using two cameras.  The first camera renders to the window.
     The second camera renders to a "television screen" (rectangle) making a texture.
+    Move the first camera: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")
