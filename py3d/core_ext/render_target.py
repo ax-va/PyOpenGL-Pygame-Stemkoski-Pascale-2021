@@ -4,7 +4,7 @@ import pygame
 from py3d.core_ext.texture import Texture
 
 
-class RenderTarget(object):
+class RenderTarget:
     """
     Create a framebuffer as the target when rendering
     """

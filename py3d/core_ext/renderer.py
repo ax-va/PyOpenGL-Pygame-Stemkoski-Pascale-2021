@@ -12,6 +12,10 @@ class Renderer:
         GL.glClearColor(clear_color[0], clear_color[1], clear_color[2], 1)
         self._window_size = pygame.display.get_surface().get_size()
 
+    @property
+    def window_size(self):
+        return self._window_size
+
     def render(self, scene, camera, clear_color=True, clear_depth=True, render_target=None):
         # Activate render target
         if render_target is None:
