@@ -12,7 +12,7 @@ from py3d.core.base import Base
 
 # Check input
 class Example(Base):
-    """ Create a text-based application to verify that the key-press modifications work as expected """
+    """ Create a text-based application to verify that the key press works as expected """
     def initialize(self):
         print("Initializing program...")
 
