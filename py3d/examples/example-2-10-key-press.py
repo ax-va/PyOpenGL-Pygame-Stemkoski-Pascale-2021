@@ -17,10 +17,11 @@ class Example(Base):
         print("Initializing program...")
 
     def update(self)
-
         # typical usage
         if self.input.is_key_down('space'):
             print("The 'space' key was just pressed down")
+        if self.input.is_key_up('space'):
+            print("The 'space' key was just pressed up")
         if self.input.is_key_pressed('right'):
             print("The 'right' key is currently being pressed")
 
