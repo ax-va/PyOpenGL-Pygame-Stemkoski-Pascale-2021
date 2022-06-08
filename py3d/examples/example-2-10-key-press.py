@@ -16,14 +16,8 @@ class Example(Base):
     def initialize(self):
         print("Initializing program...")
 
-    def update(self):
-        # # Debug printing
-        # if len(self.input.key_down_list) > 0:
-        #     print('Keys down:', self.input.key_down_list)
-        # if len(self.input.key_pressed_list) > 0:
-        #     print('Keys pressed:', self.input.key_pressed_list)
-        # if len(self.input.key_up_list) > 0:
-        #     print('Keys up:', self.input.key_up_list)
+    def update(self)
+
         # typical usage
         if self.input.is_key_down('space'):
             print("The 'space' key was just pressed down")
