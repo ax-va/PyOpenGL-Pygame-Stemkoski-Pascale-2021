@@ -16,8 +16,7 @@ class Example(Base):
     def initialize(self):
         print("Initializing program...")
 
-    def update(self)
-        # typical usage
+    def update(self):
         if self.input.is_key_down('space'):
             print("The 'space' key was just pressed down")
         if self.input.is_key_up('space'):
