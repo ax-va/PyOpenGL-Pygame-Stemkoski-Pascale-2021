@@ -37,6 +37,8 @@ class Example(Base):
 
     Not more than four light sources must be used, because only four light sources are
     specified in FlatMaterial, LambertMaterial, and PhongMaterial.
+
+    Move the camera: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")
