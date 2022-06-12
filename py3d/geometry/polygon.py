@@ -1,33 +1,40 @@
-from math import sin, cos, pi
+import math
 
 from py3d.geometry.geometry import Geometry
 
 
 class PolygonGeometry(Geometry):
+    """ Symmetrical polygon inscribed in a circle """
     def __init__(self, sides=3, radius=1):
         sides = int(sides)
         if sides < 3:
             raise ValueError(f"the 'sides' parameter must be at least three")
         super().__init__()
-        a = 2 * pi / sides
+        a = 2 * math.pi / sides
         position_data = []
         color_data = []
         uv_data = []
         uv_center = [0.5, 0.5]
+        normal_data = []
+        normal_vector = [0, 0, 1]
         for n in range(sides):
             position_data.append([0, 0, 0])
-            position_data.append([radius * cos(n * a), radius * sin(n * a), 0])
-            position_data.append([radius * cos((n + 1) * a), radius * sin((n + 1) * a), 0])
+            position_data.append([radius * math.cos(n * a), radius * math.sin(n * a), 0])
+            position_data.append([radius * math.cos((n + 1) * a), radius * math.sin((n + 1) * a), 0])
             color_data.append([1, 1, 1])
             color_data.append([1, 0, 0])
             color_data.append([0, 0, 1])
             uv_data.append(uv_center)
-            uv_data.append([cos(n * a) * 0.5 + 0.5, sin(n * a) * 0.5 + 0.5])
-            uv_data.append([cos((n + 1) * a) * 0.5 + 0.5, sin((n + 1) * a) * 0.5 + 0.5])
+            uv_data.append([math.cos(n * a) * 0.5 + 0.5, math.sin(n * a) * 0.5 + 0.5])
+            uv_data.append([math.cos((n + 1) * a) * 0.5 + 0.5, math.sin((n + 1) * a) * 0.5 + 0.5])
+            # Repeat three times for three vertices of triangle
+            for i in range(3):
+                normal_data.append(normal_vector)
         self.add_attribute("vec3", "vertexPosition", position_data)
         self.add_attribute("vec3", "vertexColor", color_data)
         self.add_attribute("vec2", "vertexUV", uv_data)
-        self.count_vertices()
+        self.add_attribute("vec3", "vertexNormal", normal_data)
+        self.add_attribute("vec3", "faceNormal", normal_data)
 
     @staticmethod
     def create_triangle_geometry(radius=1):

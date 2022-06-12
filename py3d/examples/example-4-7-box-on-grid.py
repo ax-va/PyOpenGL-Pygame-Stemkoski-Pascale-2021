@@ -1,4 +1,4 @@
-import numpy as np
+#!/usr/bin/python3
 import math
 import pathlib
 import sys
@@ -31,13 +31,13 @@ class Example(Base):
         self.renderer = Renderer()
         self.scene = Scene()
         self.camera = Camera(aspect_ratio=800/600)
-        self.camera.set_position([0.5, 1, 5])
+        self.camera.set_position([0, 1, 5])
         geometry = BoxGeometry()
         material = SurfaceMaterial(property_dict={"useVertexColors": True})
         self.mesh = Mesh(geometry, material)
         self.rig = MovementRig()
         self.rig.add(self.mesh)
-        self.rig.set_position([0, 0.5, -0.5])
+        self.rig.set_position([0, 0.5, 0])
         self.scene.add(self.rig)
         axes = AxesHelper(axis_length=2)
         self.scene.add(axes)

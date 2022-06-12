@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import pathlib
 import sys
 
@@ -12,7 +13,6 @@ from py3d.core_ext.camera import Camera
 from py3d.core_ext.mesh import Mesh
 from py3d.core_ext.renderer import Renderer
 from py3d.core_ext.scene import Scene
-from py3d.core_ext.texture import Texture
 from py3d.geometry.rectangle import RectangleGeometry
 from py3d.material.material import Material
 

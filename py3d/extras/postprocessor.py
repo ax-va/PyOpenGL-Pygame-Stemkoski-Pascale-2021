@@ -31,7 +31,6 @@ class Postprocessor:
         uv_data = [t0, t1, t3, t0, t3, t2]
         self._rectangle_geometry.add_attribute("vec2", "vertexPosition", position_data)
         self._rectangle_geometry.add_attribute("vec2", "vertexUV", uv_data)
-        self._rectangle_geometry.count_vertices()
 
     def add_effect(self, effect):
         post_scene = Scene()

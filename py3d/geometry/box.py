@@ -33,4 +33,10 @@ class BoxGeometry(Geometry):
         self.add_attribute("vec3", "vertexPosition", position_data)
         self.add_attribute("vec3", "vertexColor", color_data)
         self.add_attribute("vec2", "vertexUV", uv_data)
-        self.count_vertices()
+        # normal vectors for x+, x-, y+, y-, z+, z-
+        n1, n2 = [1, 0, 0], [-1, 0, 0]
+        n3, n4 = [0, 1, 0], [0, -1, 0]
+        n5, n6 = [0, 0, 1], [0, 0, -1]
+        normal_data = [n1]*6 + [n2]*6 + [n3]*6 + [n4]*6 + [n5]*6 + [n6]*6
+        self.add_attribute("vec3", "vertexNormal", normal_data)
+        self.add_attribute("vec3", "faceNormal", normal_data)

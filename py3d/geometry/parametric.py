@@ -1,7 +1,13 @@
+import numpy as np
 from py3d.geometry.geometry import Geometry
 
 
 class ParametricGeometry(Geometry):
+    """
+    Parametric geometry defined by
+    (x, y, z) = surface_function(u, v),
+    where u and v are the parameters
+    """
     def __init__(self,
                  u_start, u_end, u_resolution,
                  v_start, v_end, v_resolution,
@@ -11,23 +17,27 @@ class ParametricGeometry(Geometry):
         delta_u = (u_end - u_start) / u_resolution
         delta_v = (v_end - v_start) / v_resolution
 
-        positions = []
+        position_list = []
+        texture_position_list = []
+        vertex_normal_list = []
         for u_index in range(u_resolution + 1):
-            xyz_array = []
+            xyz_list = []
+            uv_list = []
+            n_list = []
             for v_index in range(v_resolution + 1):
                 u = u_start + u_index * delta_u
                 v = v_start + v_index * delta_v
-                xyz_array.append(surface_function(u, v))
-            positions.append(xyz_array)
-
-        uvs = []
-        for u_index in range(u_resolution + 1):
-            uv_array = []
-            for v_index in range(v_resolution + 1):
-                u = u_index / u_resolution
-                v = v_index / v_resolution
-                uv_array.append([u, v])
-            uvs.append(uv_array)
+                p = surface_function(u, v)
+                xyz_list.append(p)
+                # TODO: Calculate normals correctly
+                normal_vector = np.array(p) / np.linalg.norm(p)
+                n_list.append(normal_vector)
+                u_texture = u_index / u_resolution
+                v_texture = v_index / v_resolution
+                uv_list.append([u_texture, v_texture])
+            position_list.append(xyz_list)
+            vertex_normal_list.append(n_list)
+            texture_position_list.append(uv_list)
 
         # Store vertex data
         position_data = []
@@ -36,29 +46,58 @@ class ParametricGeometry(Geometry):
         # default vertex colors
         c1, c2, c3 = [1, 0, 0], [0, 1, 0], [0, 0, 1]
         c4, c5, c6 = [0, 1, 1], [1, 0, 1], [1, 1, 0]
+        vertex_normal_data = []
+        face_normal_data = []
 
-        # Group vertex data into triangles
-        # Note: .copy() is necessary to avoid storing references
-        for x_index in range(u_resolution):
-            for y_index in range(v_resolution):
+        # Group vertex data into triangles.
+        # Note: .copy() is necessary to avoid storing references.
+        # position_data will be also copied in apply_matrix() in the Geometry class.
+        for i_index in range(u_resolution):
+            for j_index in range(v_resolution):
                 # position data
-                p0 = positions[x_index + 0][y_index + 0]
-                p1 = positions[x_index + 1][y_index + 0]
-                p3 = positions[x_index + 0][y_index + 1]
-                p2 = positions[x_index + 1][y_index + 1]
-                position_data += [p0.copy(), p1.copy(), p2.copy(),
-                                  p0.copy(), p2.copy(), p3.copy()]
+                p_a = position_list[i_index + 0][j_index + 0]
+                p_b = position_list[i_index + 1][j_index + 0]
+                p_c = position_list[i_index + 1][j_index + 1]
+                p_d = position_list[i_index + 0][j_index + 1]
+                position_data += [p_a.copy(), p_b.copy(), p_c.copy(),
+                                  p_a.copy(), p_c.copy(), p_d.copy()]
                 # color data
-                color_data += [c1, c2, c3, c4, c5, c6]
-                # uv data (texture coordinates)
-                uv_a = uvs[x_index + 0][y_index + 0]
-                uv_b = uvs[x_index + 1][y_index + 0]
-                uv_d = uvs[x_index + 0][y_index + 1]
-                uv_c = uvs[x_index + 1][y_index + 1]
+                color_data += [c1, c2, c3,
+                               c4, c5, c6]
+                # uv data of texture coordinates
+                uv_a = texture_position_list[i_index + 0][j_index + 0]
+                uv_b = texture_position_list[i_index + 1][j_index + 0]
+                uv_c = texture_position_list[i_index + 1][j_index + 1]
+                uv_d = texture_position_list[i_index + 0][j_index + 1]
                 uv_data += [uv_a, uv_b, uv_c,
                             uv_a, uv_c, uv_d]
+                # vertex normal vectors
+                n_a = vertex_normal_list[i_index + 0][j_index + 0]
+                n_b = vertex_normal_list[i_index + 1][j_index + 0]
+                n_c = vertex_normal_list[i_index + 1][j_index + 1]
+                n_d = vertex_normal_list[i_index + 0][j_index + 1]
+                vertex_normal_data += [n_a.copy(), n_b.copy(), n_c.copy(),
+                                       n_a.copy(), n_c.copy(), n_d.copy()]
+                # face normal vectors
+                fn0 = self.calculate_normal(p_a, p_b, p_c)
+                fn1 = self.calculate_normal(p_a, p_c, p_d)
+                face_normal_data += [fn0.copy(), fn0.copy(), fn0.copy(),
+                                     fn1.copy(), fn1.copy(), fn1.copy()]
 
-        self.add_attribute("vec3", "vertexPosition",  position_data)
+        self.add_attribute("vec3", "vertexPosition", position_data)
         self.add_attribute("vec3", "vertexColor", color_data)
         self.add_attribute("vec2", "vertexUV", uv_data)
-        self.count_vertices()
+        self.add_attribute("vec3", "vertexNormal", vertex_normal_data)
+        self.add_attribute("vec3", "faceNormal", face_normal_data)
+
+    @staticmethod
+    def calculate_normal(p0, p1, p2):
+        v1 = np.array(p1) - np.array(p0)
+        v2 = np.array(p2) - np.array(p0)
+        orthogonal = np.cross(v1, v2)
+        norm = np.linalg.norm(orthogonal)
+        if norm < 0.001:
+            normal = np.array([0, 0, 1]).astype(float)
+        else:
+            normal = orthogonal / norm
+        return normal

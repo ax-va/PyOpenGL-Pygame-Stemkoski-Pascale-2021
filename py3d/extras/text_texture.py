@@ -10,15 +10,15 @@ class TextTexture(Texture):
                  system_font_name="Arial",
                  font_file_name=None,
                  font_size=24,
-                 font_color=[0, 0, 0],
-                 background_color=[255, 255, 255],
+                 font_color=(0, 0, 0),
+                 background_color=(255, 255, 255),
                  transparent=False,
                  image_width=None,
                  image_height=None,
                  align_horizontal=0.0,
                  align_vertical=0.0,
                  image_border_width=0,
-                 image_border_color=[0, 0, 0]):
+                 image_border_color=(0, 0, 0)):
         super().__init__()
         # Set a default font
         font = pygame.font.SysFont(system_font_name, font_size)

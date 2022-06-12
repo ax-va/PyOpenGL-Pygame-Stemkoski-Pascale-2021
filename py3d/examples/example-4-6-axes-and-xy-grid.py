@@ -1,4 +1,4 @@
-import numpy as np
+#!/usr/bin/python3
 import math
 import pathlib
 import sys

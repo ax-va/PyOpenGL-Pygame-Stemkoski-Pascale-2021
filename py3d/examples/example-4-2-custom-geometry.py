@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import pathlib
 import sys
 
@@ -37,7 +38,6 @@ class Example(Base):
         G = [0, 0.25, 0]
         color_data = [R, G, Y, Y, G, G, Y, G, R]
         geometry.add_attribute("vec3", "vertexColor", color_data)
-        geometry.count_vertices()
         material = SurfaceMaterial(property_dict={"useVertexColors": True})
         self.mesh = Mesh(geometry, material)
         self.scene.add(self.mesh)

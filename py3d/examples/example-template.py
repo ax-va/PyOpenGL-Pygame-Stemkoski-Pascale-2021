@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import pathlib
 import sys
 
@@ -17,6 +18,13 @@ from py3d.geometry.box import BoxGeometry
 # from py3d.geometry.geometry import Geometry
 from py3d.material.surface import SurfaceMaterial
 from py3d.material.texture import TextureMaterial
+from py3d.geometry.sphere import SphereGeometry
+from py3d.light.ambient import AmbientLight
+from py3d.light.directional import DirectionalLight
+from py3d.light.point import PointLight
+from py3d.material.flat import FlatMaterial
+from py3d.material.lambert import LambertMaterial
+from py3d.material.phong import PhongMaterial
 
 
 class Example(Base):

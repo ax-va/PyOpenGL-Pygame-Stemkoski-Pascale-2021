@@ -2,7 +2,7 @@ from py3d.geometry.geometry import Geometry
 
 
 class RectangleGeometry(Geometry):
-    def __init__(self, width=1, height=1, position=[0, 0], alignment=[0.5, 0.5]):
+    def __init__(self, width=1, height=1, position=(0, 0), alignment=(0.5, 0.5)):
         super().__init__()
         # vertices
         # p2 - p3
@@ -33,4 +33,7 @@ class RectangleGeometry(Geometry):
         self.add_attribute("vec3", "vertexPosition", position_data)
         self.add_attribute("vec3", "vertexColor", color_data)
         self.add_attribute("vec2", "vertexUV", uv_data)
-        self.count_vertices()
+        normal_vector = [0, 0, 1]
+        normal_data = [normal_vector] * 6
+        self.add_attribute("vec3", "vertexNormal", normal_data)
+        self.add_attribute("vec3", "faceNormal", normal_data)

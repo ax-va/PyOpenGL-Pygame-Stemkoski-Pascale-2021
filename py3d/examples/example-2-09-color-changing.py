@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import OpenGL.GL as GL
 import math
 import pathlib

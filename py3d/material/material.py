@@ -10,8 +10,8 @@ class Material:
         # Store Uniform objects, indexed by name of associated variable in shader.
         # Each shader typically contains these uniforms; values will be set during render process from Mesh / Camera.
         self._uniform_dict = {
-            "modelMatrix": Uniform("mat4", None),
-            "viewMatrix": Uniform("mat4", None),
+            "modelMatrix":      Uniform("mat4", None),
+            "viewMatrix":       Uniform("mat4", None),
             "projectionMatrix": Uniform("mat4", None),
         }
         # Store OpenGL render settings, indexed by variable name

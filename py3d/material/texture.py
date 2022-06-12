@@ -6,34 +6,33 @@ from py3d.material.material import Material
 class TextureMaterial(Material):
     def __init__(self, texture, property_dict={}):
         vertex_shader_code = """
-        uniform mat4 projectionMatrix;
-        uniform mat4 viewMatrix;
-        uniform mat4 modelMatrix;
-        in vec3 vertexPosition;
-        in vec2 vertexUV;
-        uniform vec2 repeatUV;
-        uniform vec2 offsetUV;
-        out vec2 UV;
-        void main()
-        {
-            gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(vertexPosition, 1.0);
-            UV = vertexUV * repeatUV + offsetUV;
-        }
+            uniform mat4 projectionMatrix;
+            uniform mat4 viewMatrix;
+            uniform mat4 modelMatrix;
+            in vec3 vertexPosition;
+            in vec2 vertexUV;
+            uniform vec2 repeatUV;
+            uniform vec2 offsetUV;
+            out vec2 UV;
+            void main()
+            {
+                gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(vertexPosition, 1.0);
+                UV = vertexUV * repeatUV + offsetUV;
+            }
         """
 
         fragment_shader_code = """
-        uniform vec3 baseColor;
-        uniform sampler2D texture;
-        in vec2 UV;
-        out vec4 fragColor;
-        void main()
-        {
-            vec4 color = vec4(baseColor, 1.0) * texture2D(texture, UV);
-            if (color.a < 0.1)
-                discard;
-                
-            fragColor = color;
-        }
+            uniform vec3 baseColor;
+            uniform sampler2D texture;
+            in vec2 UV;
+            out vec4 fragColor;
+            void main()
+            {
+                vec4 color = vec4(baseColor, 1.0) * texture2D(texture, UV);
+                if (color.a < 0.1)
+                    discard;                    
+                fragColor = color;
+            }
         """
         super().__init__(vertex_shader_code, fragment_shader_code)
         self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])

@@ -2,6 +2,7 @@ import OpenGL.GL as GL
 import pygame
 
 from py3d.core_ext.mesh import Mesh
+from py3d.light.light import Light
 
 
 class Renderer:
@@ -9,7 +10,7 @@ class Renderer:
         GL.glEnable(GL.GL_DEPTH_TEST)
         # required for antialiasing
         GL.glEnable(GL.GL_MULTISAMPLE)
-        GL.glClearColor(clear_color[0], clear_color[1], clear_color[2], 1)
+        GL.glClearColor(*clear_color, 1)
         self._window_size = pygame.display.get_surface().get_size()
 
     @property
@@ -22,7 +23,7 @@ class Renderer:
             # Set render target to window
             # (the value 0 is indicating the framebuffer attached to the window)
             GL.glBindFramebuffer(GL.GL_FRAMEBUFFER, 0)
-            GL.glViewport(0, 0, self._window_size[0], self._window_size[1])
+            GL.glViewport(0, 0, *self._window_size)
         else:
             # Set render target properties
             GL.glBindFramebuffer(GL.GL_FRAMEBUFFER, render_target.framebuffer_ref)
@@ -42,6 +43,11 @@ class Renderer:
         descendant_list = scene.descendant_list
         mesh_filter = lambda x: isinstance(x, Mesh)
         mesh_list = list(filter(mesh_filter, descendant_list))
+        light_filter = lambda x: isinstance(x, Light)
+        light_list = list(filter(light_filter, descendant_list))
+        # # Scenes support 4 lights; precisely 4 must be present
+        # while len(light_list) < 4:
+        #     light_list.append(Light())
 
         for mesh in mesh_list:
             # If this object is not visible, continue to next object in list
@@ -54,6 +60,15 @@ class Renderer:
             mesh.material.uniform_dict["modelMatrix"].data = mesh.global_matrix
             mesh.material.uniform_dict["viewMatrix"].data = camera.view_matrix
             mesh.material.uniform_dict["projectionMatrix"].data = camera.projection_matrix
+            # If material uses light data, add lights from list
+            if "light0" in mesh.material.uniform_dict.keys():
+                for light_number in range(len(light_list)):
+                    light_name = "light" + str(light_number)
+                    light_object = light_list[light_number]
+                    mesh.material.uniform_dict[light_name].data = light_object
+            # Add camera position if needed (specular lighting)
+            if "viewPosition" in mesh.material.uniform_dict.keys():
+                mesh.material.uniform_dict["viewPosition"].data = camera.global_position
             # Update uniforms stored in material
             for uniform_object in mesh.material.uniform_dict.values():
                 uniform_object.upload_data()

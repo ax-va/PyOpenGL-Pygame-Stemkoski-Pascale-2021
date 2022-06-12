@@ -1,4 +1,4 @@
-import numpy as np
+#!/usr/bin/python3
 import pathlib
 import sys
 
@@ -30,8 +30,8 @@ class Example(Base):
         self.camera.set_position([0, 0, 7])
         geometry = SphereGeometry(
             radius=3,
-            radius_segments=128,
-            height_segments=64
+            theta_segments=64,
+            phi_segments=128
         )
         vs_code = """
         uniform mat4 modelMatrix;

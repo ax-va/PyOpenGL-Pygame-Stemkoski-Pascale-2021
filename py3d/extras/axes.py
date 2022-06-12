@@ -14,7 +14,6 @@ class AxesHelper(Mesh):
                       axis_colors[2], axis_colors[2]]
         geomerty.add_attribute("vec3", "vertexPosition", position_data)
         geomerty.add_attribute("vec3", "vertexColor", color_data)
-        geomerty.count_vertices()
         material = LineMaterial(
             property_dict = {
                 "useVertexColors": True,

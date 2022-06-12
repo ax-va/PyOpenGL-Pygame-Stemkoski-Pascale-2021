@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import numpy as np
 import pathlib
 import sys
@@ -52,7 +53,6 @@ class Example(Base):
         for x, y in zip(x_values, y_values):
             position_data.append([x, y, 0])
         geometry.add_attribute("vec3", "vertexPosition", position_data)
-        geometry.count_vertices()
         use_vertex_colors = False
         point_material = PointMaterial(vs_code, fs_code, {"baseColor": [1, 1, 0], "pointSize": 10}, use_vertex_colors)
         point_mesh = Mesh(geometry, point_material)

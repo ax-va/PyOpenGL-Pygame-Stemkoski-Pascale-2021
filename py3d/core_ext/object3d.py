@@ -1,3 +1,4 @@
+import numpy as np
 from py3d.core.matrix import Matrix
 
 
@@ -76,6 +77,23 @@ class Object3D:
     def parent(self, parent):
         self._parent = parent
 
+    @property
+    def rotation_matrix(self):
+        """
+        Returns 3x3 submatrix with rotation data.
+        3x3 top-left submatrix contains only rotation data.
+        """
+        return np.array(
+            [self._matrix[0][0:3],
+             self._matrix[1][0:3],
+             self._matrix[2][0:3]]
+        ).astype(float)
+
+    @property
+    def direction(self):
+        forward = np.array([0, 0, -1]).astype(float)
+        return list(self.rotation_matrix @ forward)
+
     def add(self, child):
         self._children_list.append(child)
         child.parent = self
@@ -121,4 +139,13 @@ class Object3D:
 
     def look_at(self, target_position):
         self._matrix = Matrix.make_look_at(self.global_position, target_position)
+
+    def set_direction(self, direction):
+        position = self.local_position
+        target_position = [
+            position[0] + direction[0],
+            position[1] + direction[1],
+            position[2] + direction[2]
+        ]
+        self.look_at(target_position)
 

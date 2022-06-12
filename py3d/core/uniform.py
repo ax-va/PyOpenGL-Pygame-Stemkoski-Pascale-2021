@@ -21,7 +21,16 @@ class Uniform:
 
     def locate_variable(self, program_ref, variable_name):
         """ Get and store reference for program variable with given name """
-        self._variable_ref = GL.glGetUniformLocation(program_ref, variable_name)
+        if self._data_type == 'Light':
+            self._variable_ref = {
+                "lightType":    GL.glGetUniformLocation(program_ref, variable_name + ".lightType"),
+                "color":        GL.glGetUniformLocation(program_ref, variable_name + ".color"),
+                "direction":    GL.glGetUniformLocation(program_ref, variable_name + ".direction"),
+                "position":     GL.glGetUniformLocation(program_ref, variable_name + ".position"),
+                "attenuation":  GL.glGetUniformLocation(program_ref, variable_name + ".attenuation"),
+            }
+        else:
+            self._variable_ref = GL.glGetUniformLocation(program_ref, variable_name)
 
     def upload_data(self):
         """ Store data in uniform variable previously located """
@@ -34,11 +43,11 @@ class Uniform:
             elif self._data_type == 'float':
                 GL.glUniform1f(self._variable_ref, self._data)
             elif self._data_type == 'vec2':
-                GL.glUniform2f(self._variable_ref, self._data[0], self._data[1])
+                GL.glUniform2f(self._variable_ref, *self._data)
             elif self._data_type == 'vec3':
-                GL.glUniform3f(self._variable_ref, self._data[0], self._data[1], self._data[2])
+                GL.glUniform3f(self._variable_ref, *self._data)
             elif self._data_type == 'vec4':
-                GL.glUniform4f(self._variable_ref, self._data[0], self._data[1], self._data[2], self._data[3])
+                GL.glUniform4f(self._variable_ref, *self._data)
             elif self._data_type == 'mat4':
                 GL.glUniformMatrix4fv(self._variable_ref, 1, GL.GL_TRUE, self._data)
             elif self._data_type == "sampler2D":
@@ -49,3 +58,9 @@ class Uniform:
                 GL.glBindTexture(GL.GL_TEXTURE_2D, texture_object_ref)
                 # Upload texture unit number (0...15) to uniform variable in shader
                 GL.glUniform1i(self._variable_ref, texture_unit_ref)
+            elif self._data_type == "Light":
+                GL.glUniform1i(self._variable_ref["lightType"], self._data.light_type)
+                GL.glUniform3f(self._variable_ref["color"], *self._data.color)
+                GL.glUniform3f(self._variable_ref["direction"], *self._data.direction)
+                GL.glUniform3f(self._variable_ref["position"], *self._data.local_position)
+                GL.glUniform3f(self._variable_ref["attenuation"], *self._data.attenuation)

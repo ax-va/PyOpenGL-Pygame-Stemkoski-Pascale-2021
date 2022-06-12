@@ -37,6 +37,7 @@ class MovementRig(Object3D):
     # Override functions from the Object3D class.
     def add(self, child):
         self._look_attachment.add(child)
+
     def remove(self, child):
         self._look_attachment.remove(child)
 
