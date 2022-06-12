@@ -26,7 +26,7 @@ from py3d.material.phong import PhongMaterial
 
 class Example(Base):
     """
-    Illustrate:
+    Demonstrate:
     - the flat shading model;
     - the Lambert illumination model and Phong shading model;
     - the Phong illumination model and Phong shading model.
@@ -38,7 +38,7 @@ class Example(Base):
     Not more than four light sources must be used, because only four light sources are
     specified in FlatMaterial, LambertMaterial, and PhongMaterial.
 
-    Move the camera: WASDRF(move), QE(turn), TG(look).
+    Move a camera: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
         print("Initializing program...")
