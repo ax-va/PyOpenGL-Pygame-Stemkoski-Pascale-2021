@@ -53,7 +53,6 @@ class Example(Base):
         ambient_light = AmbientLight(color=[0.1, 0.1, 0.1])
         self.scene.add(ambient_light)
         directional_light = DirectionalLight(color=[0.8, 0.8, 0.8], direction=[-1, -1, -2])
-        directional_light.set_position([3, 2, 0])
         self.scene.add(directional_light)
         point_light1 = PointLight(color=[0.9, 0, 0], position=[2, 0, 0])
         self.scene.add(point_light1)
