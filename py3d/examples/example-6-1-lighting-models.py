@@ -34,8 +34,9 @@ class Example(Base):
     The Phong illumination model uses ambient, diffuse, and specular lighting.
     In the flat shading model, the light calculations are performed in the vertex shader.
     In the Phong shading model, the light calculations are performed in the fragment shader.
-    Four light sources must be used, because four light sources are specified
-    in FlatMaterial, LambertMaterial, and PhongMaterial.
+
+    Not more than four light sources must be used, because only four light sources are
+    specified in FlatMaterial, LambertMaterial, and PhongMaterial.
     """
     def initialize(self):
         print("Initializing program...")
@@ -54,7 +55,7 @@ class Example(Base):
         self.scene.add(directional_light)
         point_light1 = PointLight(color=[0.9, 0, 0], position=[2, 0, 0])
         self.scene.add(point_light1)
-        point_light2 = PointLight(color=[0.0, 0.9, 0], position=[-2, 0, 0])
+        point_light2 = PointLight(color=[0, 0.9, 0], position=[-2, 0, 0])
         self.scene.add(point_light2)
 
         sphere_geometry = SphereGeometry()

@@ -29,7 +29,7 @@ class ParametricGeometry(Geometry):
                 v = v_start + v_index * delta_v
                 p = surface_function(u, v)
                 xyz_list.append(p)
-                # TODO: Calculate normals
+                # TODO: Normals must be calculated
                 normal_vector = np.array(p) / np.linalg.norm(p)
                 n_list.append(normal_vector)
                 u_texture = u_index / u_resolution
