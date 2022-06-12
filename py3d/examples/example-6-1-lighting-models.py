@@ -32,8 +32,8 @@ class Example(Base):
     - the Phong illumination model and Phong shading model.
     The Lambert illumination model uses a combination of ambient and diffuse lighting.
     The Phong illumination model uses ambient, diffuse, and specular lighting.
-    In the Phong shading model, the normal vector data is passed from the vertex shader
-    to the fragment shader, where the light calculations are performed.
+    In the flat shading model, the light calculations are performed in the vertex shader.
+    In the Phong shading model, the light calculations are performed in the fragment shader.
     Four light sources must be used.
     """
     def initialize(self):
