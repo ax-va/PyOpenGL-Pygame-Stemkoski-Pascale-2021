@@ -49,7 +49,7 @@ class Example(Base):
         self.rig.add(self.camera)
         self.rig.set_position([0, 0, 6])
         self.scene.add(self.rig)
-
+        # light sources
         ambient_light = AmbientLight(color=[0.1, 0.1, 0.1])
         self.scene.add(ambient_light)
         directional_light = DirectionalLight(color=[0.8, 0.8, 0.8], direction=[-1, -1, -2])
@@ -58,12 +58,12 @@ class Example(Base):
         self.scene.add(point_light1)
         point_light2 = PointLight(color=[0, 0.9, 0], position=[-2, 0, 0])
         self.scene.add(point_light2)
-
+        # lighting materials with a color
         sphere_geometry = SphereGeometry()
         flat_material = FlatMaterial(property_dict={"baseColor": [0.2, 0.5, 0.5]})
         lambert_material = LambertMaterial(property_dict={"baseColor": [0.2, 0.5, 0.5]})
         phong_material = PhongMaterial(property_dict={"baseColor": [0.2, 0.5, 0.5]})
-
+        # lighting spheres with a color
         sphere_left_top = Mesh(sphere_geometry, flat_material)
         sphere_left_top.set_position([-2.5, 1.5, 0])
         self.scene.add(sphere_left_top)
@@ -73,11 +73,11 @@ class Example(Base):
         sphere_right_top = Mesh(sphere_geometry, phong_material)
         sphere_right_top.set_position([2.5, 1.5, 0])
         self.scene.add(sphere_right_top)
-
+        # lighting materials with a texture
         textured_flat_material = FlatMaterial(texture=Texture("../images/grid.jpg"))
         textured_lambert_material = LambertMaterial(texture=Texture("../images/grid.jpg"))
         textured_phong_material = PhongMaterial(texture=Texture("../images/grid.jpg"))
-
+        # lighting spheres with a texture
         sphere_left_bottom = Mesh(sphere_geometry, textured_flat_material)
         sphere_left_bottom.set_position([-2.5, -1.5, 0])
         self.scene.add(sphere_left_bottom)
