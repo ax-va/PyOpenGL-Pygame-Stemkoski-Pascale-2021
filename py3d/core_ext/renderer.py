@@ -61,7 +61,7 @@ class Renderer:
             if "light0" in mesh.material.uniform_dict.keys():
                 for light_number in range(len(light_list)):
                     light_name = "light" + str(light_number)
-                    light_instance = light_list[light_number]
+                    light_instance = light_list[light_number]  # type: Light
                     mesh.material.uniform_dict[light_name].data = light_instance
             # Add camera position if needed (specular lighting)
             if "viewPosition" in mesh.material.uniform_dict.keys():
