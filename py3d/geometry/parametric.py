@@ -31,8 +31,8 @@ class ParametricGeometry(Geometry):
                 p = surface_function(u, v)
                 xyz_list.append(p)
                 # 3D normal coordinates
-                p1 = surface_function(u + delta_u/100, v)
-                p2 = surface_function(u, v + delta_v/100)
+                p1 = surface_function(u + delta_u/1000, v)
+                p2 = surface_function(u, v + delta_v/1000)
                 normal_vector = self.calculate_normal(p, p1, p2)
                 n_list.append(normal_vector)
                 # 2D texture coordinates
