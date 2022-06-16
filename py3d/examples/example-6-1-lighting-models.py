@@ -57,7 +57,7 @@ class Example(Base):
         point_light2 = PointLight(color=[0, 0.9, 0], position=[-2, 0, 0])
         self.scene.add(point_light2)
 
-        # lighting materials with a color
+        # lighted materials with a color
         sphere_geometry = SphereGeometry()
         flat_material = FlatMaterial(
             property_dict={"baseColor": [0.2, 0.5, 0.5]},
@@ -72,7 +72,7 @@ class Example(Base):
             number_of_light_sources=4
         )
 
-        # lighting spheres with a color
+        # lighted spheres with a color
         sphere_left_top = Mesh(sphere_geometry, flat_material)
         sphere_left_top.set_position([-2.5, 1.5, 0])
         self.scene.add(sphere_left_top)
@@ -83,7 +83,7 @@ class Example(Base):
         sphere_right_top.set_position([2.5, 1.5, 0])
         self.scene.add(sphere_right_top)
 
-        # lighting materials with a texture
+        # lighted materials with a texture
         textured_flat_material = FlatMaterial(
             texture=Texture("../images/grid.jpg"),
             number_of_light_sources=4
@@ -97,7 +97,7 @@ class Example(Base):
             number_of_light_sources=4
         )
 
-        # lighting spheres with a texture
+        # lighted spheres with a texture
         sphere_left_bottom = Mesh(sphere_geometry, textured_flat_material)
         sphere_left_bottom.set_position([-2.5, -1.5, 0])
         self.scene.add(sphere_left_bottom)
