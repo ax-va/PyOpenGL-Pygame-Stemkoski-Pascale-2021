@@ -8,7 +8,7 @@ class EllipsoidGeometry(ParametricGeometry):
     def __init__(self, width=1, height=1, depth=1, theta_segments=16, phi_segments=32):
         def surface_function(u, v):
             # [x, y, z] = surface_function(u, v)
-            # Here
+            # Here,
             # x = width / 2 * sin(theta) * cos(phi),
             # y = height / 2 * sin(theta) * sin(phi),
             # z = depth / 2 * cos(theta),
