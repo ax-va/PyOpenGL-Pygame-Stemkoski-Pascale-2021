@@ -28,5 +28,6 @@ class EllipsoidGeometry(ParametricGeometry):
                          v_end=1,
                          v_resolution=theta_segments,
                          surface_function=surface_function)
-        # Rotate the ellipsoid around the x-axis on -90 degrees
+        # Rotate the ellipsoid around the x-axis on -90 degrees.
+        # The vertices will be recalculated.
         self.apply_matrix(Matrix.make_rotation_x(-math.pi/2))
