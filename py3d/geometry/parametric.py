@@ -100,7 +100,7 @@ class ParametricGeometry(Geometry):
         v2 = np.array(p2) - np.array(p0)
         orthogonal_vector = np.cross(v1, v2)
         norm = np.linalg.norm(orthogonal_vector)
-        if norm < 0.001:
+        if norm < 0.0001:
             normal_vector = np.array(p0) / np.linalg.norm(p0)
         else:
             normal_vector = orthogonal_vector / norm
