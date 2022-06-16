@@ -100,6 +100,6 @@ class ParametricGeometry(Geometry):
         v2 = np.array(p2) - np.array(p0)
         orthogonal_vector = np.cross(v1, v2)
         norm = np.linalg.norm(orthogonal_vector)
-        normal_vector = orthogonal_vector / norm \
-            if norm > 1e-6 else np.array(p0) / np.linalg.norm(p0)
+        normal_vector = orthogonal_vector / norm if norm > 1e-6 \
+            else np.array(p0) / np.linalg.norm(p0)
         return normal_vector
