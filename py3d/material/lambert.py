@@ -1,6 +1,6 @@
 import OpenGL.GL as GL
 
-from py3d.material.lighted_material import LightedMaterial
+from py3d.material.lighted import LightedMaterial
 
 
 class LambertMaterial(LightedMaterial):
