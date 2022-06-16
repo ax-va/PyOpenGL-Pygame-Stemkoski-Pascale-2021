@@ -2,7 +2,7 @@ import math
 
 from py3d.core.matrix import Matrix
 from py3d.geometry.parametric import ParametricGeometry
-from py3d.geometry.polygon import  PolygonGeometry
+from py3d.geometry.polygon import PolygonGeometry
 
 
 class CylindricalGeometry(ParametricGeometry):
