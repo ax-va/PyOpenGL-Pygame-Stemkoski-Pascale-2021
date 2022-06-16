@@ -29,8 +29,9 @@ class ParametricGeometry(Geometry):
                 v = v_start + v_index * delta_v
                 p = surface_function(u, v)
                 xyz_list.append(p)
-                # TODO: Normals must be calculated
-                normal_vector = np.array(p) / np.linalg.norm(p)
+                p1 = surface_function(u + delta_u/100, v)
+                p2 = surface_function(u, v + delta_v/100)
+                normal_vector = self.calculate_normal(p, p1, p2)
                 n_list.append(normal_vector)
                 u_texture = u_index / u_resolution
                 v_texture = v_index / v_resolution
@@ -94,10 +95,10 @@ class ParametricGeometry(Geometry):
     def calculate_normal(p0, p1, p2):
         v1 = np.array(p1) - np.array(p0)
         v2 = np.array(p2) - np.array(p0)
-        orthogonal = np.cross(v1, v2)
-        norm = np.linalg.norm(orthogonal)
+        orthogonal_vector = np.cross(v1, v2)
+        norm = np.linalg.norm(orthogonal_vector)
         if norm < 0.001:
-            normal = np.array([0, 0, 1]).astype(float)
+            normal_vector = np.array(p0) / np.linalg.norm(p0)
         else:
-            normal = orthogonal / norm
-        return normal
+            normal_vector = orthogonal_vector / norm
+        return normal_vector

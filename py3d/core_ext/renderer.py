@@ -45,12 +45,6 @@ class Renderer:
         mesh_list = list(filter(mesh_filter, descendant_list))
         light_filter = lambda x: isinstance(x, Light)
         light_list = list(filter(light_filter, descendant_list))
-        # TODO: Scenes support only 4 lights; precisely 4 must be present.
-        # If no light sources are specified, the fictive light sources
-        # Light() are added that do not affect the scene.
-        while len(light_list) < 4:
-            light_list.append(Light())
-
         for mesh in mesh_list:
             # If this object is not visible, continue to next object in list
             if not mesh.visible:

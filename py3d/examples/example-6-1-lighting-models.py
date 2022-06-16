@@ -35,9 +35,6 @@ class Example(Base):
     In the flat shading model, the light calculations are performed in the vertex shader.
     In the Phong shading model, the light calculations are performed in the fragment shader.
 
-    Not more than four light sources must be used, because only four light sources are
-    specified in FlatMaterial, LambertMaterial, and PhongMaterial.
-
     Move a camera: WASDRF(move), QE(turn), TG(look).
     """
     def initialize(self):
@@ -49,6 +46,7 @@ class Example(Base):
         self.rig.add(self.camera)
         self.rig.set_position([0, 0, 6])
         self.scene.add(self.rig)
+
         # light sources
         ambient_light = AmbientLight(color=[0.1, 0.1, 0.1])
         self.scene.add(ambient_light)
@@ -58,11 +56,22 @@ class Example(Base):
         self.scene.add(point_light1)
         point_light2 = PointLight(color=[0, 0.9, 0], position=[-2, 0, 0])
         self.scene.add(point_light2)
+
         # lighting materials with a color
         sphere_geometry = SphereGeometry()
-        flat_material = FlatMaterial(property_dict={"baseColor": [0.2, 0.5, 0.5]})
-        lambert_material = LambertMaterial(property_dict={"baseColor": [0.2, 0.5, 0.5]})
-        phong_material = PhongMaterial(property_dict={"baseColor": [0.2, 0.5, 0.5]})
+        flat_material = FlatMaterial(
+            property_dict={"baseColor": [0.2, 0.5, 0.5]},
+            number_of_light_sources=4
+        )
+        lambert_material = LambertMaterial(
+            property_dict={"baseColor": [0.2, 0.5, 0.5]},
+            number_of_light_sources=4
+        )
+        phong_material = PhongMaterial(
+            property_dict={"baseColor": [0.2, 0.5, 0.5]},
+            number_of_light_sources=4
+        )
+
         # lighting spheres with a color
         sphere_left_top = Mesh(sphere_geometry, flat_material)
         sphere_left_top.set_position([-2.5, 1.5, 0])
@@ -73,10 +82,21 @@ class Example(Base):
         sphere_right_top = Mesh(sphere_geometry, phong_material)
         sphere_right_top.set_position([2.5, 1.5, 0])
         self.scene.add(sphere_right_top)
+
         # lighting materials with a texture
-        textured_flat_material = FlatMaterial(texture=Texture("../images/grid.jpg"))
-        textured_lambert_material = LambertMaterial(texture=Texture("../images/grid.jpg"))
-        textured_phong_material = PhongMaterial(texture=Texture("../images/grid.jpg"))
+        textured_flat_material = FlatMaterial(
+            texture=Texture("../images/grid.jpg"),
+            number_of_light_sources=4
+        )
+        textured_lambert_material = LambertMaterial(
+            texture=Texture("../images/grid.jpg"),
+            number_of_light_sources=4
+        )
+        textured_phong_material = PhongMaterial(
+            texture=Texture("../images/grid.jpg"),
+            number_of_light_sources=4
+        )
+
         # lighting spheres with a texture
         sphere_left_bottom = Mesh(sphere_geometry, textured_flat_material)
         sphere_left_bottom.set_position([-2.5, -1.5, 0])

@@ -1,14 +1,34 @@
 import OpenGL.GL as GL
 
-from py3d.material.material import Material
+from py3d.material.lighted_material import LightedMaterial
 
 
-class LambertMaterial(Material):
+class LambertMaterial(LightedMaterial):
     """
-    Lambert material with four lighting sources
+    Lambert material with at least one light source (or more)
     """
-    def __init__(self, texture=None, property_dict={}):
-        vertex_shader_code = """
+    def __init__(self, texture=None, property_dict={}, number_of_light_sources=1):
+        super().__init__(number_of_light_sources)
+        self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])
+        if texture is None:
+            self.add_uniform("bool", "useTexture", False)
+        else:
+            self.add_uniform("bool", "useTexture", True)
+            self.add_uniform("sampler2D", "texture", [texture.texture_ref, 1])
+        self.locate_uniforms()
+
+        # Render both sides?
+        self.setting_dict["doubleSide"] = True
+        # Render triangles as wireframe?
+        self.setting_dict["wireframe"] = False
+        # Set line thickness for wireframe rendering
+        self.setting_dict["lineWidth"] = 1
+
+        self.set_properties(property_dict)
+
+    @property
+    def vertex_shader_code(self):
+        return """
             uniform mat4 projectionMatrix;
             uniform mat4 viewMatrix;
             uniform mat4 modelMatrix;
@@ -27,7 +47,10 @@ class LambertMaterial(Material):
                 normal = normalize(mat3(modelMatrix) * vertexNormal);
             }
         """
-        fragment_shader_code = """        
+
+    @property
+    def fragment_shader_code(self):
+        return """        
             struct Light
             {
                 int lightType;  // 1 = AMBIENT, 2 = DIRECTIONAL, 3 = POINT
@@ -36,12 +59,7 @@ class LambertMaterial(Material):
                 vec3 position;  // used by point lights
                 vec3 attenuation;  // used by directional lights
             };
-            
-            uniform Light light0;
-            uniform Light light1;
-            uniform Light light2;
-            uniform Light light3;
-
+        """ + self._light_uniforms + """
             vec3 calculateLight(Light light, vec3 pointPosition, vec3 pointNormal)
             {
                 float ambient = 0;
@@ -99,27 +117,6 @@ class LambertMaterial(Material):
                 fragColor = color;
             }
         """
-        super().__init__(vertex_shader_code, fragment_shader_code)
-        self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])
-        self.add_uniform("Light", "light0", None)
-        self.add_uniform("Light", "light1", None)
-        self.add_uniform("Light", "light2", None)
-        self.add_uniform("Light", "light3", None)
-        if texture is None:
-            self.add_uniform("bool", "useTexture", False)
-        else:
-            self.add_uniform("bool", "useTexture", True)
-            self.add_uniform("sampler2D", "texture", [texture.texture_ref, 1])
-        self.locate_uniforms()
-
-        # Render both sides?
-        self.setting_dict["doubleSide"] = True
-        # Render triangles as wireframe?
-        self.setting_dict["wireframe"] = False
-        # Set line thickness for wireframe rendering
-        self.setting_dict["lineWidth"] = 1
-
-        self.set_properties(property_dict)
 
     def update_render_settings(self):
         if self.setting_dict["doubleSide"]:
