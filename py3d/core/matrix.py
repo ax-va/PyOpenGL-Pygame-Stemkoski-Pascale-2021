@@ -97,8 +97,8 @@ class Matrix:
         # If forward and world_up vectors are parallel,
         # the right vector is zero.
         # Fix this by perturbing the world_up vector a bit
-        if np.linalg.norm(right) < 0.001:
-            offset = np.array([0, 0, -0.001])
+        if np.linalg.norm(right) < 1e-6:
+            offset = np.array([0, 0, -1e-3])
             right = np.cross(forward, world_up + offset)
         up = np.cross(right, forward)
         # All vectors should have length 1
