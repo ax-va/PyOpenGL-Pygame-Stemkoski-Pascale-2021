@@ -41,11 +41,9 @@ class Renderer:
         camera.update_view_matrix()
         # Extract list of all Mesh instances in scene
         descendant_list = scene.descendant_list
-        mesh_filter = lambda x: isinstance(x, Mesh)
-        mesh_list = list(filter(mesh_filter, descendant_list))
+        mesh_list = list(filter(lambda x: isinstance(x, Mesh), descendant_list))
         # Extract list of all Light instances in scene
-        light_filter = lambda x: isinstance(x, Light)
-        light_list = list(filter(light_filter, descendant_list))
+        light_list = list(filter(lambda x: isinstance(x, Light), descendant_list))
         for mesh in mesh_list:
             # If this object is not visible, continue to next object in list
             if not mesh.visible:
