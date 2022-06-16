@@ -25,14 +25,17 @@ class ParametricGeometry(Geometry):
             uv_list = []
             n_list = []
             for v_index in range(v_resolution + 1):
+                # 3D vertex coordinates
                 u = u_start + u_index * delta_u
                 v = v_start + v_index * delta_v
                 p = surface_function(u, v)
                 xyz_list.append(p)
+                # 3D normal coordinates
                 p1 = surface_function(u + delta_u/100, v)
                 p2 = surface_function(u, v + delta_v/100)
                 normal_vector = self.calculate_normal(p, p1, p2)
                 n_list.append(normal_vector)
+                # 2D texture coordinates
                 u_texture = u_index / u_resolution
                 v_texture = v_index / v_resolution
                 uv_list.append([u_texture, v_texture])
