@@ -31,8 +31,8 @@ class ParametricGeometry(Geometry):
                 p = surface_function(u, v)
                 xyz_list.append(p)
                 # 3D normal coordinates
-                p1 = surface_function(u + delta_u/1000, v)
-                p2 = surface_function(u, v + delta_v/1000)
+                p1 = surface_function(u + delta_u/1e3, v)
+                p2 = surface_function(u, v + delta_v/1e3)
                 normal_vector = self.calculate_normal(p, p1, p2)
                 n_list.append(normal_vector)
                 # 2D texture coordinates
@@ -100,7 +100,7 @@ class ParametricGeometry(Geometry):
         v2 = np.array(p2) - np.array(p0)
         orthogonal_vector = np.cross(v1, v2)
         norm = np.linalg.norm(orthogonal_vector)
-        if norm < 0.0001:
+        if norm < 1e-5:
             normal_vector = np.array(p0) / np.linalg.norm(p0)
         else:
             normal_vector = orthogonal_vector / norm
