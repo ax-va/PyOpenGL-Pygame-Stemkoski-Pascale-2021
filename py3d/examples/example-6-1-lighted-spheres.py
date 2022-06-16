@@ -47,7 +47,7 @@ class Example(Base):
         self.rig.set_position([0, 0, 6])
         self.scene.add(self.rig)
 
-        # light sources
+        # four light sources
         ambient_light = AmbientLight(color=[0.1, 0.1, 0.1])
         self.scene.add(ambient_light)
         directional_light = DirectionalLight(color=[0.8, 0.8, 0.8], direction=[-1, -1, -2])
