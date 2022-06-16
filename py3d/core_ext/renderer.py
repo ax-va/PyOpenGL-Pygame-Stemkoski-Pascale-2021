@@ -39,10 +39,11 @@ class Renderer:
         GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
         # Update camera view (calculate inverse)
         camera.update_view_matrix()
-        # Extract list of all Mesh objects in scene
+        # Extract list of all Mesh instances in scene
         descendant_list = scene.descendant_list
         mesh_filter = lambda x: isinstance(x, Mesh)
         mesh_list = list(filter(mesh_filter, descendant_list))
+        # Extract list of all Light instances in scene
         light_filter = lambda x: isinstance(x, Light)
         light_list = list(filter(light_filter, descendant_list))
         for mesh in mesh_list:
@@ -60,8 +61,8 @@ class Renderer:
             if "light0" in mesh.material.uniform_dict.keys():
                 for light_number in range(len(light_list)):
                     light_name = "light" + str(light_number)
-                    light_object = light_list[light_number]
-                    mesh.material.uniform_dict[light_name].data = light_object
+                    light_instance = light_list[light_number]
+                    mesh.material.uniform_dict[light_name].data = light_instance
             # Add camera position if needed (specular lighting)
             if "viewPosition" in mesh.material.uniform_dict.keys():
                 mesh.material.uniform_dict["viewPosition"].data = camera.global_position
