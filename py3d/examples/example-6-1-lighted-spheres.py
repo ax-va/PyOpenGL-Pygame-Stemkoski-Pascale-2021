@@ -13,8 +13,8 @@ from py3d.core_ext.camera import Camera
 from py3d.core_ext.mesh import Mesh
 from py3d.core_ext.renderer import Renderer
 from py3d.core_ext.scene import Scene
-from py3d.extras.movement_rig import MovementRig
 from py3d.core_ext.texture import Texture
+from py3d.extras.movement_rig import MovementRig
 from py3d.geometry.sphere import SphereGeometry
 from py3d.light.ambient import AmbientLight
 from py3d.light.directional import DirectionalLight
