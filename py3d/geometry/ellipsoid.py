@@ -12,7 +12,7 @@ class EllipsoidGeometry(ParametricGeometry):
             # x = width / 2 * sin(theta) * cos(phi),
             # y = height / 2 * sin(theta) * sin(phi),
             # z = depth / 2 * cos(theta),
-            # where 0 <= theta < pi, 0 <= phi < 2 * pi.
+            # where 0 <= theta < pi, 0 <= phi < 2*pi.
             # Then, u = phi / (2*pi), v = (1 - theta/pi).
             # Then, phi = 2 * pi * u, theta = (1 - v)*pi.
             theta = (1 - v) * math.pi
