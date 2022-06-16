@@ -14,7 +14,7 @@ class EllipsoidGeometry(ParametricGeometry):
             # z = depth / 2 * cos(theta),
             # where 0 <= theta < pi, 0 <= phi < 2 * pi.
             # Then, u = phi / (2*pi), v = (1 - theta/pi).
-            # Then, phi = 2 * pi * u, theta = (1 - v) * pi.
+            # Then, phi = 2 * pi * u, theta = (1 - v)*pi.
             theta = (1 - v) * math.pi
             phi = 2 * math.pi * u
             return [width / 2 * math.sin(theta) * math.cos(phi),
@@ -28,5 +28,5 @@ class EllipsoidGeometry(ParametricGeometry):
                          v_end=1,
                          v_resolution=theta_segments,
                          surface_function=surface_function)
-        # Rotate the ellipsoid around x on -90 degrees
+        # Rotate the ellipsoid around the x-axis on -90 degrees
         self.apply_matrix(Matrix.make_rotation_x(-math.pi/2))
