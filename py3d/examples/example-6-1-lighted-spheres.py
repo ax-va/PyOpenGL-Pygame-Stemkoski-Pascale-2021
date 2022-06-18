@@ -52,13 +52,12 @@ class Example(Base):
         self.scene.add(ambient_light)
         directional_light = DirectionalLight(color=[0.8, 0.8, 0.8], direction=[-1, -1, -2])
         self.scene.add(directional_light)
-        point_light1 = PointLight(color=[0.9, 0, 0], position=[2, 0, 0])
+        point_light1 = PointLight(color=[0.9, 0, 0], position=[4, 0, 0])
         self.scene.add(point_light1)
-        point_light2 = PointLight(color=[0, 0.9, 0], position=[-2, 0, 0])
+        point_light2 = PointLight(color=[0, 0.9, 0], position=[-4, 0, 0])
         self.scene.add(point_light2)
 
         # lighted materials with a color
-        sphere_geometry = SphereGeometry()
         flat_material = FlatMaterial(
             property_dict={"baseColor": [0.2, 0.5, 0.5]},
             number_of_light_sources=4
@@ -73,6 +72,7 @@ class Example(Base):
         )
 
         # lighted spheres with a color
+        sphere_geometry = SphereGeometry()
         sphere_left_top = Mesh(sphere_geometry, flat_material)
         sphere_left_top.set_position([-2.5, 1.5, 0])
         self.scene.add(sphere_left_top)

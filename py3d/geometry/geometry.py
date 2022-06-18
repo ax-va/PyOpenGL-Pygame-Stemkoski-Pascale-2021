@@ -82,7 +82,7 @@ class Geometry:
         Merge data from attributes of other geometry into this object.
         Requires both geometries to have attributes with same names.
         """
-        for variable_name, attribute_object in self._attribute_dict.items():
-            attribute_object.data += other_geometry._attribute_dict[variable_name].data
+        for variable_name, attribute_instance in self._attribute_dict.items():
+            attribute_instance.data.extend(other_geometry.attribute_dict[variable_name].data)
             # New data must be uploaded
-            attribute_object.upload_data()
+            attribute_instance.upload_data()

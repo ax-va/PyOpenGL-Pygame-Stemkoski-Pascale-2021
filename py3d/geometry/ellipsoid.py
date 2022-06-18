@@ -15,8 +15,8 @@ class EllipsoidGeometry(ParametricGeometry):
             # where 0 <= theta < pi, 0 <= phi < 2*pi.
             # Then, u = phi / (2*pi), v = (1 - theta/pi).
             # Then, phi = 2 * pi * u, theta = (1 - v)*pi.
-            theta = (1 - v) * math.pi
             phi = 2 * math.pi * u
+            theta = (1 - v) * math.pi
             return [width / 2 * math.sin(theta) * math.cos(phi),
                     height / 2 * math.sin(theta) * math.sin(phi),
                     depth / 2 * math.cos(theta)]
