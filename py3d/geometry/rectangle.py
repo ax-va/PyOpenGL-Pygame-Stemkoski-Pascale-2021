@@ -33,7 +33,6 @@ class RectangleGeometry(Geometry):
         self.add_attribute("vec3", "vertexPosition", position_data)
         self.add_attribute("vec3", "vertexColor", color_data)
         self.add_attribute("vec2", "vertexUV", uv_data)
-        normal_vector = [0, 0, 1]
-        normal_data = [normal_vector] * 6
+        normal_data = [[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]]
         self.add_attribute("vec3", "vertexNormal", normal_data)
         self.add_attribute("vec3", "faceNormal", normal_data)
