@@ -28,8 +28,10 @@ class Geometry:
             # the length of any Attribute object's array of data
             self._vertex_count = len(data)
 
-    def upload_data(self):
-        for variable_name in self._attribute_dict.keys():
+    def upload_data(self, variable_names=None):
+        if not variable_names:
+            variable_names = self._attribute_dict.keys()
+        for variable_name in variable_names:
             self._attribute_dict[variable_name].upload_data()
             # Update the vertex count
             if variable_name == "vertexPosition":

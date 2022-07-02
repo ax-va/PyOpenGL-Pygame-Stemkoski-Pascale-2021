@@ -12,4 +12,4 @@ class DirectionalLightHelper(GridHelper):
         )
         self.geometry.attribute_dict["vertexPosition"].data.extend([[0, 0, 0], [0, 0, -10]])
         self.geometry.attribute_dict["vertexColor"].data.extend([color, color])
-        self.geometry.upload_data()
+        self.geometry.upload_data(["vertexPosition", "vertexColor"])
