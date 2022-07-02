@@ -87,7 +87,7 @@ class Example(Base):
         directional_light_helper = DirectionalLightHelper(self.directional_light)
         # The directional light can take any position because it covers all the space.
         # The directional light helper is a child of the directional light.
-        # So changing the global matrix of thr parent leads to changing
+        # So changing the global matrix of the parent leads to changing
         # the global matrix of its child.
         self.directional_light.set_position([0, 2, 0])
         self.directional_light.add(directional_light_helper)
