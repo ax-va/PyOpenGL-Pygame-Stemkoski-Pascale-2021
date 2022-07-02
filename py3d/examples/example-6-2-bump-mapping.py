@@ -54,8 +54,8 @@ class Example(Base):
             number_of_light_sources=2
         )
 
-        # Replace color_material and bump_material in Mesh
-        # to see a difference
+        # Replace color_material and bump_material
+        # in Mesh to see a difference
         mesh = Mesh(rectangle_geometry, bump_material)
         self.scene.add(mesh)
 
