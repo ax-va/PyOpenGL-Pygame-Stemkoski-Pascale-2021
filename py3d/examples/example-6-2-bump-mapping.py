@@ -29,7 +29,7 @@ class Example(Base):
         self.renderer = Renderer()
         self.scene = Scene()
         self.camera = Camera(aspect_ratio=800/600)
-        self.camera.set_position([0, 0, 2.5])
+        self.camera.set_position([0, 0, 2])
 
         ambient_light = AmbientLight(color=[0.3, 0.3, 0.3])
         self.scene.add(ambient_light)
