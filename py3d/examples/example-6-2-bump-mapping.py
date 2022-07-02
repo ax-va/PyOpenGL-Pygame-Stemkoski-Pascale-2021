@@ -23,7 +23,7 @@ from py3d.material.lambert import LambertMaterial
 
 
 class Example(Base):
-    """ Example template """
+    """ Bump mapping """
     def initialize(self):
         print("Initializing program...")
         self.renderer = Renderer()
