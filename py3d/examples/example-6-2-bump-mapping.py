@@ -42,6 +42,11 @@ class Example(Base):
 
         rectangle_geometry = RectangleGeometry(width=2, height=2)
 
+        color_material = LambertMaterial(
+            texture=color_texture,
+            number_of_light_sources=2
+        )
+
         bump_material = LambertMaterial(
             texture=color_texture,
             bump_texture=bump_texture,
@@ -49,6 +54,8 @@ class Example(Base):
             number_of_light_sources=2
         )
 
+        # Replace color_material and bump_material in Mesh
+        # to see a difference
         mesh = Mesh(rectangle_geometry, bump_material)
         self.scene.add(mesh)
 
