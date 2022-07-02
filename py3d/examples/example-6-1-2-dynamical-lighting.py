@@ -33,8 +33,9 @@ class Example(Base):
     - the flat shading model;
     - the Lambert illumination model and Phong shading model;
     - the Phong illumination model and Phong shading model;
-    and render light helpers that show a light position and a light direction
-    for a point light and a directional light, respectively.
+    and render light helpers that show a light position and
+    a light direction for a point light and a directional light,
+    respectively.
 
     Move a camera: WASDRF(move), QE(turn), TG(look).
     """
