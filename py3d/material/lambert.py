@@ -7,7 +7,11 @@ class LambertMaterial(LightedMaterial):
     """
     Lambert material with at least one light source (or more)
     """
-    def __init__(self, texture=None, property_dict={}, number_of_light_sources=1):
+    def __init__(self,
+                 texture=None,
+                 property_dict={},
+                 number_of_light_sources=1,
+                 bump_texture=None):
         super().__init__(number_of_light_sources)
         self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])
         if texture is None:
@@ -15,6 +19,12 @@ class LambertMaterial(LightedMaterial):
         else:
             self.add_uniform("bool", "useTexture", True)
             self.add_uniform("sampler2D", "texture", [texture.texture_ref, 1])
+        if bump_texture is None:
+            self.add_uniform("bool", "useBumpTexture", False)
+        else:
+            self.add_uniform("bool", "useBumpTexture", True)
+            self.add_uniform("sampler2D", "bumpTexture", [bump_texture.texture_ref, 2])
+            self.add_uniform("float", "bumpStrength", 1.0)
         self.locate_uniforms()
 
         # Render both sides?
@@ -23,7 +33,6 @@ class LambertMaterial(LightedMaterial):
         self.setting_dict["wireframe"] = False
         # Set line thickness for wireframe rendering
         self.setting_dict["lineWidth"] = 1
-
         self.set_properties(property_dict)
 
     @property
@@ -97,16 +106,27 @@ class LambertMaterial(LightedMaterial):
             uniform vec3 baseColor;
             uniform bool useTexture;
             uniform sampler2D texture;
+            uniform bool useBumpTexture;
+            uniform sampler2D bumpTexture;
+            uniform float bumpStrength;
             in vec3 position;
             in vec2 UV;
             in vec3 normal;
             out vec4 fragColor;
-            
+
             void main()
             {
                 vec4 color = vec4(baseColor, 1.0);
-                if (useTexture)
+                if (useTexture) 
+                {
                     color *= texture2D( texture, UV );
+                }
+                vec3 calcNormal = normal;
+                if (useBumpTexture) 
+                {
+                    calcNormal += bumpStrength * vec3(texture2D(bumpTexture, UV));
+                    calcNormal = normalize(calcNormal);
+                }
                 // Calculate total effect of lights on color
                 vec3 light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
                 color *= vec4(light, 1);

@@ -23,7 +23,6 @@ class FlatMaterial(LightedMaterial):
         self.setting_dict["wireframe"] = False
         # Set line thickness for wireframe rendering
         self.setting_dict["lineWidth"] = 1
-
         self.set_properties(property_dict)
 
     @property
@@ -86,7 +85,7 @@ class FlatMaterial(LightedMaterial):
                 UV = vertexUV;
                 // Calculate total effect of lights on color
                 vec3 position = vec3(modelMatrix * vec4(vertexPosition, 1));
-                vec3 normal = normalize(mat3(modelMatrix) * faceNormal);
+                vec3 calcNormal = normalize(mat3(modelMatrix) * faceNormal);
                 light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
             }
         """

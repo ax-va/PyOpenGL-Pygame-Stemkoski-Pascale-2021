@@ -20,7 +20,7 @@ class LightedMaterial(Material):
 
     @property
     def adding_lights_in_shader_code(self):
-        return "\n" + "\n".join(f"\t\t\t\tlight += calculateLight(light{i}, position, normal);"
+        return "\n" + "\n".join(f"\t\t\t\tlight += calculateLight(light{i}, position, calcNormal);"
                                 for i in range(self._number_of_light_sources))
 
 
