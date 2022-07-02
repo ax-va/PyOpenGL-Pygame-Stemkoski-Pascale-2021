@@ -23,7 +23,7 @@ from py3d.material.lambert import LambertMaterial
 
 
 class Example(Base):
-    """ Bump mapping (normal textures)"""
+    """ Bump mapping: combining color textures with normal map textures """
     def initialize(self):
         print("Initializing program...")
         self.renderer = Renderer()
