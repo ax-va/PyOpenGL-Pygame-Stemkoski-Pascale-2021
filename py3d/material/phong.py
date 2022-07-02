@@ -61,8 +61,8 @@ class PhongMaterial(LightedMaterial):
                 vec3 direction;  // used by point lights
                 vec3 position;  // used by point lights
                 vec3 attenuation;  // used by point lights
-            };
-        """ + self._light_uniforms + """            
+            };\n\n""" \
+            + self.declaring_light_uniforms_in_shader_code + """
             uniform vec3 viewPosition;
             uniform float specularStrength;
             uniform float shininess;
@@ -122,12 +122,8 @@ class PhongMaterial(LightedMaterial):
                 if (useTexture)
                     color *= texture2D( texture, UV );
                 // Calculate total effect of lights on color
-                vec3 total = vec3(0, 0, 0);
-                total += calculateLight(light0, position, normal);
-                total += calculateLight(light1, position, normal);
-                total += calculateLight(light2, position, normal);
-                total += calculateLight(light3, position, normal);
-                color *= vec4(total, 1);
+                vec3 light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
+                color *= vec4(light, 1);
                 fragColor = color;
             }
         """

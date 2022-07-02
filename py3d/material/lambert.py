@@ -58,8 +58,8 @@ class LambertMaterial(LightedMaterial):
                 vec3 direction;  // used by directional lights
                 vec3 position;  // used by point lights
                 vec3 attenuation;  // used by directional lights
-            };
-        """ + self._light_uniforms + """
+            };\n\n""" \
+            + self.declaring_light_uniforms_in_shader_code + """
             vec3 calculateLight(Light light, vec3 pointPosition, vec3 pointNormal)
             {
                 float ambient = 0;
@@ -108,12 +108,8 @@ class LambertMaterial(LightedMaterial):
                 if (useTexture)
                     color *= texture2D( texture, UV );
                 // Calculate total effect of lights on color
-                vec3 total = vec3(0, 0, 0);
-                total += calculateLight(light0, position, normal);
-                total += calculateLight(light1, position, normal);
-                total += calculateLight(light2, position, normal);
-                total += calculateLight(light3, position, normal);
-                color *= vec4(total, 1);
+                vec3 light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
+                color *= vec4(light, 1);
                 fragColor = color;
             }
         """

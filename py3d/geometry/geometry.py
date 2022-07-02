@@ -22,10 +22,20 @@ class Geometry:
     def add_attribute(self, data_type, variable_name, data):
         attribute = Attribute(data_type, data)
         self._attribute_dict[variable_name] = attribute
+        # Update the vertex count
         if variable_name == "vertexPosition":
             # Number of vertices may be calculated from
             # the length of any Attribute object's array of data
             self._vertex_count = len(data)
+
+    def upload_data(self):
+        for variable_name in self._attribute_dict.keys():
+            self._attribute_dict[variable_name].upload_data()
+            # Update the vertex count
+            if variable_name == "vertexPosition":
+                # Number of vertices may be calculated from
+                # the length of any Attribute object's array of data
+                self._vertex_count = len(self._attribute_dict[variable_name].data)
 
     def apply_matrix(self, matrix):
         """ Transform the data in an attribute using a matrix """
@@ -86,3 +96,4 @@ class Geometry:
             attribute_instance.data.extend(other_geometry.attribute_dict[variable_name].data)
             # New data must be uploaded
             attribute_instance.upload_data()
+

@@ -36,8 +36,7 @@ class FlatMaterial(LightedMaterial):
                 vec3 direction; // used by directional lights
                 vec3 position;  // used by point lights
                 vec3 attenuation;  // used by all lights
-            };
-        """ + self._light_uniforms + """        
+            };""" + self.declaring_light_uniforms_in_shader_code + """
             vec3 calculateLight(Light light, vec3 pointPosition, vec3 pointNormal)
             {
                 float ambient = 0;
@@ -88,11 +87,7 @@ class FlatMaterial(LightedMaterial):
                 // Calculate total effect of lights on color
                 vec3 position = vec3(modelMatrix * vec4(vertexPosition, 1));
                 vec3 normal = normalize(mat3(modelMatrix) * faceNormal);
-                light = vec3(0, 0, 0);
-                light += calculateLight(light0, position, normal);
-                light += calculateLight(light1, position, normal);
-                light += calculateLight(light2, position, normal);
-                light += calculateLight(light3, position, normal);
+                light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
             }
         """
 
