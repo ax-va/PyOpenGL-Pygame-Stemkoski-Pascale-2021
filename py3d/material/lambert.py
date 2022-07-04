@@ -125,7 +125,6 @@ class LambertMaterial(LightedMaterial):
                 if (useBumpTexture) 
                 {
                     calcNormal += bumpStrength * vec3(texture2D(bumpTexture, UV));
-                    calcNormal = normalize(calcNormal);
                 }
                 // Calculate total effect of lights on color
                 vec3 light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
