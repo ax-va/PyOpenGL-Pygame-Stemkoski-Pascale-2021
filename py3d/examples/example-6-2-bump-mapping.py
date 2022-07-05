@@ -50,7 +50,7 @@ class Example(Base):
         bump_material = LambertMaterial(
             texture=color_texture,
             bump_texture=bump_texture,
-            property_dict={"bumpStrength": 5},
+            property_dict={"bumpStrength": 1},
             number_of_light_sources=2
         )
 
