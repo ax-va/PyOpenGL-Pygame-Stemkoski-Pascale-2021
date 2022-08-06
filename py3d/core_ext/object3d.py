@@ -58,6 +58,10 @@ class Object3D:
     def local_matrix(self):
         return self._matrix
 
+    @local_matrix.setter
+    def local_matrix(self, matrix):
+        self._matrix = matrix
+
     @property
     def local_position(self):
         """

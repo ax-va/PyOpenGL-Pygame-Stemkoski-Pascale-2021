@@ -32,6 +32,10 @@ class Postprocessor:
         self._rectangle_geometry.add_attribute("vec2", "vertexPosition", position_data)
         self._rectangle_geometry.add_attribute("vec2", "vertexUV", uv_data)
 
+    @property
+    def render_target_list(self):
+        return self._render_target_list
+
     def add_effect(self, effect):
         post_scene = Scene()
         resolution = self._renderer.window_size
