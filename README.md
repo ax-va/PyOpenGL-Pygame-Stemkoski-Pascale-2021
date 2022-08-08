@@ -10,3 +10,5 @@ Together with Python 3.8+, you need also the following packages or later:
 - pygame 2.1.2
 - PyOpenGL 3.1.6
 - PyOpenGL-accelerate 3.1.6
+
+If you found this material useful to you, you can thank me by giving me a star.

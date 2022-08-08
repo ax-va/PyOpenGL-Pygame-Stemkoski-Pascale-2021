@@ -66,6 +66,7 @@ class Example(Base):
 
     def update(self):
         self.sphere.rotate_y(0.01337)
+        self.rig.update(self.input, self.delta_time)
         self.postprocessor.render()
 
 
