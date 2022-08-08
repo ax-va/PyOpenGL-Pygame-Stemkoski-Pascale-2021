@@ -11,9 +11,11 @@ class PhongMaterial(LightedMaterial):
                  texture=None,
                  property_dict={},
                  number_of_light_sources=1,
-                 bump_texture=None):
+                 bump_texture=None,
+                 use_shadow=False):
         super().__init__(number_of_light_sources)
         self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])
+
         if texture is None:
             self.add_uniform("bool", "useTexture", False)
         else:
@@ -22,12 +24,20 @@ class PhongMaterial(LightedMaterial):
         self.add_uniform("vec3", "viewPosition", [0, 0, 0])
         self.add_uniform("float", "specularStrength", 1.0)
         self.add_uniform("float", "shininess", 32.0)
+
         if bump_texture is None:
             self.add_uniform("bool", "useBumpTexture", False)
         else:
             self.add_uniform("bool", "useBumpTexture", True)
             self.add_uniform("sampler2D", "bumpTexture", [bump_texture.texture_ref, 2])
             self.add_uniform("float", "bumpStrength", 1.0)
+
+        if not use_shadow:
+            self.add_uniform("bool", "useShadow", False)
+        else:
+            self.add_uniform("bool", "useShadow", True)
+            self.add_uniform("Shadow", "shadow0", None)
+
         self.locate_uniforms()
 
         # Render both sides?
@@ -50,6 +60,25 @@ class PhongMaterial(LightedMaterial):
             out vec3 position;
             out vec2 UV;
             out vec3 normal;
+            
+            struct Shadow
+            {
+                // direction of light that casts shadow
+                vec3 lightDirection;
+                // data from camera that produces depth texture
+                mat4 projectionMatrix;
+                mat4 viewMatrix;
+                // texture that stores depth values from shadow camera
+                sampler2D depthTexture;
+                // regions in shadow multiplied by (1-strength)
+                float strength;
+                // reduces unwanted visual artifacts
+                float bias;
+            };
+            
+            uniform bool useShadow;
+            uniform Shadow shadow0;
+            out vec3 shadowPosition0;
 
             void main()
             {
@@ -57,6 +86,12 @@ class PhongMaterial(LightedMaterial):
                 position = vec3(modelMatrix * vec4(vertexPosition, 1));
                 UV = vertexUV;
                 normal = normalize(mat3(modelMatrix) * vertexNormal);
+                
+                if (useShadow)
+                {
+                    vec4 temp0 = shadow0.projectionMatrix * shadow0.viewMatrix * modelMatrix * vec4(vertexPosition, 1);
+                    shadowPosition0 = vec3(temp0);
+                } 
             }
         """
 
@@ -127,6 +162,25 @@ class PhongMaterial(LightedMaterial):
             in vec2 UV;
             in vec3 normal;
             out vec4 fragColor;
+            
+            struct Shadow
+            {
+                // direction of light that casts shadow
+                vec3 lightDirection;
+                // data from camera that produces depth texture
+                mat4 projectionMatrix;
+                mat4 viewMatrix;
+                // texture that stores depth values from shadow camera
+                sampler2D depthTexture;
+                // regions in shadow multiplied by (1-strength)
+                float strength;
+                // reduces unwanted visual artifacts
+                float bias;
+            };
+            
+            uniform bool useShadow;
+            uniform Shadow shadow0;
+            in vec3 shadowPosition0;
 
             void main()
             {
@@ -143,6 +197,26 @@ class PhongMaterial(LightedMaterial):
                 // Calculate total effect of lights on color
                 vec3 light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
                 color *= vec4(light, 1);
+                
+                if (useShadow)
+                {
+                    // determine if surface is facing towards light direction
+                    float cosAngle = dot(normalize(normal), -normalize(shadow0.lightDirection));
+                    bool facingLight = (cosAngle > 0.01);
+                    // convert range [-1, 1] to range [0, 1]
+                    // for UV coordinate and depth information
+                    vec3 shadowCoord = (shadowPosition0.xyz + 1.0) / 2.0;
+                    float closestDistanceToLight = texture2D(shadow0.depthTexture, shadowCoord.xy).r;
+                    float fragmentDistanceToLight = clamp(shadowCoord.z, 0, 1);
+                    // determine if fragment lies in shadow of another object
+                    bool inShadow = (fragmentDistanceToLight > closestDistanceToLight + shadow0.bias);
+                    if (facingLight && inShadow)
+                    {
+                        float s = 1.0 - shadow0.strength;
+                        color *= vec4(s, s, s, 1);
+                    }
+                }  
+                
                 fragColor = color;
             }
         """

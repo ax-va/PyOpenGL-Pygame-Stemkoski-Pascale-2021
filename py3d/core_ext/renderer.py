@@ -3,6 +3,7 @@ import pygame
 
 from py3d.core_ext.mesh import Mesh
 from py3d.light.light import Light
+from py3d.light.shadow import Shadow
 
 
 class Renderer:
@@ -12,12 +13,51 @@ class Renderer:
         GL.glEnable(GL.GL_MULTISAMPLE)
         GL.glClearColor(*clear_color, 1)
         self._window_size = pygame.display.get_surface().get_size()
+        self._shadows_enabled = False
 
     @property
     def window_size(self):
         return self._window_size
 
+    @property
+    def shadow_object(self):
+        return self._shadow_object
+
     def render(self, scene, camera, clear_color=True, clear_depth=True, render_target=None):
+        # Filter descendents
+        descendant_list = scene.descendant_list
+        mesh_filter = lambda x: isinstance(x, Mesh)
+        mesh_list = list(filter(mesh_filter, descendant_list))
+
+        # shadow pass
+        if self._shadows_enabled:
+            # Set render target properties
+            GL.glBindFramebuffer(GL.GL_FRAMEBUFFER, self._shadow_object.render_target.framebuffer_ref)
+            GL.glViewport(0, 0, self._shadow_object.render_target.width, self._shadow_object.render_target.height)
+            # Set default color to white, used when no objects present to cast shadows
+            GL.glClearColor(1, 1, 1, 1)
+            GL.glClear(GL.GL_COLOR_BUFFER_BIT)
+            GL.glClear(GL.GL_DEPTH_BUFFER_BIT)
+            # Everything in the scene gets rendered with depthMaterial so
+            # only need to call glUseProgram & set matrices once
+            GL.glUseProgram(self._shadow_object.material.program_ref)
+            self._shadow_object.update_internal()
+            for mesh in mesh_list:
+                # Skip invisible meshes
+                if not mesh.visible:
+                    continue
+                # Only triangle-based meshes cast shadows
+                if mesh.material.setting_dict["drawStyle"] != GL.GL_TRIANGLES:
+                    continue
+                # Bind VAO
+                GL.glBindVertexArray(mesh.vao_ref)
+                # Update transform data
+                self._shadow_object.material.uniform_dict["modelMatrix"].data = mesh.global_matrix
+                # Update uniforms (matrix data) stored in shadow material
+                for var_name, uniform_obj in self._shadow_object.material.uniform_dict.items():
+                    uniform_obj.upload_data()
+                GL.glDrawArrays(GL.GL_TRIANGLES, 0, mesh.geometry.vertex_count)
+
         # Activate render target
         if render_target is None:
             # Set render target to window
@@ -64,9 +104,16 @@ class Renderer:
             # Add camera position if needed (specular lighting)
             if "viewPosition" in mesh.material.uniform_dict.keys():
                 mesh.material.uniform_dict["viewPosition"].data = camera.global_position
+            # Add shadow data if enabled and used by shader
+            if self._shadows_enabled and "shadow0" in mesh.material.uniform_dict.keys():
+                mesh.material.uniform_dict["shadow0"].data = self._shadow_object
             # Update uniforms stored in material
             for uniform_object in mesh.material.uniform_dict.values():
                 uniform_object.upload_data()
             # Update render settings
             mesh.material.update_render_settings()
             GL.glDrawArrays(mesh.material.setting_dict["drawStyle"], 0, mesh.geometry.vertex_count)
+
+    def enable_shadows(self, shadow_light, strength=0.5, resolution=(512, 512)):
+        self._shadows_enabled = True
+        self._shadow_object = Shadow(shadow_light, strength=strength, resolution=resolution)

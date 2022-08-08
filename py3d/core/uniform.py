@@ -29,6 +29,15 @@ class Uniform:
                 "position":     GL.glGetUniformLocation(program_ref, variable_name + ".position"),
                 "attenuation":  GL.glGetUniformLocation(program_ref, variable_name + ".attenuation"),
             }
+        elif self._data_type == "Shadow":
+            self._variable_ref = {
+                "lightDirection": GL.glGetUniformLocation(program_ref, variable_name + ".lightDirection"),
+                "projectionMatrix": GL.glGetUniformLocation(program_ref, variable_name + ".projectionMatrix"),
+                "viewMatrix": GL.glGetUniformLocation(program_ref, variable_name + ".viewMatrix"),
+                "depthTexture": GL.glGetUniformLocation(program_ref, variable_name + ".depthTexture"),
+                "strength": GL.glGetUniformLocation(program_ref, variable_name + ".strength"),
+                "bias": GL.glGetUniformLocation(program_ref, variable_name + ".bias"),
+            }
         else:
             self._variable_ref = GL.glGetUniformLocation(program_ref, variable_name)
 
@@ -64,3 +73,15 @@ class Uniform:
                 GL.glUniform3f(self._variable_ref["direction"], *self._data.direction)
                 GL.glUniform3f(self._variable_ref["position"], *self._data.local_position)
                 GL.glUniform3f(self._variable_ref["attenuation"], *self._data.attenuation)
+            elif self._data_type == "Shadow":
+                GL.glUniform3f(self._variable_ref["lightDirection"], *self._data.light_source.direction)
+                GL.glUniformMatrix4fv(self._variable_ref["projectionMatrix"], 1, GL.GL_TRUE, self._data.camera.projection_matrix)
+                GL.glUniformMatrix4fv(self._variable_ref["viewMatrix"], 1, GL.GL_TRUE, self._data.camera.view_matrix)
+                # Configure depth texture
+                texture_object_ref = self._data.render_target.texture.texture_ref
+                texture_unit_ref = 3
+                GL.glActiveTexture(GL.GL_TEXTURE0 + texture_unit_ref)
+                GL.glBindTexture(GL.GL_TEXTURE_2D, texture_object_ref)
+                GL.glUniform1i(self._variable_ref["depthTexture"], texture_unit_ref)
+                GL.glUniform1f(self._variable_ref["strength"], self._data.strength)
+                GL.glUniform1f(self._variable_ref["bias"], self._data.bias)
