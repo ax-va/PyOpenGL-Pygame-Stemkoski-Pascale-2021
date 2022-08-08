@@ -26,7 +26,7 @@ from py3d.extras.directional_light import DirectionalLightHelper
 
 
 class Example(Base):
-    """ Render shadows using shadow pass """
+    """ Render shadows using shadow pass for the directional light """
     def initialize(self):
         self.renderer = Renderer([0.2, 0.2, 0.2])
         self.scene = Scene()
