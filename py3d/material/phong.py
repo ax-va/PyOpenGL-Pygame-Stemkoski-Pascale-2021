@@ -9,7 +9,7 @@ class PhongMaterial(LightedMaterial):
     """
     def __init__(self,
                  texture=None,
-                 property_dict={},
+                 property_dict=None,
                  number_of_light_sources=1,
                  bump_texture=None,
                  use_shadow=False):

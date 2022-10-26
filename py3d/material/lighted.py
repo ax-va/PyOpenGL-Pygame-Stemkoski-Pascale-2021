@@ -23,4 +23,10 @@ class LightedMaterial(Material):
         return "\n" + "\n".join(f"\t\t\t\tlight += calculateLight(light{i}, position, calcNormal);"
                                 for i in range(self._number_of_light_sources))
 
+    @property
+    def vertex_shader_code(self):
+        raise NotImplementedError("Implement this property for an inheriting class")
 
+    @property
+    def fragment_shader_code(self):
+        raise NotImplementedError("Implement this property for an inheriting class")

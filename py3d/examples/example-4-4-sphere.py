@@ -35,8 +35,7 @@ class Example(Base):
         void main()
         {
             vec4 pos = vec4(vertexPosition, 1.0);
-            gl_Position = projectionMatrix * viewMatrix *
-            modelMatrix * pos;
+            gl_Position = projectionMatrix * viewMatrix * modelMatrix * pos;
             position = vertexPosition;
         }
         """

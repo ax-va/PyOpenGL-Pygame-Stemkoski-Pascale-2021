@@ -7,7 +7,7 @@ class FlatMaterial(LightedMaterial):
     """
     Flat material with at least one light source (or more)
     """
-    def __init__(self, texture=None, property_dict={}, number_of_light_sources=1):
+    def __init__(self, texture=None, property_dict=None, number_of_light_sources=1):
         super().__init__(number_of_light_sources)
         self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])
         if texture is None:

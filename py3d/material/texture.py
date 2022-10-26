@@ -4,7 +4,7 @@ from py3d.material.material import Material
 
 
 class TextureMaterial(Material):
-    def __init__(self, texture, property_dict={}):
+    def __init__(self, texture, property_dict=None):
         vertex_shader_code = """
             uniform mat4 projectionMatrix;
             uniform mat4 viewMatrix;

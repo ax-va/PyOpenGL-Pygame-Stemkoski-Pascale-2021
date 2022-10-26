@@ -4,7 +4,7 @@ from py3d.material.line import LineMaterial
 
 
 class AxesHelper(Mesh):
-    def __init__(self, axis_length=1, line_width=4, axis_colors=[[1, 0, 0],[0, 1, 0],[0, 0, 1]]):
+    def __init__(self, axis_length=1, line_width=4, axis_colors=([1, 0, 0], [0, 1, 0], [0, 0, 1])):
         geomerty = Geometry()
         position_data = [[0, 0, 0], [axis_length, 0, 0],
                          [0, 0, 0], [0, axis_length, 0],

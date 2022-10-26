@@ -4,7 +4,7 @@ from py3d.material.basic import BasicMaterial
 
 
 class LineMaterial(BasicMaterial):
-    def __init__(self, vertex_shader_code=None, fragment_shader_code=None, property_dict={}, use_vertex_colors=True):
+    def __init__(self, vertex_shader_code=None, fragment_shader_code=None, property_dict=None, use_vertex_colors=True):
         super().__init__(vertex_shader_code, fragment_shader_code, use_vertex_colors)
         # Render vertices as continuous line by default
         self._setting_dict["drawStyle"] = GL.GL_LINE_STRIP

@@ -48,14 +48,14 @@ class Material:
         Convenience method for setting multiple material "properties"
         (uniform and render setting values) from a dictionary
         """
-        for name, data in property_dict.items():
-            # Update uniforms
-            if name in self._uniform_dict.keys():
-                self._uniform_dict[name].data = data
-            # Update render settings
-            elif name in self._setting_dict.keys():
-                self._setting_dict[name] = data
-            # Unknown property type
-            else:
-                raise Exception("Material has no property named: " + name)
-
+        if property_dict:
+            for name, data in property_dict.items():
+                # Update uniforms
+                if name in self._uniform_dict.keys():
+                    self._uniform_dict[name].data = data
+                # Update render settings
+                elif name in self._setting_dict.keys():
+                    self._setting_dict[name] = data
+                # Unknown property type
+                else:
+                    raise Exception("Material has no property named: " + name)

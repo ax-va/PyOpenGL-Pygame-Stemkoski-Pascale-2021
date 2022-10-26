@@ -8,7 +8,7 @@ class RenderTarget:
     """
     Create a framebuffer as the target when rendering
     """
-    def __init__(self, resolution=(512, 512), texture=None, property_dict={}):
+    def __init__(self, resolution=(512, 512), texture=None, property_dict=None):
         # Values should equal texture dimensions
         self._width, self._height = resolution
         if texture is not None:
