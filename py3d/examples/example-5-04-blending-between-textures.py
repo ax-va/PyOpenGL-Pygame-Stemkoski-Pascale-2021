@@ -45,16 +45,16 @@ class Example(Base):
             }
         """
         fragment_shader_code = """
-            uniform sampler2D texture1;
-            uniform sampler2D texture2;
+            uniform sampler2D textureSampler1;
+            uniform sampler2D textureSampler2;
             in vec2 UV;
             uniform float time;
             out vec4 fragColor;
 
             void main()
             {
-                vec4 color1 = texture2D(texture1, UV);
-                vec4 color2 = texture2D(texture2, UV);
+                vec4 color1 = texture(textureSampler1, UV);
+                vec4 color2 = texture(textureSampler2, UV);
                 float s = abs(sin(time));
                 fragColor = s * color1 + (1.0 - s) * color2;
             }
@@ -62,8 +62,8 @@ class Example(Base):
         grid_texture = Texture("../images/grid.jpg")
         crate_texture = Texture("../images/crate.jpg")
         self.blend_material = Material(vertex_shader_code, fragment_shader_code)
-        self.blend_material.add_uniform("sampler2D", "texture1", [grid_texture.texture_ref, 1])
-        self.blend_material.add_uniform("sampler2D", "texture2", [crate_texture.texture_ref, 2])
+        self.blend_material.add_uniform("sampler2D", "textureSampler1", [grid_texture.texture_ref, 1])
+        self.blend_material.add_uniform("sampler2D", "textureSampler2", [crate_texture.texture_ref, 2])
         self.blend_material.add_uniform("float", "time", 0.0)
         self.blend_material.locate_uniforms()
 

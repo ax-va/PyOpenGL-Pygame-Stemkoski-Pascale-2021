@@ -34,7 +34,7 @@ class Uniform:
                 "lightDirection": GL.glGetUniformLocation(program_ref, variable_name + ".lightDirection"),
                 "projectionMatrix": GL.glGetUniformLocation(program_ref, variable_name + ".projectionMatrix"),
                 "viewMatrix": GL.glGetUniformLocation(program_ref, variable_name + ".viewMatrix"),
-                "depthTexture": GL.glGetUniformLocation(program_ref, variable_name + ".depthTexture"),
+                "depthTextureSampler": GL.glGetUniformLocation(program_ref, variable_name + ".depthTextureSampler"),
                 "strength": GL.glGetUniformLocation(program_ref, variable_name + ".strength"),
                 "bias": GL.glGetUniformLocation(program_ref, variable_name + ".bias"),
             }
@@ -82,6 +82,6 @@ class Uniform:
                 texture_unit_ref = 3
                 GL.glActiveTexture(GL.GL_TEXTURE0 + texture_unit_ref)
                 GL.glBindTexture(GL.GL_TEXTURE_2D, texture_object_ref)
-                GL.glUniform1i(self._variable_ref["depthTexture"], texture_unit_ref)
+                GL.glUniform1i(self._variable_ref["depthTextureSampler"], texture_unit_ref)
                 GL.glUniform1f(self._variable_ref["strength"], self._data.strength)
                 GL.glUniform1f(self._variable_ref["bias"], self._data.bias)

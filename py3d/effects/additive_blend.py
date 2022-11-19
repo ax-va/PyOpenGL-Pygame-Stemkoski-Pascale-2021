@@ -18,23 +18,23 @@ class AdditiveBlendEffect(Material):
         #  pass-through shader
         fragment_shader_code = """
         in vec2 UV;
-        uniform sampler2D texture;
-        uniform sampler2D blendTexture;
+        uniform sampler2D textureSampler;
+        uniform sampler2D blendTextureSampler;
         uniform float originalStrength;
         uniform float blendStrength;
         out vec4 fragColor;
 
         void main()
         {
-            vec4 originalColor = texture2D(texture, UV);
-            vec4 blendColor = texture2D(blendTexture, UV);
+            vec4 originalColor = texture(textureSampler, UV);
+            vec4 blendColor = texture(blendTextureSampler, UV);
             vec4 color = originalStrength * originalColor + blendStrength * blendColor;
             fragColor = color;
         }
         """
         super().__init__(vertex_shader_code, fragment_shader_code)
-        self.add_uniform("sampler2D", "texture", [None, 1])
-        self.add_uniform("sampler2D", "blendTexture", [blend_texture.texture_ref, 2])
+        self.add_uniform("sampler2D", "textureSampler", [None, 1])
+        self.add_uniform("sampler2D", "blendTextureSampler", [blend_texture.texture_ref, 2])
         self.add_uniform("float", "originalStrength", original_strength)
         self.add_uniform("float", "blendStrength", blend_strength)
         self.locate_uniforms()

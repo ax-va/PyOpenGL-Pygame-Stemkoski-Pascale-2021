@@ -41,8 +41,8 @@ class Example(Base):
             }
         """
         fragment_shader_code = """
-            uniform sampler2D rgbNoise;
-            uniform sampler2D image;
+            uniform sampler2D rgbNoiseSampler;
+            uniform sampler2D imageSampler;
             in vec2 UV;
             uniform float time;
             out vec4 fragColor;
@@ -50,16 +50,16 @@ class Example(Base):
             void main()
             {
                 vec2 uvShift = UV + vec2(-0.033, 0.07) * time;
-                vec4 noiseValues = texture2D(rgbNoise, uvShift);
+                vec4 noiseValues = texture(rgbNoiseSampler, uvShift);
                 vec2 uvNoise = UV + 0.01 * noiseValues.rg;
-                fragColor = texture2D(image, uvNoise);
+                fragColor = texture(imageSampler, uvNoise);
             }
         """
         rgb_noise_texture = Texture("../images/rgb-noise.jpg")
         grid_texture = Texture("../images/grid.jpg")
         self.distort_material = Material(vertex_shader_code, fragment_shader_code)
-        self.distort_material.add_uniform("sampler2D", "rgbNoise", [rgb_noise_texture.texture_ref, 1])
-        self.distort_material.add_uniform("sampler2D", "image", [grid_texture.texture_ref, 2])
+        self.distort_material.add_uniform("sampler2D", "rgbNoiseSampler", [rgb_noise_texture.texture_ref, 1])
+        self.distort_material.add_uniform("sampler2D", "imageSampler", [grid_texture.texture_ref, 2])
         self.distort_material.add_uniform("float", "time", 0.0)
         self.distort_material.locate_uniforms()
 

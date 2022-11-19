@@ -20,7 +20,7 @@ class PhongMaterial(LightedMaterial):
             self.add_uniform("bool", "useTexture", False)
         else:
             self.add_uniform("bool", "useTexture", True)
-            self.add_uniform("sampler2D", "texture", [texture.texture_ref, 1])
+            self.add_uniform("sampler2D", "textureSampler", [texture.texture_ref, 1])
         self.add_uniform("vec3", "viewPosition", [0, 0, 0])
         self.add_uniform("float", "specularStrength", 1.0)
         self.add_uniform("float", "shininess", 32.0)
@@ -29,7 +29,7 @@ class PhongMaterial(LightedMaterial):
             self.add_uniform("bool", "useBumpTexture", False)
         else:
             self.add_uniform("bool", "useBumpTexture", True)
-            self.add_uniform("sampler2D", "bumpTexture", [bump_texture.texture_ref, 2])
+            self.add_uniform("sampler2D", "bumpTextureSampler", [bump_texture.texture_ref, 2])
             self.add_uniform("float", "bumpStrength", 1.0)
 
         if not use_shadow:
@@ -69,7 +69,7 @@ class PhongMaterial(LightedMaterial):
                 mat4 projectionMatrix;
                 mat4 viewMatrix;
                 // texture that stores depth values from shadow camera
-                sampler2D depthTexture;
+                sampler2D depthTextureSampler;
                 // regions in shadow multiplied by (1-strength)
                 float strength;
                 // reduces unwanted visual artifacts
@@ -154,9 +154,9 @@ class PhongMaterial(LightedMaterial):
 
             uniform vec3 baseColor;
             uniform bool useTexture;
-            uniform sampler2D texture;
+            uniform sampler2D textureSampler;
             uniform bool useBumpTexture;
-            uniform sampler2D bumpTexture;
+            uniform sampler2D bumpTextureSampler;
             uniform float bumpStrength;
             in vec3 position;
             in vec2 UV;
@@ -171,7 +171,7 @@ class PhongMaterial(LightedMaterial):
                 mat4 projectionMatrix;
                 mat4 viewMatrix;
                 // texture that stores depth values from shadow camera
-                sampler2D depthTexture;
+                sampler2D depthTextureSampler;
                 // regions in shadow multiplied by (1-strength)
                 float strength;
                 // reduces unwanted visual artifacts
@@ -187,12 +187,12 @@ class PhongMaterial(LightedMaterial):
                 vec4 color = vec4(baseColor, 1.0);
                 if (useTexture) 
                 {
-                    color *= texture2D( texture, UV );
+                    color *= texture(textureSampler, UV );
                 }
                 vec3 calcNormal = normal;
                 if (useBumpTexture) 
                 {
-                    calcNormal += bumpStrength * vec3(texture2D(bumpTexture, UV));
+                    calcNormal += bumpStrength * vec3(texture(bumpTextureSampler, UV));
                 }
                 // Calculate total effect of lights on color
                 vec3 light = vec3(0, 0, 0);""" + self.adding_lights_in_shader_code + """
@@ -206,7 +206,7 @@ class PhongMaterial(LightedMaterial):
                     // convert range [-1, 1] to range [0, 1]
                     // for UV coordinate and depth information
                     vec3 shadowCoord = (shadowPosition0.xyz + 1.0) / 2.0;
-                    float closestDistanceToLight = texture2D(shadow0.depthTexture, shadowCoord.xy).r;
+                    float closestDistanceToLight = texture(shadow0.depthTextureSampler, shadowCoord.xy).r;
                     float fragmentDistanceToLight = clamp(shadowCoord.z, 0, 1);
                     // determine if fragment lies in shadow of another object
                     bool inShadow = (fragmentDistanceToLight > closestDistanceToLight + shadow0.bias);

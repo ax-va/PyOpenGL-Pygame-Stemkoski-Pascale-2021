@@ -44,7 +44,7 @@ class Example(Base):
             }
         """
         fragment_shader_code = """
-            uniform sampler2D texture;
+            uniform sampler2D textureSampler;
             in vec2 UV;
             uniform float time;
             out vec4 fragColor;
@@ -52,12 +52,12 @@ class Example(Base):
             void main()
             {
                 vec2 shiftUV = UV + vec2(0, 0.2 * sin(6.0 * UV.x + time));
-                fragColor = texture2D(texture, shiftUV);
+                fragColor = texture(textureSampler, shiftUV);
             }
         """
         grid_texure = Texture("../images/grid.jpg")
         self.wave_material = Material(vertex_shader_code, fragment_shader_code)
-        self.wave_material.add_uniform("sampler2D", "texture", [grid_texure.texture_ref, 1])
+        self.wave_material.add_uniform("sampler2D", "textureSampler", [grid_texure.texture_ref, 1])
         self.wave_material.add_uniform("float", "time", 0.0)
         self.wave_material.locate_uniforms()
 

@@ -19,7 +19,7 @@ class PixelateEffect(Material):
         """
         fragment_shader_code = """
         in vec2 UV;
-        uniform sampler2D texture;
+        uniform sampler2D textureSampler;
         uniform float pixelSize;
         uniform vec2 resolution;
         out vec4 fragColor;
@@ -28,12 +28,12 @@ class PixelateEffect(Material):
         {
             vec2 factor = resolution / pixelSize;
             vec2 newUV = floor(UV * factor) / factor;
-            vec4 color = texture2D(texture, newUV);
+            vec4 color = texture(textureSampler, newUV);
             fragColor = color;
         }
         """
         super().__init__(vertex_shader_code, fragment_shader_code)
-        self.add_uniform("sampler2D", "texture", [None, 1])
+        self.add_uniform("sampler2D", "textureSampler", [None, 1])
         self.add_uniform("float", "pixelSize", pixel_size)
         self.add_uniform("vec2", "resolution", resolution)
         self.locate_uniforms()

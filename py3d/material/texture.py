@@ -23,12 +23,12 @@ class TextureMaterial(Material):
 
         fragment_shader_code = """
             uniform vec3 baseColor;
-            uniform sampler2D texture;
+            uniform sampler2D textureSampler;
             in vec2 UV;
             out vec4 fragColor;
             void main()
             {
-                vec4 color = vec4(baseColor, 1.0) * texture2D(texture, UV);
+                vec4 color = vec4(baseColor, 1.0) * texture(textureSampler, UV);
                 if (color.a < 0.1)
                     discard;                    
                 fragColor = color;
@@ -36,7 +36,7 @@ class TextureMaterial(Material):
         """
         super().__init__(vertex_shader_code, fragment_shader_code)
         self.add_uniform("vec3", "baseColor", [1.0, 1.0, 1.0])
-        self.add_uniform("sampler2D", "texture", [texture.texture_ref, 1])
+        self.add_uniform("sampler2D", "textureSampler", [texture.texture_ref, 1])
         self.add_uniform("vec2", "repeatUV", [1.0, 1.0])
         self.add_uniform("vec2", "offsetUV", [0.0, 0.0])
         self.locate_uniforms()

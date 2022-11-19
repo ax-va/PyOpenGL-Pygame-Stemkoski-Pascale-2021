@@ -22,7 +22,7 @@ class VignetteEffect(Material):
         """
         fragment_shader_code = """
         in vec2 UV;
-        uniform sampler2D texture;
+        uniform sampler2D textureSampler;
         uniform float dimStart;
         uniform float dimEnd;
         uniform vec3 dimColor;
@@ -30,7 +30,7 @@ class VignetteEffect(Material):
 
         void main()
         {
-            vec4 color = texture2D(texture, UV);
+            vec4 color = texture(textureSampler, UV);
             // Calculate position in clip space from UV coordinates
             vec2 position = 2 * UV - vec2(1, 1);
             // Calculate distance from center, which affects brightness
@@ -45,7 +45,7 @@ class VignetteEffect(Material):
         }
         """
         super().__init__(vertex_shader_code, fragment_shader_code)
-        self.add_uniform("sampler2D", "texture", [None, 1])
+        self.add_uniform("sampler2D", "textureSampler", [None, 1])
         self.add_uniform("float", "dimStart", dimming_start)
         self.add_uniform("float", "dimEnd", dimming_end)
         self.add_uniform("vec3", "dimColor", dimming_color)
