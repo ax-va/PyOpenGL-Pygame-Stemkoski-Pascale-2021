@@ -14,7 +14,7 @@ class FlatMaterial(LightedMaterial):
             self.add_uniform("bool", "useTexture", False)
         else:
             self.add_uniform("bool", "useTexture", True)
-            self.add_uniform("sampler2D", "texture", [texture.texture_ref, 1])
+            self.add_uniform("sampler2D", "textureSampler", [texture.texture_ref, 1])
         self.locate_uniforms()
 
         # Render both sides?
@@ -95,7 +95,7 @@ class FlatMaterial(LightedMaterial):
         return """
             uniform vec3 baseColor;
             uniform bool useTexture;
-            uniform sampler2D texture;
+            uniform sampler2D textureSampler;
             in vec2 UV;
             in vec3 light;
             out vec4 fragColor;
@@ -103,7 +103,7 @@ class FlatMaterial(LightedMaterial):
             {
                 vec4 color = vec4(baseColor, 1.0);
                 if (useTexture)
-                    color *= texture2D(texture, UV);
+                    color *= texture(textureSampler, UV);
                 color *= vec4(light, 1);
                 fragColor = color;
             }

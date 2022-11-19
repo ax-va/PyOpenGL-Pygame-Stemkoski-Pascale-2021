@@ -19,19 +19,19 @@ class ColorReduceEffect(Material):
         """
         fragment_shader_code = """
         in vec2 UV;
-        uniform sampler2D texture;
+        uniform sampler2D textureSampler;
         uniform float levels;
         out vec4 fragColor;
 
         void main()
         {
-            vec4 color = texture2D(texture, UV);
+            vec4 color = texture(textureSampler, UV);
             vec4 reduced = round(color * levels) / levels;
             reduced.a = 1.0;
             fragColor = reduced;
         }
         """
         super().__init__(vertex_shader_code, fragment_shader_code)
-        self.add_uniform("sampler2D", "texture", [None, 1])
+        self.add_uniform("sampler2D", "textureSampler", [None, 1])
         self.add_uniform("float", "levels", levels)
         self.locate_uniforms()

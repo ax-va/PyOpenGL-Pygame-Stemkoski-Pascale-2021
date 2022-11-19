@@ -45,7 +45,7 @@ class Postprocessor:
         self._render_target_list[-1] = target
         # The effect in this render pass will use the texture
         # that was written to in the previous render pass
-        effect.uniform_dict["texture"].data[0] = target.texture.texture_ref
+        effect.uniform_dict["textureSampler"].data[0] = target.texture.texture_ref
         mesh = Mesh(self._rectangle_geometry, effect)
         post_scene.add(mesh)
         self._scene_list.append(post_scene)
