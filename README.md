@@ -11,7 +11,7 @@ With Python 3.8+, you also need the following packages or later:
 - PyOpenGL 3.1.6
 - PyOpenGL-accelerate 3.1.6
 
-The code was tested on the same machine ASUS VivoBook with two operating systems, more exactly:
+The code was tested on the same machine ASUS VivoBook with two operating systems, more precisely:
 
 - OS: Windows 11; Vendor: ATI Technologies Inc.; Renderer: AMD Radeon(TM) Graphics; OpenGL version supported: 4.6.14761 Compatibility Profile Context 21.30.44.03 30.0.13044.3001; GLSL version supported: 4.60
 
