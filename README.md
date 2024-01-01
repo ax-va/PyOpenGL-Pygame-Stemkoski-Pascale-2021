@@ -19,7 +19,4 @@ The code was tested on the same machine with two operating systems, more precise
 
 Update:
 
-- On Ubuntu 22.04.3 LTS, you can get an error:
-"OpenGL.error.Error: Attempt to retrieve context when no valid context"
-See a bug report: 
-https://github.com/pygame/pygame/issues/3110
+- On Ubuntu 22.04.3 LTS, you can get an error: "OpenGL.error.Error: Attempt to retrieve context when no valid context". See a bug report: https://github.com/pygame/pygame/issues/3110
