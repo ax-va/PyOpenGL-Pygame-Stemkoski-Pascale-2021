@@ -16,3 +16,10 @@ The code was tested on the same machine with two operating systems, more precise
 - OS: Windows 11; Vendor: ATI Technologies Inc.; Renderer: AMD Radeon(TM) Graphics; OpenGL version supported: 4.6.14761 Compatibility Profile Context 21.30.44.03 30.0.13044.3001; GLSL version supported: 4.60
 
 - OS: Ubuntu 20.04.3 LTS; Vendor: AMD; Renderer: AMD RENOIR (DRM 3.41.0, 5.13.0-48-generic, LLVM 12.0.0); OpenGL version supported: 4.6 (Compatibility Profile) Mesa 21.2.6; GLSL version supported: 4.60
+
+Update:
+
+- On Ubuntu 22.04.3 LTS, you get an error:
+"OpenGL.error.Error: Attempt to retrieve context when no valid context"
+See a bug report: 
+https://github.com/pygame/pygame/issues/3110
