@@ -6,10 +6,12 @@ The examples cover all the book chapters with code, from 2 through 6, with some 
 You find the examples in an examples' folder. Just read a class description in a script and run it. Since the object-oriented approach is used, auxiliary classes are logically separated in other folders (packages).
 
 My environment was Python 3.8 with the following packages:
-- numpy 1.22.4
-- pygame 2.1.2
-- PyOpenGL 3.1.6
-- PyOpenGL-accelerate 3.1.6
+```
+numpy==1.22.4
+pygame==2.1.2
+PyOpenGL==3.1.6
+PyOpenGL-accelerate==3.1.6
+```
 
 The code was tested on the same machine with two operating systems, more precisely:
 
