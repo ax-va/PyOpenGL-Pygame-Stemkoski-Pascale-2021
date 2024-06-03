@@ -1,9 +1,9 @@
 # OpenGL examples with PyOpenGL and Pygame
-The OpenGL examples are based on book "Developing Graphics Frameworks with Python and OpenGL" by Lee Stemkoski and Michael Pascale published by CRC Press in 2021. 
+The OpenGL examples are based on book *"Developing Graphics Frameworks with Python and OpenGL"* by Lee Stemkoski and Michael Pascale published by CRC Press in 2021. 
 
-The examples cover all the book chapters with code, from 2 through 6, with some code changes and demonstrate GLSL programming by PyOpenGL. Pygame is mainly used for control, windowing, and image loading.
+The examples cover all the book chapters with code, from 2 through 6, with some code changes and demonstrate **GLSL** programming using **PyOpenGL**. **Pygame** is mainly used for control, windowing, and image loading.
 
-You find the examples in an examples' folder. Just read a class description in a script and run it. Since the object-oriented approach is used, auxiliary classes are logically separated in other folders (packages).
+You find the examples in an **examples** folder. Just read a class description in a script and run it. Since the object-oriented approach is used, auxiliary classes are logically separated in other folders (packages).
 
 My environment was Python 3.8 with the following packages:
 ```
