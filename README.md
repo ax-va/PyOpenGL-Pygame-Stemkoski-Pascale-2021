@@ -5,7 +5,7 @@ The examples cover all the book chapters with code, 2 through 6, with some code 
 
 You find the examples in the **examples** folder. Just read a class description in a script and run it. Since the object-oriented approach is used, auxiliary classes are logically separated in other folders (packages).
 
-My environment was Python 3.8 with the following packages and their depenencies (not listed here):
+My environment was Python 3.8 with the following packages (and their dependencies not listed here):
 ```
 numpy==1.22.4
 pygame==2.1.2
