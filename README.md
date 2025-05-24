@@ -1,5 +1,5 @@
 # OpenGL examples with PyOpenGL and Pygame
-The OpenGL examples are based on book *"Developing Graphics Frameworks with Python and OpenGL"* by Lee Stemkoski and Michael Pascale published by *CRC Press* in 2021. 
+The OpenGL examples are based on the book *"Developing Graphics Frameworks with Python and OpenGL"* by Lee Stemkoski and Michael Pascale published by *CRC Press* in 2021. 
 
 The examples cover all the book chapters with code, 2 through 6, with some code changes and demonstrate **GLSL** programming using **PyOpenGL**. **Pygame** is mainly used for control, windowing, and image loading.
 
